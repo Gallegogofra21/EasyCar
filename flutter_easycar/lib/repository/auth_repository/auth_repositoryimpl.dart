@@ -24,6 +24,7 @@ class AuthRepositoryImpl extends AuthRepository {
         headers: headers,
         body: jsonEncode(loginDto.toJson()));
     if (response.statusCode == 201) {
+      print("dskfjhsakfLoginResponse.fromJson(json.decode(response.body))}");
       return LoginResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception('Fail to login');
