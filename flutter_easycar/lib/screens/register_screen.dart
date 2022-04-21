@@ -66,6 +66,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.grey.shade800,
+      appBar: AppBar(
+        title: Padding(
+          padding: const EdgeInsets.only(left: 50.0),
+          child: Image.asset(
+            'assets/images/logo.png',
+            width: 150,
+            fit: BoxFit.cover,
+          ),
+        ),
+        backgroundColor: Colors.grey.shade900,
+      ),
       body: MultiBlocProvider(
         providers: [
           BlocProvider(
@@ -148,13 +159,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Container(
-                  margin: const EdgeInsets.only(bottom: 70),
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    width: 200,
-                    fit: BoxFit.cover,
-                  )),
               Padding(
                   padding: const EdgeInsets.only(bottom: 10.0),
                   child: TextFormField(

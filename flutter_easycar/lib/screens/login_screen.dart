@@ -40,6 +40,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   _createBody(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Padding(
+          padding: const EdgeInsets.only(left: 50.0),
+          child: Image.asset(
+            'assets/images/logo.png',
+            width: 150,
+            fit: BoxFit.cover,
+          ),
+        ),
+        backgroundColor: Colors.grey.shade900,
+      ),
       body: Center(
         child: Container(
             color: Colors.grey.shade400,
@@ -88,13 +99,6 @@ class _LoginScreenState extends State<LoginScreen> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(
-              margin: const EdgeInsets.only(top: 150, bottom: 70),
-              child: Image.asset(
-                'assets/images/logo.png',
-                width: 80,
-                fit: BoxFit.cover,
-              )),
           Padding(
             padding: const EdgeInsets.only(left: 40, right: 40, bottom: 10),
             child: TextFormField(
