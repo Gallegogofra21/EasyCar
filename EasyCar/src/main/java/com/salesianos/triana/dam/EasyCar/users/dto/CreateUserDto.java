@@ -16,8 +16,9 @@ public class CreateUserDto {
     @NotBlank(message = "{user.username.blank}")
     @UniqueUsernameUser(message = "{user.username.unique}")
     private String username;
-    @NotBlank(message = "{user.name.blank}")
+    //@NotBlank(message = "{user.name.blank}")
     private String nombre;
+    private String apellidos;
     @NotBlank(message = "{user.email.blank}")
     @UniqueEmailUser(message = "{user.email.unique}")
     private String email;
