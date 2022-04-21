@@ -128,7 +128,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
   Future<void> _loginSuccess(BuildContext context, User late) async {
     _prefs.then((SharedPreferences prefs) {
       prefs.setString('token', late.email);
-      prefs.setString('id', late.id);
       prefs.setString('avatar', late.avatar);
 
       Navigator.push(

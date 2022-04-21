@@ -1,14 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class FavScreen extends StatefulWidget {
+  const FavScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  _FavScreenState createState() => _FavScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _FavScreenState extends State<FavScreen> {
   @override
   void initState() {
     super.initState();
