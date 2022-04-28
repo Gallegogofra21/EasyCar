@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.users.model;
 
+import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -33,6 +35,11 @@ public class Usuario implements UserDetails {
     private String avatar;
     private String password;
     private String password2;
+
+    @OneToMany
+    private List<Vehiculo> vehiculos;
+
+    private UserRole rol;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

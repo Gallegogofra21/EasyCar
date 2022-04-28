@@ -1,0 +1,48 @@
+package com.salesianos.triana.dam.EasyCar.model;
+
+import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.time.LocalDate;
+
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter @Setter
+@Builder
+public class Vehiculo implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String version;
+    private LocalDate fechaMatriculacion;
+    private String kilometraje;
+    private String potencia;
+    @Enumerated
+    private Marchas marchas;
+    private Double precio;
+
+    @ManyToOne
+    @JoinColumn(name = "marca_id", foreignKey = @ForeignKey(name = "FK_VEHICULO_MARCA"))
+    private Marca marca;
+
+    @ManyToOne
+    @JoinColumn(name = "tipo_id", foreignKey = @ForeignKey(name = "FK_VEHICULO_TIPO"))
+    private Tipo tipo;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "FK_VEHICULO_USUARIO"))
+    private Usuario usuario;
+
+    private String foto1;
+    private String foto2;
+    private String foto3;
+    private String foto4;
+    private String llantas;
+    private String distribucion;
+    private String procedencia;
+    private String traccion;
+}
