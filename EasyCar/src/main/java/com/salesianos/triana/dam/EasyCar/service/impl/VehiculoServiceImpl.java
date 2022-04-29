@@ -11,6 +11,8 @@ import com.salesianos.triana.dam.EasyCar.service.StorageService;
 import com.salesianos.triana.dam.EasyCar.service.VehiculoService;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,13 +67,13 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
-    public List<GetVehiculoDto> findAll() {
-        List<Vehiculo> data = repository.findAll();
+    public Page<GetVehiculoDto> findAll(Pageable pageable) {
+        Page<Vehiculo> data = repository.findAll(pageable);
 
         if(data.isEmpty()) {
             throw new ListEntityNotFoundException(Vehiculo.class);
         } else {
-            return data.stream().map(converter::getVehiculoToDto).collect(Collectors.toList());
+            return data.map(converter::getVehiculoToDto);
         }
     }
 

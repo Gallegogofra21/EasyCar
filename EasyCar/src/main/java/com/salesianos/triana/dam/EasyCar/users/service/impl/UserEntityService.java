@@ -62,6 +62,8 @@ public class UserEntityService extends BaseService<Usuario, Long, UserEntityRepo
                     .username(newUser.getUsername())
                     .password(passwordEncoder.encode(newUser.getPassword()))
                     .avatar(uri)
+                    .apellidos(newUser.getApellidos())
+                    .telefono(newUser.getTelefono())
                     .nombre(newUser.getNombre())
                     .email(newUser.getEmail())
                     .build();

@@ -14,14 +14,14 @@ public class ConverterVehiculoDto {
                 .potencia(v.getPotencia())
                 .marchas(v.getMarchas())
                 .precio(v.getPrecio())
-                .marca(v.getMarca())
-                .tipo(v.getTipo())
+                .marca(v.getMarca().getId())
+                .tipo(v.getTipo().getId())
                 .foto1(v.getFoto1())
                 .llantas(v.getLlantas())
                 .distribucion(v.getDistribucion())
                 .procedencia(v.getProcedencia())
                 .traccion(v.getTraccion())
-                .concesionario(v.getConcesionario())
+                .concesionario(v.getConcesionario().getId())
                 .build();
     }
 }

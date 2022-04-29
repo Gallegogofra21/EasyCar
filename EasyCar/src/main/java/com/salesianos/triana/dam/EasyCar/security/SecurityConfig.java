@@ -54,6 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.GET,"/profile/**").authenticated()
                 .antMatchers(HttpMethod.PUT, "/profile/**").authenticated()
+                .antMatchers(HttpMethod.GET, "/download/**").authenticated()
 
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/error").permitAll()
