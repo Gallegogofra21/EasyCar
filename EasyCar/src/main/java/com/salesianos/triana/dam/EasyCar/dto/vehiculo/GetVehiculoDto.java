@@ -1,5 +1,6 @@
-package com.salesianos.triana.dam.EasyCar.security.dto.vehiculo;
+package com.salesianos.triana.dam.EasyCar.dto.vehiculo;
 
+import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.model.Marca;
 import com.salesianos.triana.dam.EasyCar.model.Marchas;
 import com.salesianos.triana.dam.EasyCar.model.Tipo;
@@ -28,4 +29,5 @@ public class GetVehiculoDto {
     private String distribucion;
     private String procedencia;
     private String traccion;
+    private Concesionario concesionario;
 }

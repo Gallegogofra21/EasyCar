@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.users.model;
 
+import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -37,7 +38,7 @@ public class Usuario implements UserDetails {
     private String password2;
 
     @OneToMany
-    private List<Vehiculo> vehiculos;
+    private List<Concesionario> concesionarios;
 
     private UserRole rol;
 

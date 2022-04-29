@@ -1,8 +1,8 @@
 package com.salesianos.triana.dam.EasyCar.service;
 
 import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
-import com.salesianos.triana.dam.EasyCar.security.dto.vehiculo.CreateVehiculoDto;
-import com.salesianos.triana.dam.EasyCar.security.dto.vehiculo.GetVehiculoDto;
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.CreateVehiculoDto;
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;

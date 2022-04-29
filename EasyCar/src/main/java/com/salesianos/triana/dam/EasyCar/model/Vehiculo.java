@@ -26,16 +26,16 @@ public class Vehiculo implements Serializable {
     private Double precio;
 
     @ManyToOne
+    @JoinColumn(name = "concesionario_id", foreignKey = @ForeignKey(name = "FK_VEHICULO_CONCESIONARIO"))
+    private Concesionario concesionario;
+
+    @ManyToOne
     @JoinColumn(name = "marca_id", foreignKey = @ForeignKey(name = "FK_VEHICULO_MARCA"))
     private Marca marca;
 
     @ManyToOne
     @JoinColumn(name = "tipo_id", foreignKey = @ForeignKey(name = "FK_VEHICULO_TIPO"))
     private Tipo tipo;
-
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "FK_VEHICULO_USUARIO"))
-    private Usuario usuario;
 
     private String foto1;
     private String foto2;

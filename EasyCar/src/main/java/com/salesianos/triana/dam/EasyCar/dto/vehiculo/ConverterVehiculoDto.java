@@ -1,4 +1,4 @@
-package com.salesianos.triana.dam.EasyCar.security.dto.vehiculo;
+package com.salesianos.triana.dam.EasyCar.dto.vehiculo;
 
 import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
 import org.springframework.stereotype.Component;
@@ -21,6 +21,7 @@ public class ConverterVehiculoDto {
                 .distribucion(v.getDistribucion())
                 .procedencia(v.getProcedencia())
                 .traccion(v.getTraccion())
+                .concesionario(v.getConcesionario())
                 .build();
     }
 }

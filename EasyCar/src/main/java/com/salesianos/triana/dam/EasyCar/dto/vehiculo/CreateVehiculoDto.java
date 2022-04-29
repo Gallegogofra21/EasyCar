@@ -1,5 +1,6 @@
-package com.salesianos.triana.dam.EasyCar.security.dto.vehiculo;
+package com.salesianos.triana.dam.EasyCar.dto.vehiculo;
 
+import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.model.Marca;
 import com.salesianos.triana.dam.EasyCar.model.Marchas;
 import com.salesianos.triana.dam.EasyCar.model.Tipo;
@@ -27,5 +28,5 @@ public class CreateVehiculoDto {
     private String traccion;
 
     private Marca marca;
-    private Usuario usuario;
+    private Concesionario concesionario;
 }

@@ -4,13 +4,12 @@ import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundExc
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
 import com.salesianos.triana.dam.EasyCar.repo.VehiculoRepository;
-import com.salesianos.triana.dam.EasyCar.security.dto.vehiculo.ConverterVehiculoDto;
-import com.salesianos.triana.dam.EasyCar.security.dto.vehiculo.CreateVehiculoDto;
-import com.salesianos.triana.dam.EasyCar.security.dto.vehiculo.GetVehiculoDto;
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.ConverterVehiculoDto;
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.CreateVehiculoDto;
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.service.StorageService;
 import com.salesianos.triana.dam.EasyCar.service.VehiculoService;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
-import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,7 +30,6 @@ public class VehiculoServiceImpl implements VehiculoService {
 
     private final VehiculoRepository repository;
     private final StorageService storageService;
-    private final UserEntityService userEntityService;
     private final ConverterVehiculoDto converter;
 
     @Override
@@ -86,11 +84,37 @@ public class VehiculoServiceImpl implements VehiculoService {
     public Vehiculo edit(CreateVehiculoDto createVehiculoDto, MultipartFile file, Usuario usuario, Long id) {
         Vehiculo vehiculo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
 
-        if(vehiculo.getUsuario().getId().equals(usuario.getId()) && vehiculo.getUsuario().get)
+        String filename = storageService.store(file);
+
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(filename)
+                .toUriString();
+
+        return repository.findById(id).map(v -> {
+            v.setVersion(createVehiculoDto.getVersion());
+            v.setFechaMatriculacion(createVehiculoDto.getFechaMatriculacion());
+            v.setKilometraje(createVehiculoDto.getKilometraje());
+            v.setPotencia(createVehiculoDto.getPotencia());
+            v.setMarchas(createVehiculoDto.getMarchas());
+            v.setPrecio(createVehiculoDto.getPrecio());
+            v.setMarca(createVehiculoDto.getMarca());
+            v.setTipo(createVehiculoDto.getTipo());
+            v.setFoto1(uri);
+            v.setLlantas(createVehiculoDto.getLlantas());
+            v.setDistribucion(createVehiculoDto.getDistribucion());
+            v.setProcedencia(createVehiculoDto.getProcedencia());
+            v.setTraccion(createVehiculoDto.getTraccion());
+            return repository.save(v);
+        }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
     }
 
     @Override
     public ResponseEntity<?> delete(Long id, Usuario usuario) throws IOException {
-        return null;
+
+        Vehiculo vehiculo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
+        storageService.deleteFile(vehiculo.getFoto1());
+        repository.delete(vehiculo);
+        return ResponseEntity.noContent().build();
     }
 }

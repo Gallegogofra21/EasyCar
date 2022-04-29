@@ -1,11 +1,9 @@
 package com.salesianos.triana.dam.EasyCar.model;
 
+import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -25,4 +23,9 @@ public class Concesionario implements Serializable {
 
     @OneToMany
     private List<Vehiculo> vehiculos;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "FK_CONCESIONARIO_USUARIO"))
+    private Usuario usuario;
+
 }
