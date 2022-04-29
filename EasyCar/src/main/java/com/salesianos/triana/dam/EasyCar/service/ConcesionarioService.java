@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface ConcesionarioService {
 
-    Concesionario createConcesionario(CreateConcesionarioDto createConcesionarioDto, Usuario usuario) throws IOException;
+    Concesionario createConcesionario(CreateConcesionarioDto createConcesionarioDto, Long id) throws IOException;
     List<GetConcesionarioDto> findAll();
     Concesionario findById(Long id);
     Concesionario edit(CreateConcesionarioDto createConcesionarioDto, Usuario usuario, Long id);

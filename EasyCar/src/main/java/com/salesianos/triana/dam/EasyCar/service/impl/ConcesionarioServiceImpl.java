@@ -9,9 +9,12 @@ import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.repo.ConcesionarioRepository;
 import com.salesianos.triana.dam.EasyCar.service.ConcesionarioService;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
+import com.salesianos.triana.dam.EasyCar.users.repo.UserEntityRepository;
+import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -24,6 +27,7 @@ public class ConcesionarioServiceImpl implements ConcesionarioService {
 
     private final ConcesionarioRepository repository;
     private final ConverterConcesionarioDto converter;
+    private final UserEntityRepository userRepository;
 
     @Override
     public List<GetConcesionarioDto> findAll() {
@@ -42,11 +46,15 @@ public class ConcesionarioServiceImpl implements ConcesionarioService {
     }
 
     @Override
-    public Concesionario createConcesionario(CreateConcesionarioDto createConcesionarioDto, Usuario usuario) {
+    public Concesionario createConcesionario(CreateConcesionarioDto createConcesionarioDto, Long idGestor) {
+
+        Usuario gestor = userRepository.findById(idGestor).orElseThrow(() -> new SingleEntityNotFoundException(idGestor.toString(), Usuario.class));
+
         Concesionario newConcesionario = Concesionario.builder()
                 .nombre(createConcesionarioDto.getNombre())
                 .direccion(createConcesionarioDto.getDireccion())
                 .vehiculos(createConcesionarioDto.getVehiculos())
+                .usuario(gestor)
                 .build();
         return repository.save(newConcesionario);
     }
