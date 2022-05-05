@@ -4,6 +4,8 @@ import com.salesianos.triana.dam.EasyCar.dto.tipo.CreateTipoDto;
 import com.salesianos.triana.dam.EasyCar.dto.tipo.GetTipoDto;
 import com.salesianos.triana.dam.EasyCar.model.Tipo;
 import org.apache.coyote.Response;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +15,7 @@ import java.util.List;
 public interface TipoService {
 
     Tipo createTipo(CreateTipoDto createTipoDto, MultipartFile file) throws IOException;
-    List<GetTipoDto> findAll();
+    Page<GetTipoDto> findAll(Pageable pageable);
     Tipo findById(Long id);
     Tipo edit(CreateTipoDto createTipoDto, MultipartFile file, Long id) throws IOException;
     ResponseEntity<?> delete(Long id) throws IOException;

@@ -6,18 +6,17 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Component
 public class PaginationLinksUtil {
-
     public String createLinkHeader(Page<?> page, UriComponentsBuilder uriBuilder) {
         final StringBuilder linkHeader = new StringBuilder();
         linkHeader.append("");
 
         if (page.hasNext()) {
-            String uri = constructUri(page.getNumber() + 1, page.getSize(), uriBuilder);
+            String uri = constructUri(page.getNumber()+1, page.getSize(), uriBuilder);
             linkHeader.append(buildLinkHeader(uri, "next"));
         }
 
         if (page.hasPrevious()) {
-            String uri = constructUri(page.getNumber() - 1, page.getSize(), uriBuilder);
+            String uri = constructUri(page.getNumber()-1, page.getSize(), uriBuilder);
             appendCommaIfNecessary(linkHeader);
             linkHeader.append(buildLinkHeader(uri, "prev"));
         }
@@ -29,7 +28,7 @@ public class PaginationLinksUtil {
         }
 
         if (!page.isLast()) {
-            String uri = constructUri(page.getTotalPages() - 1, page.getSize(), uriBuilder);
+            String uri = constructUri(page.getTotalPages()-1, page.getSize(), uriBuilder);
             appendCommaIfNecessary(linkHeader);
             linkHeader.append(buildLinkHeader(uri, "last"));
         }
@@ -39,7 +38,7 @@ public class PaginationLinksUtil {
     }
 
     private String constructUri(int newPageNumber, int size, UriComponentsBuilder uriBuilder) {
-        return uriBuilder.replaceQueryParam("page", newPageNumber).replaceQueryParam("size", size).build().encode().toUriString();
+        return uriBuilder.replaceQueryParam("page", newPageNumber ).replaceQueryParam("size", size).build().encode().toUriString();
     }
 
 
@@ -52,4 +51,6 @@ public class PaginationLinksUtil {
             linkHeader.append(", ");
         }
     }
+
+
 }
