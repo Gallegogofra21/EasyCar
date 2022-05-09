@@ -10,6 +10,8 @@ import com.salesianos.triana.dam.EasyCar.repo.MarcaRepository;
 import com.salesianos.triana.dam.EasyCar.service.MarcaService;
 import com.salesianos.triana.dam.EasyCar.service.StorageService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,13 +30,13 @@ public class MarcaServiceImpl implements MarcaService {
     private final StorageService storageService;
 
     @Override
-    public List<GetMarcaDto> findAll() {
-        List<Marca> data = repository.findAll();
+    public Page<GetMarcaDto> findAll(Pageable pageable) {
+        Page<Marca> data = repository.findAll(pageable);
 
         if(data.isEmpty()) {
             throw new ListEntityNotFoundException(Marca.class);
         } else {
-            return data.stream().map(converter::getMarcaToDto).collect(Collectors.toList());
+            return data.map(converter::getMarcaToDto);
         }
     }
 

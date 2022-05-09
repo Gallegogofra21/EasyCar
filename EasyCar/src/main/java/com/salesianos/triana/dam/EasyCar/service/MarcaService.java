@@ -4,6 +4,8 @@ import com.salesianos.triana.dam.EasyCar.dto.marca.CreateMarcaDto;
 import com.salesianos.triana.dam.EasyCar.dto.marca.GetMarcaDto;
 import com.salesianos.triana.dam.EasyCar.model.Marca;
 import org.apache.coyote.Response;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +15,7 @@ import java.util.List;
 public interface MarcaService {
 
     Marca createMarca(CreateMarcaDto createMarcaDto, MultipartFile file) throws IOException;
-    List<GetMarcaDto> findAll();
+    Page<GetMarcaDto> findAll(Pageable pageable);
     Marca findById(Long id);
     Marca edit(CreateMarcaDto createMarcaDto, MultipartFile file, Long id) throws IOException;
     ResponseEntity<?> delete(Long id) throws IOException;

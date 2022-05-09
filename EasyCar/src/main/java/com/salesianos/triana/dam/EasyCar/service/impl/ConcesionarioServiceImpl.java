@@ -12,6 +12,8 @@ import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import com.salesianos.triana.dam.EasyCar.users.repo.UserEntityRepository;
 import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,13 +32,13 @@ public class ConcesionarioServiceImpl implements ConcesionarioService {
     private final UserEntityRepository userRepository;
 
     @Override
-    public List<GetConcesionarioDto> findAll() {
-        List<Concesionario> data = repository.findAll();
+    public Page<GetConcesionarioDto> findAll(Pageable pageable) {
+        Page<Concesionario> data = repository.findAll(pageable);
 
         if(data.isEmpty()) {
             throw new ListEntityNotFoundException(Concesionario.class);
         } else {
-            return data.stream().map(converter::getConcesionarioToDto).collect(Collectors.toList());
+            return data.map(converter::getConcesionarioToDto);
         }
     }
 
@@ -60,22 +62,18 @@ public class ConcesionarioServiceImpl implements ConcesionarioService {
     }
 
     @Override
-    public Concesionario edit(CreateConcesionarioDto createConcesionarioDto, Usuario usuario, Long id) {
+    public Concesionario edit(CreateConcesionarioDto createConcesionarioDto, Long id) {
         Concesionario concesionario = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Concesionario.class));
-
-        if(concesionario.getUsuario().getId().equals(usuario.getId())){
             return repository.findById(id).map(c -> {
                 c.setNombre(createConcesionarioDto.getNombre());
                 c.setDireccion(createConcesionarioDto.getDireccion());
                 c.setVehiculos(createConcesionarioDto.getVehiculos());
                 return repository.save(c);
             }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Concesionario.class));
-        }
-        throw new SingleEntityNotFoundException(id.toString(), Concesionario.class);
     }
 
     @Override
-    public ResponseEntity<?> delete(Long id, Usuario usuario) throws IOException {
+    public ResponseEntity<?> delete(Long id) {
         Concesionario concesionario = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Concesionario.class));
         repository.delete(concesionario);
         return ResponseEntity.noContent().build();
