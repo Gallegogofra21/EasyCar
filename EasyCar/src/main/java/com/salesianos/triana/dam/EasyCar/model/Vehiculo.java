@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 @Entity
 @AllArgsConstructor
@@ -45,4 +46,19 @@ public class Vehiculo implements Serializable {
     private String distribucion;
     private String procedencia;
     private String traccion;
+
+    // HELPERS
+
+    public void addToConcesionario(Concesionario c) {
+        concesionario = c;
+        if (c.getVehiculos() == null) {
+            c.setVehiculos(new ArrayList<>());
+            c.getVehiculos().add(this);
+        }
+    }
+
+    public void removeFromConcesionario(Concesionario c) {
+        c.getVehiculos().remove(this);
+        concesionario = null;
+    }
 }

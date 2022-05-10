@@ -19,7 +19,6 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
 
     private final ObjectMapper mapper;
 
-
     @Override
     public void handle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AccessDeniedException e) throws IOException, ServletException {
         httpServletResponse.setStatus(HttpStatus.FORBIDDEN.value());

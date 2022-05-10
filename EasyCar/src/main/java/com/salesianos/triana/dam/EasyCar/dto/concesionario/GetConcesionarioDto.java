@@ -16,5 +16,5 @@ public class GetConcesionarioDto {
     private String nombre;
     private String direccion;
     private int numVehiculos;
-    private Usuario usuario;
+    private Long usuarioId;
 }

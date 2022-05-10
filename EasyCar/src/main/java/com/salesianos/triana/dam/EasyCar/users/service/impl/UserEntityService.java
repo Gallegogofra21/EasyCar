@@ -1,12 +1,23 @@
 package com.salesianos.triana.dam.EasyCar.users.service.impl;
 
+import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException2;
+import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.service.BaseService;
+import com.salesianos.triana.dam.EasyCar.service.ConcesionarioService;
 import com.salesianos.triana.dam.EasyCar.service.StorageService;
+import com.salesianos.triana.dam.EasyCar.users.dto.Admin.CreateAdminDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.CreateUserDto;
+import com.salesianos.triana.dam.EasyCar.users.dto.Gestor.CreateGestorDto;
+import com.salesianos.triana.dam.EasyCar.users.dto.GetUserDto;
+import com.salesianos.triana.dam.EasyCar.users.dto.UserDtoConverter;
+import com.salesianos.triana.dam.EasyCar.users.dto.Usuario.CreateUsuarioDto;
+import com.salesianos.triana.dam.EasyCar.users.model.UserRole;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import com.salesianos.triana.dam.EasyCar.users.repo.UserEntityRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import lombok.RequiredArgsConstructor;
@@ -33,11 +44,25 @@ public class UserEntityService extends BaseService<Usuario, Long, UserEntityRepo
 
     private final PasswordEncoder passwordEncoder;
     private final StorageService storageService;
+    private final ConcesionarioService concesionarioService;
+    private final UserDtoConverter converter;
+    private final UserEntityRepository repository;
 
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         return this.repositorio.findFirstByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email + " no encontrado."));
+    }
+
+    @Override
+    public Page<GetUserDto> findAll(Pageable pageable) {
+        Page<Usuario> data = repository.findAll(pageable);
+
+        if(data.isEmpty()) {
+            throw new ListEntityNotFoundException(Usuario.class);
+        } else {
+            return data.map(converter::convertUsuarioToNewUser);
+        }
     }
 
     public Optional<Usuario> loadUserById (Long id) throws UsernameNotFoundException {
@@ -48,7 +73,7 @@ public class UserEntityService extends BaseService<Usuario, Long, UserEntityRepo
         return repositorio.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
     }
 
-    public Usuario saveUser (@Valid CreateUserDto newUser, MultipartFile file) {
+    public Usuario saveUser (@Valid CreateUsuarioDto newUser, MultipartFile file) {
 
         String filename = storageService.store(file);
 
@@ -66,6 +91,58 @@ public class UserEntityService extends BaseService<Usuario, Long, UserEntityRepo
                     .telefono(newUser.getTelefono())
                     .nombre(newUser.getNombre())
                     .email(newUser.getEmail())
+                    .rol(UserRole.USUARIO)
+                    .build();
+            return save(usuario);
+        }else {
+            return null;
+        }
+    }
+
+    public Usuario saveGestor (@Valid CreateGestorDto newUser, MultipartFile file) {
+
+        String filename = storageService.store(file);
+
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(filename)
+                .toUriString();
+
+        if(newUser.getPassword().contentEquals(newUser.getPassword2())) {
+            Usuario usuario = Usuario.builder()
+                    .username(newUser.getUsername())
+                    .password(passwordEncoder.encode(newUser.getPassword()))
+                    .avatar(uri)
+                    .apellidos(newUser.getApellidos())
+                    .telefono(newUser.getTelefono())
+                    .nombre(newUser.getNombre())
+                    .email(newUser.getEmail())
+                    .rol(UserRole.GESTOR)
+                    .build();
+            return save(usuario);
+        }else {
+            return null;
+        }
+    }
+    public Usuario saveAdmin (@Valid CreateAdminDto newUser, MultipartFile file) {
+
+        String filename = storageService.store(file);
+
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(filename)
+                .toUriString();
+
+        if(newUser.getPassword().contentEquals(newUser.getPassword2())) {
+            Usuario usuario = Usuario.builder()
+                    .username(newUser.getUsername())
+                    .password(passwordEncoder.encode(newUser.getPassword()))
+                    .avatar(uri)
+                    .apellidos(newUser.getApellidos())
+                    .telefono(newUser.getTelefono())
+                    .nombre(newUser.getNombre())
+                    .email(newUser.getEmail())
+                    .rol(UserRole.ADMIN)
                     .build();
             return save(usuario);
         }else {

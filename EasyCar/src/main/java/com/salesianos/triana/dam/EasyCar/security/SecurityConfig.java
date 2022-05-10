@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/register/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/login").anonymous()
                 .antMatchers(HttpMethod.GET, "/download/**").authenticated()
                 .antMatchers(HttpMethod.GET, "/me").authenticated()
@@ -55,6 +55,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET,"/profile/**").authenticated()
                 .antMatchers(HttpMethod.PUT, "/profile/**").authenticated()
                 .antMatchers(HttpMethod.GET, "/download/**").authenticated()
+
+                .antMatchers(HttpMethod.GET, "/vehiculo/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/vehiculo/**").authenticated()
+
+                .antMatchers(HttpMethod.GET, "/concesionario/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/concesionario/**").authenticated()
 
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/error").permitAll()

@@ -24,7 +24,7 @@ public class CreateAdminDto {
     private String email;
     private LocalDate fechaNacimiento;
     private String password;
+    private String telefono;
     private String password2;
     private String avatar;
-    private Vehiculo vehiculo;
 }

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -21,8 +22,9 @@ public class Concesionario implements Serializable {
     private String nombre;
     private String direccion;
 
-    @OneToMany
-    private List<Vehiculo> vehiculos;
+    @OneToMany(mappedBy = "concesionario", fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<Vehiculo> vehiculos = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "FK_CONCESIONARIO_USUARIO"))

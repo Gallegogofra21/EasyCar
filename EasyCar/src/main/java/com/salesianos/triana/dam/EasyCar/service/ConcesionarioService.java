@@ -14,7 +14,7 @@ import java.util.List;
 
 public interface ConcesionarioService {
 
-    Concesionario createConcesionario(CreateConcesionarioDto createConcesionarioDto, Long id);
+    Concesionario createConcesionario(CreateConcesionarioDto createConcesionarioDto, Long idGestor);
     Page<GetConcesionarioDto> findAll(Pageable pageable);
     Concesionario findById(Long id);
     Concesionario edit(CreateConcesionarioDto createConcesionarioDto, Long id);

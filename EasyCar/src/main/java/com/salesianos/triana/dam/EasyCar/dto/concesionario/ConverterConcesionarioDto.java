@@ -11,7 +11,7 @@ public class ConverterConcesionarioDto {
                 .nombre(c.getNombre())
                 .direccion(c.getDireccion())
                 .numVehiculos(c.getVehiculos().size())
-                .usuario(c.getUsuario())
+                .usuarioId(c.getUsuario().getId())
                 .build();
     }
 }

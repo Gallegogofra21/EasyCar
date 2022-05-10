@@ -37,9 +37,10 @@ public class Usuario implements UserDetails {
     private String password;
     private String password2;
 
-    @OneToMany
-    private List<Concesionario> concesionarios;
+    @OneToOne
+    private Concesionario concesionario;
 
+    @Enumerated
     private UserRole rol;
 
     @Override

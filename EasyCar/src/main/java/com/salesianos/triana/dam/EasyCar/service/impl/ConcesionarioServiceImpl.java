@@ -49,15 +49,15 @@ public class ConcesionarioServiceImpl implements ConcesionarioService {
 
     @Override
     public Concesionario createConcesionario(CreateConcesionarioDto createConcesionarioDto, Long idGestor) {
-
-        Usuario gestor = userRepository.findById(idGestor).orElseThrow(() -> new SingleEntityNotFoundException(idGestor.toString(), Usuario.class));
-
+        Usuario gestor = userRepository.findById(idGestor).orElseThrow(() -> new SingleEntityNotFoundException(idGestor.toString(), Concesionario.class));
         Concesionario newConcesionario = Concesionario.builder()
                 .nombre(createConcesionarioDto.getNombre())
                 .direccion(createConcesionarioDto.getDireccion())
                 .vehiculos(createConcesionarioDto.getVehiculos())
                 .usuario(gestor)
                 .build();
+
+        gestor.setConcesionario(repository.save(newConcesionario));
         return repository.save(newConcesionario);
     }
 

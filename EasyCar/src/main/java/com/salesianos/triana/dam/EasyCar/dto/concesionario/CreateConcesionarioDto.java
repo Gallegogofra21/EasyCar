@@ -14,5 +14,5 @@ public class CreateConcesionarioDto {
     private String nombre;
     private String direccion;
     private List<Vehiculo> vehiculos;
-    private Usuario usuario;
+    private Long usuarioId;
 }

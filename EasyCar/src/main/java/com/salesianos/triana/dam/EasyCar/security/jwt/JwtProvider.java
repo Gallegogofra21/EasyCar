@@ -52,6 +52,7 @@ public class JwtProvider {
                 .setSubject(Long.toString(user.getId()))
                 .setIssuedAt(tokenExpirationDate)
                 .claim("nombre", user.getNombre())
+                .claim("rol", user.getRol().name())
                 .compact();
     }
 

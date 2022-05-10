@@ -1,19 +1,26 @@
 package com.salesianos.triana.dam.EasyCar.users.controller;
 
+import com.salesianos.triana.dam.EasyCar.users.dto.Admin.CreateAdminDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.CreateUserDto;
+import com.salesianos.triana.dam.EasyCar.users.dto.Gestor.CreateGestorDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.GetUserDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.UserDtoConverter;
+import com.salesianos.triana.dam.EasyCar.users.dto.Usuario.CreateUsuarioDto;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import com.salesianos.triana.dam.EasyCar.users.repo.UserEntityRepository;
 import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityService;
 import com.salesianos.triana.dam.EasyCar.util.PaginationLinksUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.io.IOException;
 
@@ -32,8 +39,35 @@ public class UserController {
         return userEntityService.findUserById(id);
     }
 
-    @PostMapping("/auth/register")
-    public ResponseEntity<GetUserDto> nuevoUser (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateUserDto newUser) {
+    @GetMapping("/usuarios")
+    public ResponseEntity<?> findAll(Pageable pageable, HttpServletRequest request) {
+        Page<GetUserDto> result = userEntityService.findAll(pageable);
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
+        return ResponseEntity.ok().header("link", paginationLinksUtil.createLinkHeader(result, uriBuilder)).body(result);
+    }
+
+    @PostMapping("/auth/register/admin")
+    public ResponseEntity<GetUserDto> nuevoAdmin (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateAdminDto newUser) {
+        Usuario saved = userEntityService.saveAdmin(newUser, file);
+
+        if(saved == null)
+            return ResponseEntity.badRequest().build();
+        else
+            return ResponseEntity.ok(userDtoConverter.convertUsuarioToNewUser(saved));
+    }
+
+    @PostMapping("/auth/register/gestor")
+    public ResponseEntity<GetUserDto> nuevoGestor (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateGestorDto newUser) {
+        Usuario saved = userEntityService.saveGestor(newUser, file);
+
+        if(saved == null)
+            return ResponseEntity.badRequest().build();
+        else
+            return ResponseEntity.ok(userDtoConverter.convertUsuarioToNewUser(saved));
+    }
+
+    @PostMapping("/auth/register/usuario")
+    public ResponseEntity<GetUserDto> nuevoUsuario (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateUsuarioDto newUser) {
         Usuario saved = userEntityService.saveUser(newUser, file);
 
         if(saved == null)

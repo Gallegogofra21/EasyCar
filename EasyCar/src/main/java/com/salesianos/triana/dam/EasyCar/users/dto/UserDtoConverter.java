@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.users.dto;
 
+import com.salesianos.triana.dam.EasyCar.users.dto.Gestor.CreateGestorDto;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import org.springframework.stereotype.Component;
 

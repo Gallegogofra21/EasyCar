@@ -1,5 +1,6 @@
-package com.salesianos.triana.dam.EasyCar.users.dto;
+package com.salesianos.triana.dam.EasyCar.users.dto.Gestor;
 
+import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.validacion.anotaciones.UniqueEmailUser;
 import com.salesianos.triana.dam.EasyCar.validacion.anotaciones.UniqueUsernameUser;
 import lombok.*;
@@ -9,9 +10,10 @@ import java.time.LocalDate;
 
 @Getter
 @Setter
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class CreateUserDto {
+public class CreateGestorDto {
 
     @NotBlank(message = "{user.username.blank}")
     @UniqueUsernameUser(message = "{user.username.unique}")
@@ -28,5 +30,5 @@ public class CreateUserDto {
     private String password2;
     private String avatar;
     private String rol;
-
+    private Long concesionarioId;
 }
