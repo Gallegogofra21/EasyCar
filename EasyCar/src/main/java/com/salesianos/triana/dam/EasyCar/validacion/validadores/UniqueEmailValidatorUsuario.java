@@ -1,6 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.validacion.validadores;
 
-import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityService;
+import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityServiceImpl;
 import com.salesianos.triana.dam.EasyCar.validacion.anotaciones.UniqueEmailUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
@@ -10,7 +10,7 @@ import javax.validation.ConstraintValidatorContext;
 
 @RequiredArgsConstructor
 public class UniqueEmailValidatorUsuario implements ConstraintValidator<UniqueEmailUser, String> {
-    private final UserEntityService service;
+    private final UserEntityServiceImpl service;
 
     @Override
     public void initialize(UniqueEmailUser constraintAnnotation) {

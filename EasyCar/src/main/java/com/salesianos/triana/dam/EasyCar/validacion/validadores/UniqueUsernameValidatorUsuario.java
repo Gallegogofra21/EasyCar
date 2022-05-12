@@ -1,6 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.validacion.validadores;
 
-import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityService;
+import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityServiceImpl;
 import com.salesianos.triana.dam.EasyCar.validacion.anotaciones.UniqueUsernameUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;
@@ -11,7 +11,7 @@ import javax.validation.ConstraintValidatorContext;
 @RequiredArgsConstructor
 public class UniqueUsernameValidatorUsuario implements ConstraintValidator<UniqueUsernameUser, String> {
 
-    private final UserEntityService service;
+    private final UserEntityServiceImpl service;
 
     @Override
     public void initialize(UniqueUsernameUser constraintAnnotation) {

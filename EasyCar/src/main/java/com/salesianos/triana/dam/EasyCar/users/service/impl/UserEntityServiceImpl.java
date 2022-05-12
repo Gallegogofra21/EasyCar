@@ -3,8 +3,6 @@ package com.salesianos.triana.dam.EasyCar.users.service.impl;
 import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException2;
-import com.salesianos.triana.dam.EasyCar.model.Concesionario;
-import com.salesianos.triana.dam.EasyCar.service.BaseService;
 import com.salesianos.triana.dam.EasyCar.service.ConcesionarioService;
 import com.salesianos.triana.dam.EasyCar.service.StorageService;
 import com.salesianos.triana.dam.EasyCar.users.dto.Admin.CreateAdminDto;
@@ -16,13 +14,14 @@ import com.salesianos.triana.dam.EasyCar.users.dto.Usuario.CreateUsuarioDto;
 import com.salesianos.triana.dam.EasyCar.users.model.UserRole;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import com.salesianos.triana.dam.EasyCar.users.repo.UserEntityRepository;
+import com.salesianos.triana.dam.EasyCar.users.service.UserEntityService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,7 +39,7 @@ import java.util.Optional;
 
 @Service("userDetailsService")
 @RequiredArgsConstructor
-public class UserEntityService extends BaseService<Usuario, Long, UserEntityRepository> implements UserDetailsService {
+public class UserEntityServiceImpl implements UserEntityService {
 
     private final PasswordEncoder passwordEncoder;
     private final StorageService storageService;
@@ -51,7 +50,12 @@ public class UserEntityService extends BaseService<Usuario, Long, UserEntityRepo
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return this.repositorio.findFirstByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email + " no encontrado."));
+        return repository.findFirstByEmail(email).orElseThrow(() -> new UsernameNotFoundException(email + " no encontrado."));
+    }
+
+    @Override
+    public Usuario findById(Long id) {
+        return repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
     }
 
     @Override
@@ -66,14 +70,14 @@ public class UserEntityService extends BaseService<Usuario, Long, UserEntityRepo
     }
 
     public Optional<Usuario> loadUserById (Long id) throws UsernameNotFoundException {
-        return this.repositorio.findById(id);
+        return repository.findById(id);
     }
 
     public Usuario findUserById(Long id){
-        return repositorio.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
+        return repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
     }
 
-    public Usuario saveUser (@Valid CreateUsuarioDto newUser, MultipartFile file) {
+    public Usuario createUser (@Valid CreateUsuarioDto newUser, MultipartFile file) throws IOException{
 
         String filename = storageService.store(file);
 
@@ -93,13 +97,13 @@ public class UserEntityService extends BaseService<Usuario, Long, UserEntityRepo
                     .email(newUser.getEmail())
                     .rol(UserRole.USUARIO)
                     .build();
-            return save(usuario);
+            return repository.save(usuario);
         }else {
             return null;
         }
     }
 
-    public Usuario saveGestor (@Valid CreateGestorDto newUser, MultipartFile file) {
+    public Usuario createGestor (@Valid CreateGestorDto newUser, MultipartFile file) throws IOException{
 
         String filename = storageService.store(file);
 
@@ -119,12 +123,12 @@ public class UserEntityService extends BaseService<Usuario, Long, UserEntityRepo
                     .email(newUser.getEmail())
                     .rol(UserRole.GESTOR)
                     .build();
-            return save(usuario);
+            return repository.save(usuario);
         }else {
             return null;
         }
     }
-    public Usuario saveAdmin (@Valid CreateAdminDto newUser, MultipartFile file) {
+    public Usuario createAdmin (@Valid CreateAdminDto newUser, MultipartFile file) throws IOException{
 
         String filename = storageService.store(file);
 
@@ -144,16 +148,14 @@ public class UserEntityService extends BaseService<Usuario, Long, UserEntityRepo
                     .email(newUser.getEmail())
                     .rol(UserRole.ADMIN)
                     .build();
-            return save(usuario);
+            return repository.save(usuario);
         }else {
             return null;
         }
     }
 
-    public Usuario edit (CreateUserDto newUser, MultipartFile file, Usuario currentUser) throws IOException {
-
-        String email = currentUser.getEmail();
-
+    @Override
+    public Usuario edit(CreateUsuarioDto createUsuarioDto, MultipartFile file, Long id) throws IOException {
         String filename = storageService.store(file);
 
         String extension = StringUtils.getFilenameExtension(filename);
@@ -171,22 +173,31 @@ public class UserEntityService extends BaseService<Usuario, Long, UserEntityRepo
                 .path(filename)
                 .toUriString();
 
-        return repositorio.findFirstByEmail(currentUser.getEmail()).map(c -> {
-            c.setNombre(newUser.getNombre());
-            c.setEmail(newUser.getEmail());
-            c.setUsername(newUser.getUsername());
-            c.setPassword(newUser.getPassword());
-            c.setPassword2(newUser.getPassword2());
+        return repository.findById(id).map(c -> {
+            c.setNombre(createUsuarioDto.getNombre());
+            c.setEmail(createUsuarioDto.getEmail());
+            c.setUsername(createUsuarioDto.getUsername());
+            c.setPassword(createUsuarioDto.getPassword());
+            c.setPassword2(createUsuarioDto.getPassword2());
             c.setAvatar(uri);
-            return repositorio.save(c);
+            return repository.save(c);
 
-        }).orElseThrow(() -> new SingleEntityNotFoundException2(email, Usuario.class));
+        }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
+
+    }
+
+    public ResponseEntity<?> delete (Long id) throws IOException{
+
+        Usuario usuario = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
+        storageService.deleteFile(usuario.getAvatar());
+        repository.delete(usuario);
+        return ResponseEntity.noContent().build();
 
     }
 
     public boolean comprobarUsername(String username) {
-        return repositorio.existsByUsername(username);
+        return repository.existsByUsername(username);
     }
 
-    public boolean comprobarEmail(String email){ return repositorio.existsByEmail(email);}
+    public boolean comprobarEmail(String email){ return repository.existsByEmail(email);}
 }

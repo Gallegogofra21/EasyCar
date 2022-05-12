@@ -8,7 +8,7 @@ import com.salesianos.triana.dam.EasyCar.users.dto.UserDtoConverter;
 import com.salesianos.triana.dam.EasyCar.users.dto.Usuario.CreateUsuarioDto;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import com.salesianos.triana.dam.EasyCar.users.repo.UserEntityRepository;
-import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityService;
+import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityServiceImpl;
 import com.salesianos.triana.dam.EasyCar.util.PaginationLinksUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -29,7 +29,7 @@ import java.io.IOException;
 @Validated
 public class UserController {
 
-    private final UserEntityService userEntityService;
+    private final UserEntityServiceImpl userEntityService;
     private final UserEntityRepository userEntityRepository;
     private final UserDtoConverter userDtoConverter;
     private final PaginationLinksUtil paginationLinksUtil;
@@ -39,7 +39,7 @@ public class UserController {
         return userEntityService.findUserById(id);
     }
 
-    @GetMapping("/usuarios")
+    @GetMapping("/usuario/")
     public ResponseEntity<?> findAll(Pageable pageable, HttpServletRequest request) {
         Page<GetUserDto> result = userEntityService.findAll(pageable);
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
@@ -47,8 +47,8 @@ public class UserController {
     }
 
     @PostMapping("/auth/register/admin")
-    public ResponseEntity<GetUserDto> nuevoAdmin (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateAdminDto newUser) {
-        Usuario saved = userEntityService.saveAdmin(newUser, file);
+    public ResponseEntity<GetUserDto> nuevoAdmin (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateAdminDto newUser) throws IOException{
+        Usuario saved = userEntityService.createAdmin(newUser, file);
 
         if(saved == null)
             return ResponseEntity.badRequest().build();
@@ -57,8 +57,8 @@ public class UserController {
     }
 
     @PostMapping("/auth/register/gestor")
-    public ResponseEntity<GetUserDto> nuevoGestor (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateGestorDto newUser) {
-        Usuario saved = userEntityService.saveGestor(newUser, file);
+    public ResponseEntity<GetUserDto> nuevoGestor (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateGestorDto newUser) throws IOException{
+        Usuario saved = userEntityService.createGestor(newUser, file);
 
         if(saved == null)
             return ResponseEntity.badRequest().build();
@@ -67,18 +67,8 @@ public class UserController {
     }
 
     @PostMapping("/auth/register/usuario")
-    public ResponseEntity<GetUserDto> nuevoUsuario (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateUsuarioDto newUser) {
-        Usuario saved = userEntityService.saveUser(newUser, file);
-
-        if(saved == null)
-            return ResponseEntity.badRequest().build();
-        else
-            return ResponseEntity.ok(userDtoConverter.convertUsuarioToNewUser(saved));
-    }
-
-    @PutMapping("/profile/me")
-    public ResponseEntity<GetUserDto> editPost (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateUserDto newUser, @AuthenticationPrincipal Usuario currentUser) throws IOException {
-        Usuario saved = userEntityService.edit(newUser, file, currentUser);
+    public ResponseEntity<GetUserDto> nuevoUsuario (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateUsuarioDto newUser) throws IOException{
+        Usuario saved = userEntityService.createUser(newUser, file);
 
         if(saved == null)
             return ResponseEntity.badRequest().build();
