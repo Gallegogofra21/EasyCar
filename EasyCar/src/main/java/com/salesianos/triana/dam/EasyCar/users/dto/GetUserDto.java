@@ -8,6 +8,7 @@ import lombok.*;
 @Builder
 public class GetUserDto {
 
+    private Long id;
     private String username;
     private String nombre;
     private String apellidos;

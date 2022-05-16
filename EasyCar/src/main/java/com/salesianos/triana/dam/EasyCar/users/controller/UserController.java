@@ -1,20 +1,18 @@
 package com.salesianos.triana.dam.EasyCar.users.controller;
 
 import com.salesianos.triana.dam.EasyCar.users.dto.Admin.CreateAdminDto;
-import com.salesianos.triana.dam.EasyCar.users.dto.CreateUserDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.Gestor.CreateGestorDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.GetUserDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.UserDtoConverter;
 import com.salesianos.triana.dam.EasyCar.users.dto.Usuario.CreateUsuarioDto;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import com.salesianos.triana.dam.EasyCar.users.repo.UserEntityRepository;
-import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityServiceImpl;
+import com.salesianos.triana.dam.EasyCar.users.service.UserEntityService;
 import com.salesianos.triana.dam.EasyCar.util.PaginationLinksUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,7 +27,7 @@ import java.io.IOException;
 @Validated
 public class UserController {
 
-    private final UserEntityServiceImpl userEntityService;
+    private final UserEntityService userEntityService;
     private final UserEntityRepository userEntityRepository;
     private final UserDtoConverter userDtoConverter;
     private final PaginationLinksUtil paginationLinksUtil;

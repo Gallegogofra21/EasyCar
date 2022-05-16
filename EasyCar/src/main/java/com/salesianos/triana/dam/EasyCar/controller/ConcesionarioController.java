@@ -38,13 +38,13 @@ public class ConcesionarioController {
     @GetMapping("/{id}")
     public Concesionario findOne(@PathVariable Long id) { return service.findById(id); }
 
-    @PostMapping
-    public ResponseEntity<?> create (@Valid @RequestPart("concesionario")CreateConcesionarioDto newConcesionario, @PathVariable Long idGestor) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.createConcesionario(newConcesionario, idGestor));
+    @PostMapping("/{id}")
+    public ResponseEntity<?> create (@Valid @RequestParam CreateConcesionarioDto newConcesionario, @PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createConcesionario(newConcesionario, id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> edit (@PathVariable Long id, @Valid @RequestPart("concesionario") CreateConcesionarioDto newConcesionario) {
+    public ResponseEntity<?> edit (@PathVariable Long id, @Valid @RequestParam CreateConcesionarioDto newConcesionario) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.edit(newConcesionario, id));
     }
 

@@ -9,6 +9,7 @@ public class UserDtoConverter {
 
     public GetUserDto convertUsuarioToNewUser(Usuario p) {
         return GetUserDto.builder()
+                .id(p.getId())
                 .username(p.getUsername())
                 .nombre(p.getNombre())
                 .apellidos(p.getApellidos())

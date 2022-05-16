@@ -1,7 +1,7 @@
 package com.salesianos.triana.dam.EasyCar.security.jwt;
 
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
-import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityServiceImpl;
+import com.salesianos.triana.dam.EasyCar.users.service.UserEntityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,14 +16,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
 @Log
 @Component
 @RequiredArgsConstructor
 public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
-    private final UserEntityServiceImpl usuarioService;
+    private final UserEntityService usuarioService;
     private final JwtProvider jwtProvider;
 
     @Override
