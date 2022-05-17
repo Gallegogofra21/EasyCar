@@ -2,6 +2,7 @@ package com.salesianos.triana.dam.EasyCar.controller;
 
 import com.salesianos.triana.dam.EasyCar.dto.tipo.CreateTipoDto;
 import com.salesianos.triana.dam.EasyCar.dto.tipo.GetTipoDto;
+import com.salesianos.triana.dam.EasyCar.dto.tipo.GetTipoVehiculosDto;
 import com.salesianos.triana.dam.EasyCar.model.Tipo;
 import com.salesianos.triana.dam.EasyCar.service.TipoService;
 import com.salesianos.triana.dam.EasyCar.util.PaginationLinksUtil;
@@ -38,11 +39,11 @@ public class TipoController {
     }
 
     @GetMapping("/{id}")
-    public Tipo findOne(@PathVariable Long id) {
+    public GetTipoVehiculosDto findOne(@PathVariable Long id) {
         return service.findById(id);
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<?> create (@RequestPart("file")MultipartFile file, @Valid @RequestPart("tipo")CreateTipoDto newTipo) throws IOException {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createTipo(newTipo, file));
     }

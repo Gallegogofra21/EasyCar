@@ -16,7 +16,7 @@ import java.util.List;
 public class Concesionario implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nombre;

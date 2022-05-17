@@ -2,6 +2,7 @@ package com.salesianos.triana.dam.EasyCar.controller;
 
 import com.salesianos.triana.dam.EasyCar.dto.marca.CreateMarcaDto;
 import com.salesianos.triana.dam.EasyCar.dto.marca.GetMarcaDto;
+import com.salesianos.triana.dam.EasyCar.dto.marca.GetMarcaVehiculosDto;
 import com.salesianos.triana.dam.EasyCar.model.Marca;
 import com.salesianos.triana.dam.EasyCar.service.MarcaService;
 import com.salesianos.triana.dam.EasyCar.util.PaginationLinksUtil;
@@ -36,7 +37,7 @@ public class MarcaController {
     }
 
     @GetMapping("/{id}")
-    public Marca findOne(@PathVariable Long id) {
+    public GetMarcaVehiculosDto findOne(@PathVariable Long id) {
         return service.findById(id);
     }
 

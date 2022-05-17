@@ -2,7 +2,13 @@ package com.salesianos.triana.dam.EasyCar.service.impl;
 
 import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
+import com.salesianos.triana.dam.EasyCar.model.Concesionario;
+import com.salesianos.triana.dam.EasyCar.model.Marca;
+import com.salesianos.triana.dam.EasyCar.model.Tipo;
 import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
+import com.salesianos.triana.dam.EasyCar.repo.ConcesionarioRepository;
+import com.salesianos.triana.dam.EasyCar.repo.MarcaRepository;
+import com.salesianos.triana.dam.EasyCar.repo.TipoRepository;
 import com.salesianos.triana.dam.EasyCar.repo.VehiculoRepository;
 import com.salesianos.triana.dam.EasyCar.dto.vehiculo.ConverterVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.dto.vehiculo.CreateVehiculoDto;
@@ -33,26 +39,44 @@ public class VehiculoServiceImpl implements VehiculoService {
     private final VehiculoRepository repository;
     private final StorageService storageService;
     private final ConverterVehiculoDto converter;
+    private final ConcesionarioRepository concesionarioRepository;
+    private final MarcaRepository marcaRepository;
+    private final TipoRepository tipoRepository;
 
     @Override
-    public Vehiculo createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file, Usuario usuario) throws IOException {
+    public GetVehiculoDto createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file, Long idConcesionario) throws IOException {
         String filename = storageService.store(file);
+
+        Concesionario concesionario = concesionarioRepository.findById(idConcesionario).orElseThrow(() -> new SingleEntityNotFoundException(idConcesionario.toString(), Concesionario.class));
+
+        Marca marca = marcaRepository.findById(createVehiculoDto.getMarca()).orElseThrow(() -> new SingleEntityNotFoundException(createVehiculoDto.getMarca().toString(), Marca.class));
+
+        Tipo tipo = tipoRepository.findById(createVehiculoDto.getTipo()).orElseThrow(() -> new SingleEntityNotFoundException(createVehiculoDto.getTipo().toString(), Tipo.class));
 
         Vehiculo newVehiculo = Vehiculo.builder()
                 .version(createVehiculoDto.getVersion())
+                .modelo(createVehiculoDto.getModelo())
                 .fechaMatriculacion(createVehiculoDto.getFechaMatriculacion())
                 .kilometraje(createVehiculoDto.getKilometraje())
                 .potencia(createVehiculoDto.getPotencia())
                 .marchas(createVehiculoDto.getMarchas())
                 .precio(createVehiculoDto.getPrecio())
-                .marca(createVehiculoDto.getMarca())
-                .tipo(createVehiculoDto.getTipo())
+                .marca(marca)
+                .tipo(tipo)
                 .foto1(createVehiculoDto.getFoto1())
                 .llantas(createVehiculoDto.getLlantas())
                 .distribucion(createVehiculoDto.getDistribucion())
                 .procedencia(createVehiculoDto.getProcedencia())
                 .traccion(createVehiculoDto.getTraccion())
+                .concesionario(concesionario)
                 .build();
+        repository.save(newVehiculo);
+        concesionario.getVehiculos().add(newVehiculo);
+        tipo.getVehiculos().add(newVehiculo);
+        marca.getVehiculos().add(newVehiculo);
+        concesionarioRepository.save(concesionario);
+        marcaRepository.save(marca);
+        tipoRepository.save(tipo);
 
         BufferedImage img = ImageIO.read(file.getInputStream());
         OutputStream out = Files.newOutputStream(storageService.load(filename));
@@ -62,8 +86,9 @@ public class VehiculoServiceImpl implements VehiculoService {
                 .path(storageService.store(file))
                 .toUriString();
         newVehiculo.setFoto1(uri);
+        repository.save(newVehiculo);
 
-        return repository.save(newVehiculo);
+        return converter.getVehiculoToDto(newVehiculo);
     }
 
     @Override
@@ -78,8 +103,50 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
-    public Vehiculo findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
+    public GetVehiculoDto findById(Long id) {
+        Vehiculo vehiculo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
+
+        GetVehiculoDto result = GetVehiculoDto.builder()
+                .id(vehiculo.getId())
+                .version(vehiculo.getVersion())
+                .modelo(vehiculo.getModelo())
+                .fechaMatriculacion(vehiculo.getFechaMatriculacion())
+                .kilometraje(vehiculo.getKilometraje())
+                .potencia(vehiculo.getPotencia())
+                .marchas(vehiculo.getMarchas())
+                .precio(vehiculo.getPrecio())
+                .marca(vehiculo.getMarca().getId())
+                .tipo(vehiculo.getTipo().getId())
+                .foto1(vehiculo.getFoto1())
+                .llantas(vehiculo.getLlantas())
+                .distribucion(vehiculo.getDistribucion())
+                .procedencia(vehiculo.getProcedencia())
+                .traccion(vehiculo.getTraccion())
+                .concesionario(vehiculo.getConcesionario().getId())
+                .build();
+
+        return result;
+    }
+
+    @Override
+    public List<GetVehiculoDto> findAllByConcesionario(Concesionario concesionario) {
+        List<Vehiculo> data = repository.findAllByConcesionario(concesionario);
+
+        return data.stream().map(converter::getVehiculoToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GetVehiculoDto> findAllByMarca(Marca marca) {
+        List<Vehiculo> data = repository.findAllByMarca(marca);
+
+        return data.stream().map(converter::getVehiculoToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<GetVehiculoDto> findAllByTipo(Tipo tipo) {
+        List<Vehiculo> data = repository.findAllByTipo(tipo);
+
+        return data.stream().map(converter::getVehiculoToDto).collect(Collectors.toList());
     }
 
     @Override
@@ -87,6 +154,10 @@ public class VehiculoServiceImpl implements VehiculoService {
         Vehiculo vehiculo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
 
         String filename = storageService.store(file);
+
+        Marca marca = marcaRepository.findById(createVehiculoDto.getMarca()).orElseThrow(() -> new SingleEntityNotFoundException(createVehiculoDto.getMarca().toString(), Marca.class));
+
+        Tipo tipo = tipoRepository.findById(createVehiculoDto.getTipo()).orElseThrow(() -> new SingleEntityNotFoundException(createVehiculoDto.getTipo().toString(), Tipo.class));
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
@@ -100,8 +171,8 @@ public class VehiculoServiceImpl implements VehiculoService {
             v.setPotencia(createVehiculoDto.getPotencia());
             v.setMarchas(createVehiculoDto.getMarchas());
             v.setPrecio(createVehiculoDto.getPrecio());
-            v.setMarca(createVehiculoDto.getMarca());
-            v.setTipo(createVehiculoDto.getTipo());
+            v.setMarca(marca);
+            v.setTipo(tipo);
             v.setFoto1(uri);
             v.setLlantas(createVehiculoDto.getLlantas());
             v.setDistribucion(createVehiculoDto.getDistribucion());

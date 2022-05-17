@@ -3,12 +3,15 @@ package com.salesianos.triana.dam.EasyCar.service.impl;
 import com.salesianos.triana.dam.EasyCar.dto.tipo.ConverterTipoDto;
 import com.salesianos.triana.dam.EasyCar.dto.tipo.CreateTipoDto;
 import com.salesianos.triana.dam.EasyCar.dto.tipo.GetTipoDto;
+import com.salesianos.triana.dam.EasyCar.dto.tipo.GetTipoVehiculosDto;
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.model.Tipo;
 import com.salesianos.triana.dam.EasyCar.repo.TipoRepository;
 import com.salesianos.triana.dam.EasyCar.service.StorageService;
 import com.salesianos.triana.dam.EasyCar.service.TipoService;
+import com.salesianos.triana.dam.EasyCar.service.VehiculoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +35,7 @@ public class TipoServiceImpl implements TipoService {
     private final TipoRepository repository;
     private final ConverterTipoDto converter;
     private final StorageService storageService;
+    private final VehiculoService vehiculoService;
 
     @Override
     public Page<GetTipoDto> findAll(Pageable pageable) {
@@ -45,18 +49,27 @@ public class TipoServiceImpl implements TipoService {
     }
 
     @Override
-    public Tipo findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Tipo.class));
+    public GetTipoVehiculosDto findById(Long id) {
+        Tipo tipo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Tipo.class));
+
+        List<GetVehiculoDto> vehiculosTipo = vehiculoService.findAllByTipo(tipo);
+
+        GetTipoVehiculosDto result = GetTipoVehiculosDto.builder()
+                .id(tipo.getId())
+                .nombre(tipo.getNombre())
+                .foto(tipo.getFoto())
+                .vehiculos(vehiculosTipo)
+                .build();
+        return result;
     }
 
     @Override
-    public Tipo createTipo (CreateTipoDto createTipoDto, MultipartFile file) throws IOException {
+    public GetTipoDto createTipo (CreateTipoDto createTipoDto, MultipartFile file) throws IOException {
         String filename = storageService.store(file);
 
         Tipo newTipo = Tipo.builder()
                 .nombre(createTipoDto.getNombre())
                 .foto(createTipoDto.getFoto())
-                .vehiculos(createTipoDto.getVehiculos())
                 .build();
         BufferedImage img = ImageIO.read(file.getInputStream());
         OutputStream out = Files.newOutputStream(storageService.load(filename));
@@ -66,7 +79,7 @@ public class TipoServiceImpl implements TipoService {
                 .path(storageService.store(file))
                 .toUriString();
         newTipo.setFoto(uri);
-        return repository.save(newTipo);
+        return converter.getTipoToDto(repository.save(newTipo));
     }
 
     @Override

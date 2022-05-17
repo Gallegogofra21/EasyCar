@@ -18,6 +18,7 @@ public class Vehiculo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String modelo;
     private String version;
     private LocalDate fechaMatriculacion;
     private String kilometraje;

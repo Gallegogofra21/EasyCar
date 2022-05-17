@@ -2,6 +2,7 @@ package com.salesianos.triana.dam.EasyCar.service;
 
 import com.salesianos.triana.dam.EasyCar.dto.concesionario.CreateConcesionarioDto;
 import com.salesianos.triana.dam.EasyCar.dto.concesionario.GetConcesionarioDto;
+import com.salesianos.triana.dam.EasyCar.dto.concesionario.GetConcesionarioVehiculosDto;
 import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import org.springframework.data.domain.Page;
@@ -14,9 +15,9 @@ import java.util.List;
 
 public interface ConcesionarioService {
 
-    Concesionario createConcesionario(CreateConcesionarioDto createConcesionarioDto, Long idGestor);
+    GetConcesionarioDto createConcesionario(CreateConcesionarioDto createConcesionarioDto, Long idGestor);
     Page<GetConcesionarioDto> findAll(Pageable pageable);
-    Concesionario findById(Long id);
+    GetConcesionarioVehiculosDto findById(Long id);
     Concesionario edit(CreateConcesionarioDto createConcesionarioDto, Long id);
     ResponseEntity<?> delete(Long id);
 }

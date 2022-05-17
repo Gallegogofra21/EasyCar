@@ -17,6 +17,7 @@ public class GetVehiculoDto {
 
     private Long id;
     private String version;
+    private String modelo;
     private LocalDate fechaMatriculacion;
     private String kilometraje;
     private String potencia;

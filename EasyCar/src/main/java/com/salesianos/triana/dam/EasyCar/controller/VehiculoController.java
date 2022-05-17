@@ -39,13 +39,13 @@ public class VehiculoController {
     }
 
     @GetMapping("/{id}")
-    public Vehiculo findOne(@PathVariable Long id) {
+    public GetVehiculoDto findOne(@PathVariable Long id) {
         return service.findById(id);
     }
 
-    @PostMapping
-    public ResponseEntity<?> create(@RequestPart("file")MultipartFile file, @Valid @RequestPart("vehiculo")CreateVehiculoDto newVehiculo, @AuthenticationPrincipal Usuario usuario) throws IOException {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.createVehiculo(newVehiculo, file, usuario));
+    @PostMapping("/{id}")
+    public ResponseEntity<?> create(@RequestPart("file")MultipartFile file, @Valid @RequestPart("vehiculo")CreateVehiculoDto newVehiculo, @PathVariable Long id) throws IOException {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createVehiculo(newVehiculo, file, id));
     }
 
     @PutMapping("/{id}")

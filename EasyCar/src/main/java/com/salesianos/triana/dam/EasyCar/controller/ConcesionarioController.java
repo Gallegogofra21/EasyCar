@@ -2,6 +2,7 @@ package com.salesianos.triana.dam.EasyCar.controller;
 
 import com.salesianos.triana.dam.EasyCar.dto.concesionario.CreateConcesionarioDto;
 import com.salesianos.triana.dam.EasyCar.dto.concesionario.GetConcesionarioDto;
+import com.salesianos.triana.dam.EasyCar.dto.concesionario.GetConcesionarioVehiculosDto;
 import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.service.ConcesionarioService;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
@@ -36,10 +37,10 @@ public class ConcesionarioController {
     }
 
     @GetMapping("/{id}")
-    public Concesionario findOne(@PathVariable Long id) { return service.findById(id); }
+    public GetConcesionarioVehiculosDto findOne(@PathVariable Long id) { return service.findById(id); }
 
     @PostMapping("/{id}")
-    public ResponseEntity<?> create (@Valid @RequestParam CreateConcesionarioDto newConcesionario, @PathVariable Long id) {
+    public ResponseEntity<?> create (@Valid @RequestPart("concesionario") CreateConcesionarioDto newConcesionario, @PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.createConcesionario(newConcesionario, id));
     }
 

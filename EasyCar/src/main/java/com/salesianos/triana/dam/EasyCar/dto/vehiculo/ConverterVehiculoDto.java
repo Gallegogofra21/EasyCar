@@ -9,6 +9,7 @@ public class ConverterVehiculoDto {
         return GetVehiculoDto.builder()
                 .id(v.getId())
                 .version(v.getVersion())
+                .modelo(v.getModelo())
                 .fechaMatriculacion(v.getFechaMatriculacion())
                 .kilometraje(v.getKilometraje())
                 .potencia(v.getPotencia())

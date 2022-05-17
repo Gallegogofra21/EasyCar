@@ -1,5 +1,8 @@
 package com.salesianos.triana.dam.EasyCar.service;
 
+import com.salesianos.triana.dam.EasyCar.model.Concesionario;
+import com.salesianos.triana.dam.EasyCar.model.Marca;
+import com.salesianos.triana.dam.EasyCar.model.Tipo;
 import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
 import com.salesianos.triana.dam.EasyCar.dto.vehiculo.CreateVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
@@ -15,9 +18,12 @@ import java.util.List;
 
 public interface VehiculoService {
 
-    Vehiculo createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file, Usuario usuario) throws IOException;
+    GetVehiculoDto createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file, Long id) throws IOException;
     Page<GetVehiculoDto> findAll(Pageable pageable);
-    Vehiculo findById(Long id);
+    GetVehiculoDto findById(Long id);
+    List<GetVehiculoDto> findAllByConcesionario(Concesionario concesionario);
+    List<GetVehiculoDto> findAllByMarca(Marca marca);
+    List<GetVehiculoDto> findAllByTipo(Tipo tipo);
     Vehiculo edit(CreateVehiculoDto createVehiculoDto, MultipartFile file, Usuario usuario, Long id);
     ResponseEntity<?> delete(Long id, Usuario usuario) throws IOException;
 }

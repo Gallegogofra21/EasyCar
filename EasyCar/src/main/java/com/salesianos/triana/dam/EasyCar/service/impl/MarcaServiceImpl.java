@@ -3,12 +3,15 @@ package com.salesianos.triana.dam.EasyCar.service.impl;
 import com.salesianos.triana.dam.EasyCar.dto.marca.ConverterMarcaDto;
 import com.salesianos.triana.dam.EasyCar.dto.marca.CreateMarcaDto;
 import com.salesianos.triana.dam.EasyCar.dto.marca.GetMarcaDto;
+import com.salesianos.triana.dam.EasyCar.dto.marca.GetMarcaVehiculosDto;
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.model.Marca;
 import com.salesianos.triana.dam.EasyCar.repo.MarcaRepository;
 import com.salesianos.triana.dam.EasyCar.service.MarcaService;
 import com.salesianos.triana.dam.EasyCar.service.StorageService;
+import com.salesianos.triana.dam.EasyCar.service.VehiculoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,6 +31,7 @@ public class MarcaServiceImpl implements MarcaService {
     private final MarcaRepository repository;
     private final ConverterMarcaDto converter;
     private final StorageService storageService;
+    private final VehiculoService vehiculoService;
 
     @Override
     public Page<GetMarcaDto> findAll(Pageable pageable) {
@@ -41,8 +45,18 @@ public class MarcaServiceImpl implements MarcaService {
     }
 
     @Override
-    public Marca findById(Long id) {
-        return repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Marca.class));
+    public GetMarcaVehiculosDto findById(Long id) {
+        Marca marca = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Marca.class));
+
+        List<GetVehiculoDto> vehiculosMarca = vehiculoService.findAllByMarca(marca);
+
+        GetMarcaVehiculosDto result = GetMarcaVehiculosDto.builder()
+                .id(marca.getId())
+                .nombre(marca.getNombre())
+                .foto(marca.getFoto())
+                .vehiculos(vehiculosMarca)
+                .build();
+        return result;
     }
 
     @Override

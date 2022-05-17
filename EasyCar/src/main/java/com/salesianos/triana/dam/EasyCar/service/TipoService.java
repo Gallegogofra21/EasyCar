@@ -2,6 +2,7 @@ package com.salesianos.triana.dam.EasyCar.service;
 
 import com.salesianos.triana.dam.EasyCar.dto.tipo.CreateTipoDto;
 import com.salesianos.triana.dam.EasyCar.dto.tipo.GetTipoDto;
+import com.salesianos.triana.dam.EasyCar.dto.tipo.GetTipoVehiculosDto;
 import com.salesianos.triana.dam.EasyCar.model.Tipo;
 import org.apache.coyote.Response;
 import org.springframework.data.domain.Page;
@@ -14,9 +15,9 @@ import java.util.List;
 
 public interface TipoService {
 
-    Tipo createTipo(CreateTipoDto createTipoDto, MultipartFile file) throws IOException;
+    GetTipoDto createTipo(CreateTipoDto createTipoDto, MultipartFile file) throws IOException;
     Page<GetTipoDto> findAll(Pageable pageable);
-    Tipo findById(Long id);
+    GetTipoVehiculosDto findById(Long id);
     Tipo edit(CreateTipoDto createTipoDto, MultipartFile file, Long id) throws IOException;
     ResponseEntity<?> delete(Long id) throws IOException;
 }
