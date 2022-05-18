@@ -24,6 +24,6 @@ public interface VehiculoService {
     List<GetVehiculoDto> findAllByConcesionario(Concesionario concesionario);
     List<GetVehiculoDto> findAllByMarca(Marca marca);
     List<GetVehiculoDto> findAllByTipo(Tipo tipo);
-    Vehiculo edit(CreateVehiculoDto createVehiculoDto, MultipartFile file, Usuario usuario, Long id);
+    GetVehiculoDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file, Usuario usuario, Long id);
     ResponseEntity<?> delete(Long id, Usuario usuario) throws IOException;
 }

@@ -18,6 +18,6 @@ public interface MarcaService {
     Marca createMarca(CreateMarcaDto createMarcaDto, MultipartFile file) throws IOException;
     Page<GetMarcaDto> findAll(Pageable pageable);
     GetMarcaVehiculosDto findById(Long id);
-    Marca edit(CreateMarcaDto createMarcaDto, MultipartFile file, Long id) throws IOException;
+    GetMarcaDto edit(CreateMarcaDto createMarcaDto, MultipartFile file, Long id) throws IOException;
     ResponseEntity<?> delete(Long id) throws IOException;
 }

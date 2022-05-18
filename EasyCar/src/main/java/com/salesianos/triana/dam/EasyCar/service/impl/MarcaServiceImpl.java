@@ -79,9 +79,7 @@ public class MarcaServiceImpl implements MarcaService {
     }
 
     @Override
-    public Marca edit(CreateMarcaDto createMarcaDto, MultipartFile file, Long id) throws IOException {
-        Marca marca = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Marca.class));
-
+    public GetMarcaDto edit(CreateMarcaDto createMarcaDto, MultipartFile file, Long id) throws IOException {
         String filename = storageService.store(file);
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -89,12 +87,14 @@ public class MarcaServiceImpl implements MarcaService {
                 .path(filename)
                 .toUriString();
 
-        return repository.findById(id).map(m -> {
+        Marca marca = repository.findById(id).map(m -> {
             m.setNombre(createMarcaDto.getNombre());
             m.setFoto(uri);
             m.setVehiculos(createMarcaDto.getVehiculos());
             return repository.save(m);
         }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Marca.class));
+
+        return converter.getMarcaToDto(marca);
     }
 
     @Override

@@ -71,14 +71,15 @@ public class ConcesionarioServiceImpl implements ConcesionarioService {
     }
 
     @Override
-    public Concesionario edit(CreateConcesionarioDto createConcesionarioDto, Long id) {
-        Concesionario concesionario = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Concesionario.class));
-            return repository.findById(id).map(c -> {
+    public GetConcesionarioDto edit(CreateConcesionarioDto createConcesionarioDto, Long id) {
+            Concesionario concesionario = repository.findById(id).map(c -> {
                 c.setNombre(createConcesionarioDto.getNombre());
                 c.setDireccion(createConcesionarioDto.getDireccion());
                 c.setVehiculos(createConcesionarioDto.getVehiculos());
                 return repository.save(c);
             }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Concesionario.class));
+
+            return converter.getConcesionarioToDto(concesionario);
     }
 
     @Override

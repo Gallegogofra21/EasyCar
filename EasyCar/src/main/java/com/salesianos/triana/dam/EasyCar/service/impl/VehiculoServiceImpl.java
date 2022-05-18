@@ -150,8 +150,9 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
-    public Vehiculo edit(CreateVehiculoDto createVehiculoDto, MultipartFile file, Usuario usuario, Long id) {
-        Vehiculo vehiculo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
+    public GetVehiculoDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file, Usuario usuario, Long id) {
+
+        Concesionario concesionario = concesionarioRepository.findById(createVehiculoDto.getConcesionario()).orElseThrow(() -> new SingleEntityNotFoundException(createVehiculoDto.getConcesionario().toString(), Concesionario.class));
 
         String filename = storageService.store(file);
 
@@ -164,8 +165,9 @@ public class VehiculoServiceImpl implements VehiculoService {
                 .path(filename)
                 .toUriString();
 
-        return repository.findById(id).map(v -> {
+        Vehiculo vehiculo = repository.findById(id).map(v -> {
             v.setVersion(createVehiculoDto.getVersion());
+            v.setModelo(createVehiculoDto.getModelo());
             v.setFechaMatriculacion(createVehiculoDto.getFechaMatriculacion());
             v.setKilometraje(createVehiculoDto.getKilometraje());
             v.setPotencia(createVehiculoDto.getPotencia());
@@ -178,8 +180,11 @@ public class VehiculoServiceImpl implements VehiculoService {
             v.setDistribucion(createVehiculoDto.getDistribucion());
             v.setProcedencia(createVehiculoDto.getProcedencia());
             v.setTraccion(createVehiculoDto.getTraccion());
+            v.setConcesionario(concesionario);
             return repository.save(v);
         }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
+
+        return converter.getVehiculoToDto(vehiculo);
     }
 
     @Override
@@ -187,6 +192,10 @@ public class VehiculoServiceImpl implements VehiculoService {
 
         Vehiculo vehiculo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
         storageService.deleteFile(vehiculo.getFoto1());
+        vehiculo.setConcesionario(null);
+        vehiculo.setMarca(null);
+        vehiculo.setTipo(null);
+        repository.save(vehiculo);
         repository.delete(vehiculo);
         return ResponseEntity.noContent().build();
     }

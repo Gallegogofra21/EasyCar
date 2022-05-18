@@ -83,9 +83,7 @@ public class TipoServiceImpl implements TipoService {
     }
 
     @Override
-    public Tipo edit (CreateTipoDto createTipoDto, MultipartFile file, Long id) throws IOException {
-        Tipo tipo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Tipo.class));
-
+    public GetTipoDto edit (CreateTipoDto createTipoDto, MultipartFile file, Long id) throws IOException {
         String filename = storageService.store(file);
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -93,12 +91,14 @@ public class TipoServiceImpl implements TipoService {
                 .path(filename)
                 .toUriString();
 
-        return repository.findById(id).map(t -> {
+        Tipo tipo = repository.findById(id).map(t -> {
             t.setNombre(createTipoDto.getNombre());
             t.setFoto(uri);
             t.setVehiculos(createTipoDto.getVehiculos());
             return repository.save(t);
         }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Tipo.class));
+
+        return converter.getTipoToDto(tipo);
     }
 
     @Override

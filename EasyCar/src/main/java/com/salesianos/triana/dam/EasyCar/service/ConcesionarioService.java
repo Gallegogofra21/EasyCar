@@ -18,6 +18,6 @@ public interface ConcesionarioService {
     GetConcesionarioDto createConcesionario(CreateConcesionarioDto createConcesionarioDto, Long idGestor);
     Page<GetConcesionarioDto> findAll(Pageable pageable);
     GetConcesionarioVehiculosDto findById(Long id);
-    Concesionario edit(CreateConcesionarioDto createConcesionarioDto, Long id);
+    GetConcesionarioDto edit(CreateConcesionarioDto createConcesionarioDto, Long id);
     ResponseEntity<?> delete(Long id);
 }

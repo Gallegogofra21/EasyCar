@@ -18,6 +18,6 @@ public interface TipoService {
     GetTipoDto createTipo(CreateTipoDto createTipoDto, MultipartFile file) throws IOException;
     Page<GetTipoDto> findAll(Pageable pageable);
     GetTipoVehiculosDto findById(Long id);
-    Tipo edit(CreateTipoDto createTipoDto, MultipartFile file, Long id) throws IOException;
+    GetTipoDto edit(CreateTipoDto createTipoDto, MultipartFile file, Long id) throws IOException;
     ResponseEntity<?> delete(Long id) throws IOException;
 }

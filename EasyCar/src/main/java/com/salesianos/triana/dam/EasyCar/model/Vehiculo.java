@@ -62,4 +62,30 @@ public class Vehiculo implements Serializable {
         c.getVehiculos().remove(this);
         concesionario = null;
     }
+
+    public void addToTipo(Tipo t) {
+        tipo = t;
+        if (t.getVehiculos() == null) {
+            t.setVehiculos(new ArrayList<>());
+            t.getVehiculos().add(this);
+        }
+    }
+
+    public void removeFromTipo (Tipo t) {
+        t.getVehiculos().remove(this);
+        tipo = null;
+    }
+
+    public void addToMarca (Marca m) {
+        marca = m;
+        if (m.getVehiculos() == null) {
+            m.setVehiculos(new ArrayList<>());
+            m.getVehiculos().add(this);
+        }
+    }
+
+    public void removeFromMarca (Marca m) {
+        m.getVehiculos().remove(this);
+        marca = null;
+    }
 }
