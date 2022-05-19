@@ -1,5 +1,5 @@
-class TipoResponse {
-  TipoResponse({
+class MarcaResponse {
+  MarcaResponse({
     required this.content,
     required this.pageable,
     required this.last,
@@ -12,7 +12,7 @@ class TipoResponse {
     required this.numberOfElements,
     required this.empty,
   });
-  late final List<TipoContent> content;
+  late final List<MarcaContent> content;
   late final Pageable pageable;
   late final bool last;
   late final int totalPages;
@@ -24,9 +24,10 @@ class TipoResponse {
   late final int numberOfElements;
   late final bool empty;
 
-  TipoResponse.fromJson(Map<String, dynamic> json) {
-    content =
-        List.from(json['content']).map((e) => TipoContent.fromJson(e)).toList();
+  MarcaResponse.fromJson(Map<String, dynamic> json) {
+    content = List.from(json['content'])
+        .map((e) => MarcaContent.fromJson(e))
+        .toList();
     pageable = Pageable.fromJson(json['pageable']);
     last = json['last'];
     totalPages = json['totalPages'];
@@ -56,8 +57,8 @@ class TipoResponse {
   }
 }
 
-class TipoContent {
-  TipoContent({
+class MarcaContent {
+  MarcaContent({
     required this.id,
     required this.nombre,
     required this.foto,
@@ -68,7 +69,7 @@ class TipoContent {
   late final String foto;
   late final int numVehiculos;
 
-  TipoContent.fromJson(Map<String, dynamic> json) {
+  MarcaContent.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     nombre = json['nombre'];
     foto = json['foto'];
@@ -89,35 +90,35 @@ class Pageable {
   Pageable({
     required this.sort,
     required this.offset,
-    required this.pageSize,
     required this.pageNumber,
-    required this.unpaged,
+    required this.pageSize,
     required this.paged,
+    required this.unpaged,
   });
   late final Sort sort;
   late final int offset;
-  late final int pageSize;
   late final int pageNumber;
-  late final bool unpaged;
+  late final int pageSize;
   late final bool paged;
+  late final bool unpaged;
 
   Pageable.fromJson(Map<String, dynamic> json) {
     sort = Sort.fromJson(json['sort']);
     offset = json['offset'];
-    pageSize = json['pageSize'];
     pageNumber = json['pageNumber'];
-    unpaged = json['unpaged'];
+    pageSize = json['pageSize'];
     paged = json['paged'];
+    unpaged = json['unpaged'];
   }
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
     _data['sort'] = sort.toJson();
     _data['offset'] = offset;
-    _data['pageSize'] = pageSize;
     _data['pageNumber'] = pageNumber;
-    _data['unpaged'] = unpaged;
+    _data['pageSize'] = pageSize;
     _data['paged'] = paged;
+    _data['unpaged'] = unpaged;
     return _data;
   }
 }

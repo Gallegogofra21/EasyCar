@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easycar/bloc/marca_bloc/marcas_bloc.dart';
+import 'package:flutter_easycar/bloc/marca_bloc/marcas_event.dart';
+import 'package:flutter_easycar/bloc/marca_bloc/marcas_state.dart';
 import 'package:flutter_easycar/bloc/tipo_bloc/tipos_event.dart';
+import 'package:flutter_easycar/models/marca.dart';
+import 'package:flutter_easycar/repository/marca_repository/marca_repository.dart';
+import 'package:flutter_easycar/repository/marca_repository/marca_repository_impl.dart';
 import 'package:flutter_easycar/repository/tipo_repository/tipo_repository.dart';
 import 'package:flutter_easycar/repository/tipo_repository/tipo_repository_impl.dart';
 import 'package:flutter_easycar/models/tipo.dart';
@@ -17,11 +23,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late TipoRepository tipoRepository;
+  late MarcaRepository marcaRepository;
 
   @override
   void initState() {
     super.initState();
     tipoRepository = TipoRepositoryImpl();
+    marcaRepository = MarcaRepositoryImpl();
   }
 
   @override
@@ -31,10 +39,19 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) {
-          return TiposBloc(tipoRepository)..add(const FetchTipoWithType());
-        },
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<TiposBloc>(
+            create: (context) {
+              return TiposBloc(tipoRepository)..add(const FetchTipoWithType());
+            },
+          ),
+          BlocProvider<MarcasBloc>(
+            create: (context) {
+              return MarcasBloc(marcaRepository)..add(const FetchMarca());
+            },
+          ),
+        ],
         child: Scaffold(
             appBar: AppBar(
               title: Padding(
@@ -61,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ]),
                   _createTipo(context),
+                  _createMarca(context),
                   Padding(
                     padding: const EdgeInsets.only(top: 450.0),
                     child: Stack(
@@ -108,7 +126,7 @@ Widget _createTipo(BuildContext context) {
   });
 }
 
-Widget _createTipoView(BuildContext context, List<Content> tipos) {
+Widget _createTipoView(BuildContext context, List<TipoContent> tipos) {
   final contentHeight = 4.0 * (MediaQuery.of(context).size.width / 2.4) / 3;
   return Column(children: [
     SizedBox(
@@ -127,7 +145,7 @@ Widget _createTipoView(BuildContext context, List<Content> tipos) {
   ]);
 }
 
-Widget _createTipoViewItem(BuildContext context, Content tipo) {
+Widget _createTipoViewItem(BuildContext context, TipoContent tipo) {
   return Container(
     child: Column(
       children: <Widget>[
@@ -140,4 +158,57 @@ Widget _createTipoViewItem(BuildContext context, Content tipo) {
       ],
     ),
   );
+}
+
+Widget _createMarca(BuildContext context) {
+  return BlocBuilder<MarcasBloc, MarcasState>(builder: (context, state) {
+    if (state is MarcasInitial) {
+      return const Center(child: CircularProgressIndicator());
+    } else if (state is MarcaFetchError) {
+      return ErrorPage(
+        mensaje: state.mensaje,
+        retry: () {
+          context.watch<MarcasBloc>().add(const FetchMarca());
+        },
+      );
+    } else if (state is MarcasFetched) {
+      return _createMarcaView(context, state.marcas);
+    } else {
+      return const Text('Not support');
+    }
+  });
+}
+
+Widget _createMarcaView(BuildContext context, List<MarcaContent> marcas) {
+  return Column(
+    children: [
+      SizedBox(
+        height: 500,
+        child: ListView.separated(
+          itemBuilder: (BuildContext context, int index) {
+            return _createMarcaViewItem(context, marcas[index]);
+          },
+          separatorBuilder: (context, index) => const VerticalDivider(
+            color: Colors.transparent,
+            width: 6.0,
+          ),
+          itemCount: marcas.length,
+        ),
+      ),
+    ],
+  );
+}
+
+Widget _createMarcaViewItem(BuildContext context, MarcaContent marca) {
+  return Container(
+      child: Column(
+    children: <Widget>[
+      Text(marca.nombre),
+      Image.network(
+        marca.foto.replaceAll('localhost', '10.0.2.2'),
+        fit: BoxFit.cover,
+        height: 200,
+      )
+    ],
+  ));
 }

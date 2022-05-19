@@ -11,7 +11,7 @@ abstract class TiposState extends Equatable {
 class TiposInitial extends TiposState {}
 
 class TiposFetched extends TiposState {
-  final List<Content> tipos;
+  final List<TipoContent> tipos;
 
   const TiposFetched(this.tipos);
 
