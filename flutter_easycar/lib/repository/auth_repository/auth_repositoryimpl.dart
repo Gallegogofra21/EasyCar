@@ -33,7 +33,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<User> register(RegisterDto registerDto, String image) async {
-    var uri = Uri.parse('http://10.0.2.2:8080/auth/register');
+    var uri = Uri.parse('http://10.0.2.2:8080/auth/register/usuario');
     var request = http.MultipartRequest('POST', uri)
       ..files.add(await http.MultipartFile.fromPath('file', image,
           contentType: MediaType('multipart', 'form-data')))
