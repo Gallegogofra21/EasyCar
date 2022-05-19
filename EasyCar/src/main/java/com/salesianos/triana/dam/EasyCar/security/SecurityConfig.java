@@ -49,12 +49,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/auth/register/**").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/login").anonymous()
-                .antMatchers(HttpMethod.GET, "/download/**").authenticated()
                 .antMatchers(HttpMethod.GET, "/me").authenticated()
 
                 .antMatchers(HttpMethod.GET,"/profile/**").authenticated()
                 .antMatchers(HttpMethod.PUT, "/profile/**").authenticated()
-                .antMatchers(HttpMethod.GET, "/download/**").authenticated()
+            
 
                 .antMatchers(HttpMethod.GET, "/vehiculo/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/vehiculo/**").authenticated()
