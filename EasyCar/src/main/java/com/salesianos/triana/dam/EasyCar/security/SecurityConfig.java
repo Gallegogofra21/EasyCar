@@ -61,6 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/concesionario/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/concesionario/**").authenticated()
 
+                .antMatchers(HttpMethod.GET, "/download/**").anonymous()
+
                 .antMatchers("/h2-console/**").permitAll()
                 .antMatchers("/error").permitAll()
                 .anyRequest().authenticated();
