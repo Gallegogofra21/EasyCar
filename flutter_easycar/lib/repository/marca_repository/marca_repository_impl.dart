@@ -24,7 +24,7 @@ class MarcaRepositoryImpl extends MarcaRepository {
     if (response.statusCode == 200) {
       return MarcaResponse.fromJson(json.decode(response.body)).content;
     } else {
-      throw Exception('Fail to load tipos');
+      throw Exception('Fail to load marcas');
     }
   }
 }

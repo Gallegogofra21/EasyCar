@@ -79,9 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ]),
                   _createTipo(context),
                   _createMarca(context),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 450.0),
-                    child: Stack(
+                  Stack(
                       children: [
                         Image.asset('assets/images/Foto2.PNG'),
                         const Padding(
@@ -100,7 +98,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                       ],
                     ),
-                  )
                 ],
               ),
             )));
@@ -151,7 +148,7 @@ Widget _createTipoViewItem(BuildContext context, TipoContent tipo) {
       children: <Widget>[
         Text(tipo.nombre),
         Image.network(
-          "http://10.0.2.2:8080/download/UserLogin.png",
+          tipo.foto.replaceAll('localhost', '10.0.2.2'),
           fit: BoxFit.cover,
           height: 200,
         )
