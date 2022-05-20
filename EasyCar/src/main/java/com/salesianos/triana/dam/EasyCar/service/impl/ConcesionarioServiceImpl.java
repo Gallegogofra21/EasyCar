@@ -8,6 +8,7 @@ import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.model.Concesionario;
+import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
 import com.salesianos.triana.dam.EasyCar.repo.ConcesionarioRepository;
 import com.salesianos.triana.dam.EasyCar.service.ConcesionarioService;
 import com.salesianos.triana.dam.EasyCar.service.VehiculoService;
@@ -85,6 +86,7 @@ public class ConcesionarioServiceImpl implements ConcesionarioService {
     @Override
     public ResponseEntity<?> delete(Long id) {
         Concesionario concesionario = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Concesionario.class));
+        concesionario.getVehiculos().forEach(vehiculo -> vehiculo.removeFromConcesionario(concesionario));
         repository.delete(concesionario);
         return ResponseEntity.noContent().build();
     }

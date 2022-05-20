@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,12 @@ public class Tipo implements Serializable {
     private String nombre;
     private String foto;
 
-    @OneToMany
-    private List<Vehiculo> vehiculos;
+    @OneToMany(mappedBy = "tipo", fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<Vehiculo> vehiculos = new ArrayList<>();
+
+    @PreRemove
+    public void nullearTipoDeVehiculos() {
+        vehiculos.forEach(vehiculo -> vehiculo.setTipo(null));
+    }
 }

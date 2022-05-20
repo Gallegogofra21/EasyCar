@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +21,12 @@ public class Marca implements Serializable {
     private String nombre;
     private String foto;
 
-    @OneToMany
-    private List<Vehiculo> vehiculos;
+    @OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
+    @Builder.Default
+    private List<Vehiculo> vehiculos = new ArrayList<>();
+
+    @PreRemove
+    public void nullearMarcaDeVehiculos() {
+        vehiculos.forEach(vehiculo -> vehiculo.setMarca(null));
+    }
 }
