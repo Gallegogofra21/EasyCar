@@ -188,7 +188,7 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
-    public ResponseEntity<?> delete(Long id, Usuario usuario) throws IOException {
+    public ResponseEntity<?> delete(Long id) throws IOException {
 
         Vehiculo vehiculo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
         storageService.deleteFile(vehiculo.getFoto1());

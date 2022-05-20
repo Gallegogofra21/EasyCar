@@ -25,5 +25,5 @@ public interface VehiculoService {
     List<GetVehiculoDto> findAllByMarca(Marca marca);
     List<GetVehiculoDto> findAllByTipo(Tipo tipo);
     GetVehiculoDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file, Usuario usuario, Long id);
-    ResponseEntity<?> delete(Long id, Usuario usuario) throws IOException;
+    ResponseEntity<?> delete(Long id) throws IOException;
 }

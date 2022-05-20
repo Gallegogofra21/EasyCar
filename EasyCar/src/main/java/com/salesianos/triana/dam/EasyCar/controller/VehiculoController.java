@@ -55,7 +55,7 @@ public class VehiculoController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id, @AuthenticationPrincipal Usuario usuario) throws IOException {
-        service.delete(id, usuario);
+        service.delete(id);
         return ResponseEntity.notFound().build();
     }
 }

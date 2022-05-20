@@ -20,6 +20,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -86,7 +87,15 @@ public class ConcesionarioServiceImpl implements ConcesionarioService {
     @Override
     public ResponseEntity<?> delete(Long id) {
         Concesionario concesionario = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Concesionario.class));
-        concesionario.getVehiculos().forEach(vehiculo -> vehiculo.removeFromConcesionario(concesionario));
+        concesionario.getVehiculos().forEach(vehiculo -> {
+            try {
+                vehiculoService.delete(vehiculo.getId());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+        Usuario gestor = concesionario.getUsuario();
+        gestor.setConcesionario(null);
         repository.delete(concesionario);
         return ResponseEntity.noContent().build();
     }
