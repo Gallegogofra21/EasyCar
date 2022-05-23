@@ -1,5 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easycar/bloc/vehiculo_bloc/vehiculo_bloc.dart';
+import 'package:flutter_easycar/bloc/vehiculo_bloc/vehiculo_event.dart';
+import 'package:flutter_easycar/bloc/vehiculo_bloc/vehiculo_state.dart';
+import 'package:flutter_easycar/models/vehiculo.dart';
+import 'package:flutter_easycar/ui/error_page.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
@@ -72,4 +78,43 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ));
   }
+}
+
+Widget _createVehiculo(BuildContext context) {
+  return BlocBuilder<VehiculosBloc, VehiculosState>(builder: (context, state) {
+    if (state is VehiculosInitial) {
+      return const Center(child: CircularProgressIndicator());
+    } else if (state is VehiculoFetchError) {
+      return ErrorPage(
+        mensaje: state.mensaje,
+        retry: () {
+          context.watch<VehiculosBloc>().add(const FetchVehiculo());
+        },
+      );
+    } else if (state is VehiculosFetched) {
+      return _createVehiculoView(context, state.vehiculos);
+    } else {
+      return const Text('Not support');
+    }
+  });
+}
+
+Widget _createVehiculoView(BuildContext context, List<VehiculoContent> vehiculos) {
+  return Column(children: [
+    SizedBox(
+      height: 500,
+      child: ListView.separated(itemBuilder: (BuildContext context, int index) {
+        return _createVehiculoViewItem(context, vehiculos[index]);
+      },
+      separatorBuilder: (context, index) => const VerticalDivider(color: Colors.transparent,
+      width: 6.0,),
+      itemCount: vehiculos.length,),
+    ),
+  ]);
+}
+
+Widget _createVehiculoViewItem(BuildContext context, VehiculoContent vehiculo) {
+  return Container(child: Column(children: <Widget>[Text(vehiculo.modelo), Image.network(vehiculo.foto1.replaceAll('localhost', '10.0.2.2'),
+  fit: BoxFit.cover,
+  height: 200,)],));
 }
