@@ -20,7 +20,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -63,17 +67,16 @@ public class MarcaServiceImpl implements MarcaService {
     public Marca createMarca(CreateMarcaDto createMarcaDto, MultipartFile file) throws IOException {
         String filename = storageService.store(file);
 
-        Marca newMarca = Marca.builder()
-                .nombre(createMarcaDto.getNombre())
-                .foto(createMarcaDto.getFoto())
-                .vehiculos(createMarcaDto.getVehiculos())
-                .build();
-
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
-                .path(storageService.store(file))
+                .path(filename)
                 .toUriString();
-        newMarca.setFoto(uri);
+
+        Marca newMarca = Marca.builder()
+                .nombre(createMarcaDto.getNombre())
+                .foto(uri)
+                .vehiculos(createMarcaDto.getVehiculos())
+                .build();
 
         return repository.save(newMarca);
     }

@@ -6,16 +6,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ConverterTipoDto {
     public GetTipoDto getTipoToDto(Tipo t) {
-         GetTipoDto result = GetTipoDto.builder()
+         return GetTipoDto.builder()
                 .id(t.getId())
                 .nombre(t.getNombre())
                 .foto(t.getFoto())
+                 .numVehiculos(t.getVehiculos().size())
                 .build();
-        if(t.getVehiculos() == null) {
-            result.setNumVehiculos(0);
-        } else {
-            result.setNumVehiculos(t.getVehiculos().size());
-        }
-        return result;
     }
 }

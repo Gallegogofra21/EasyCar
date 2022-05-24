@@ -4,6 +4,7 @@ import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
 import lombok.Builder;
 import lombok.Value;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Value
@@ -11,5 +12,6 @@ import java.util.List;
 public class CreateTipoDto {
     private String nombre;
     private String foto;
-    private List<Vehiculo> vehiculos;
+    @Builder.Default
+    private List<Vehiculo> vehiculos = new ArrayList<>();
 }

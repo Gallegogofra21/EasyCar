@@ -67,18 +67,15 @@ public class TipoServiceImpl implements TipoService {
     public GetTipoDto createTipo (CreateTipoDto createTipoDto, MultipartFile file) throws IOException {
         String filename = storageService.store(file);
 
-        Tipo newTipo = Tipo.builder()
-                .nombre(createTipoDto.getNombre())
-                .foto(createTipoDto.getFoto())
-                .build();
-        BufferedImage img = ImageIO.read(file.getInputStream());
-        OutputStream out = Files.newOutputStream(storageService.load(filename));
-
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
-                .path(storageService.store(file))
+                .path(filename)
                 .toUriString();
-        newTipo.setFoto(uri);
+
+        Tipo newTipo = Tipo.builder()
+                .nombre(createTipoDto.getNombre())
+                .foto(uri)
+                .build();
         return converter.getTipoToDto(repository.save(newTipo));
     }
 
