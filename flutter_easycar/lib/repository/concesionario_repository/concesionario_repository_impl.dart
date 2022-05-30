@@ -4,10 +4,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
 
+import '../../constants.dart';
+
 class ConcesionarioRepositoryImpl extends ConcesionarioRepository {
   final Client _client = Client();
 
-  @override 
+  @override
   Future<List<ConcesionarioContent>> fetchConcesionarios() async {
     final prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('token');
@@ -17,8 +19,9 @@ class ConcesionarioRepositoryImpl extends ConcesionarioRepository {
       'Authorization': 'Bearer ${token}'
     };
 
-    final response = await _client.get(Uri.parse('http://10.0.2.2:8080/concesionario/'),
-    headers: headers);
+    final response = await _client.get(
+        Uri.parse('${Constant.ApiBaseUrl}/concesionario/'),
+        headers: headers);
     if (response.statusCode == 200) {
       return ConcesionarioResponse.fromJson(json.decode(response.body)).content;
     } else {

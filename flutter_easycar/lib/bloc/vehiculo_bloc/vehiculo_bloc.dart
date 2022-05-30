@@ -8,12 +8,25 @@ class VehiculosBloc extends Bloc<VehiculosEvent, VehiculosState> {
 
   VehiculosBloc(this.vehiculoRepository) : super(VehiculosInitial()) {
     on<FetchVehiculo>(_vehiculosFetched);
+    on<FetchVehiculoDetails>(_vehiculoDetailsFetched);
   }
 
-  void _vehiculosFetched(FetchVehiculo event, Emitter<VehiculosState> emit) async {
+  void _vehiculosFetched(
+      FetchVehiculo event, Emitter<VehiculosState> emit) async {
     try {
       final vehiculos = await vehiculoRepository.fetchVehiculos();
       emit(VehiculosFetched(vehiculos));
+      return;
+    } on Exception catch (e) {
+      emit(VehiculoFetchError(e.toString()));
+    }
+  }
+
+  void _vehiculoDetailsFetched(
+      FetchVehiculoDetails event, Emitter<VehiculosState> emit) async {
+    try {
+      final vehiculo = await vehiculoRepository.fetchVehiculoDetails(event.id);
+      emit(VehiculosDetailsFetched(vehiculo, event.id));
       return;
     } on Exception catch (e) {
       emit(VehiculoFetchError(e.toString()));

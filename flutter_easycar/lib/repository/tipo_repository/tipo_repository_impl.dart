@@ -7,6 +7,8 @@ import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../constants.dart';
+
 class TipoRepositoryImpl extends TipoRepository {
   final Client _client = Client();
 
@@ -20,8 +22,8 @@ class TipoRepositoryImpl extends TipoRepository {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${token}'
     };
-    final response = await _client.get(Uri.parse('http://10.0.2.2:8080/tipo/'),
-        headers: headers);
+    final response = await _client
+        .get(Uri.parse('${Constant.ApiBaseUrl}/tipo/'), headers: headers);
     if (response.statusCode == 200) {
       return TipoResponse.fromJson(json.decode(response.body)).content;
     } else {

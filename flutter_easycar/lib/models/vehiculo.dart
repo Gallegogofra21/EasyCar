@@ -23,9 +23,11 @@ class VehiculoResponse {
   late final bool first;
   late final int numberOfElements;
   late final bool empty;
-  
-  VehiculoResponse.fromJson(Map<String, dynamic> json){
-    content = List.from(json['content']).map((e)=>VehiculoContent.fromJson(e)).toList();
+
+  VehiculoResponse.fromJson(Map<String, dynamic> json) {
+    content = List.from(json['content'])
+        .map((e) => VehiculoContent.fromJson(e))
+        .toList();
     pageable = Pageable.fromJson(json['pageable']);
     last = json['last'];
     totalPages = json['totalPages'];
@@ -40,7 +42,7 @@ class VehiculoResponse {
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
-    _data['content'] = content.map((e)=>e.toJson()).toList();
+    _data['content'] = content.map((e) => e.toJson()).toList();
     _data['pageable'] = pageable.toJson();
     _data['last'] = last;
     _data['totalPages'] = totalPages;
@@ -65,13 +67,9 @@ class VehiculoContent {
     required this.potencia,
     required this.marchas,
     required this.precio,
-    required this.marca,
+    required this.nombreMarca,
     required this.tipo,
     required this.foto1,
-    required this.llantas,
-    required this.distribucion,
-    required this.procedencia,
-    required this.traccion,
     required this.concesionario,
   });
   late final int id;
@@ -82,16 +80,12 @@ class VehiculoContent {
   late final String potencia;
   late final String marchas;
   late final double precio;
-  late final int marca;
+  late final String nombreMarca;
   late final int tipo;
   late final String foto1;
-  late final String llantas;
-  late final String distribucion;
-  late final String procedencia;
-  late final String traccion;
   late final int concesionario;
-  
-  VehiculoContent.fromJson(Map<String, dynamic> json){
+
+  VehiculoContent.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     version = json['version'];
     modelo = json['modelo'];
@@ -100,13 +94,9 @@ class VehiculoContent {
     potencia = json['potencia'];
     marchas = json['marchas'];
     precio = json['precio'];
-    marca = json['marca'];
+    nombreMarca = json['nombreMarca'];
     tipo = json['tipo'];
     foto1 = json['foto1'];
-    llantas = json['llantas'];
-    distribucion = json['distribucion'];
-    procedencia = json['procedencia'];
-    traccion = json['traccion'];
     concesionario = json['concesionario'];
   }
 
@@ -120,13 +110,9 @@ class VehiculoContent {
     _data['potencia'] = potencia;
     _data['marchas'] = marchas;
     _data['precio'] = precio;
-    _data['marca'] = marca;
+    _data['nombreMarca'] = nombreMarca;
     _data['tipo'] = tipo;
     _data['foto1'] = foto1;
-    _data['llantas'] = llantas;
-    _data['distribucion'] = distribucion;
-    _data['procedencia'] = procedencia;
-    _data['traccion'] = traccion;
     _data['concesionario'] = concesionario;
     return _data;
   }
@@ -147,8 +133,8 @@ class Pageable {
   late final int pageNumber;
   late final bool unpaged;
   late final bool paged;
-  
-  Pageable.fromJson(Map<String, dynamic> json){
+
+  Pageable.fromJson(Map<String, dynamic> json) {
     sort = Sort.fromJson(json['sort']);
     offset = json['offset'];
     pageSize = json['pageSize'];
@@ -178,8 +164,8 @@ class Sort {
   late final bool empty;
   late final bool sorted;
   late final bool unsorted;
-  
-  Sort.fromJson(Map<String, dynamic> json){
+
+  Sort.fromJson(Map<String, dynamic> json) {
     empty = json['empty'];
     sorted = json['sorted'];
     unsorted = json['unsorted'];

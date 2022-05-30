@@ -7,6 +7,8 @@ import 'package:flutter_easycar/repository/marca_repository/marca_repository.dar
 import 'package:http/http.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../constants.dart';
+
 class MarcaRepositoryImpl extends MarcaRepository {
   final Client _client = Client();
 
@@ -19,8 +21,8 @@ class MarcaRepositoryImpl extends MarcaRepository {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${token}'
     };
-    final response = await _client.get(Uri.parse('http://10.0.2.2:8080/marca/'),
-        headers: headers);
+    final response = await _client
+        .get(Uri.parse('${Constant.ApiBaseUrl}/marca/'), headers: headers);
     if (response.statusCode == 200) {
       return MarcaResponse.fromJson(json.decode(response.body)).content;
     } else {

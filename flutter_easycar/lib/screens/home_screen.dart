@@ -77,11 +77,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     )
                   ]),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 8.0, left: 50),
+                    child: Text(
+                      'Elige el coche que mejor se adapte a tus necesidades',
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    ),
+                  ),
                   _createTipo(context),
                   Stack(
                     children: [
                       Image.asset('assets/images/Foto2.PNG'),
-                      _createMarca(context),
                       const Padding(
                         padding: EdgeInsets.only(top: 25.0, left: 35),
                         child: Text(
@@ -95,7 +102,11 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Encuentra en nuestro concesionario multimarca el coche de tus sueños',
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
-                      )
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 100.0, top: 150),
+                        child: _createMarca(context),
+                      ),
                     ],
                   ),
                 ],
@@ -127,10 +138,12 @@ Widget _createTipoView(BuildContext context, List<TipoContent> tipos) {
   final contentHeight = 4.0 * (MediaQuery.of(context).size.width / 2.4) / 3;
   return Column(children: [
     SizedBox(
-        height: 500,
+        height: 620,
+        width: 320,
         child: GridView.builder(
+            physics: const NeverScrollableScrollPhysics(),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2),
+                crossAxisSpacing: 50, mainAxisSpacing: 20, crossAxisCount: 2),
             itemCount: tipos.length,
             itemBuilder: (context, index) {
               return _createTipoViewItem(context, tipos[index]);
@@ -154,20 +167,21 @@ Widget _createTipoViewItem(BuildContext context, TipoContent tipo) {
 
   return GridTile(
     child: InkWell(
-      child: Ink.image(
-        image: NetworkImage(
-          tipo.foto.replaceAll('localhost', '10.0.2.2'),
-        ),
-        fit: BoxFit.contain,
-      ),
       onTap: () => selectedItem(tipo.nombre),
-    ),
-    footer: Container(
-      padding: EdgeInsets.all(12),
-      alignment: Alignment.center,
-      child: Text(
-        tipo.nombre,
-        style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+      child: Column(
+        children: <Widget>[
+          Image.network(tipo.foto.replaceAll('localhost', '10.0.2.2'),
+              height: 100),
+          Container(
+            width: 100,
+            padding: const EdgeInsets.only(),
+            alignment: Alignment.center,
+            child: Text(
+              tipo.nombre,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
       ),
     ),
   );
@@ -193,35 +207,49 @@ Widget _createMarca(BuildContext context) {
 }
 
 Widget _createMarcaView(BuildContext context, List<MarcaContent> marcas) {
-  return Column(
-    children: [
-      SizedBox(
-        height: 400,
-        child: ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            return _createMarcaViewItem(context, marcas[index]);
-          },
-          separatorBuilder: (context, index) => const VerticalDivider(
-            color: Colors.transparent,
-            width: 6.0,
-          ),
-          itemCount: marcas.length,
-        ),
-      ),
-    ],
-  );
+  return Column(children: [
+    SizedBox(
+        height: 150,
+        width: 180,
+        child: GridView.builder(
+            scrollDirection: Axis.horizontal,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2),
+            itemCount: marcas.length,
+            itemBuilder: (context, index) {
+              return _createMarcaViewItem(context, marcas[index]);
+            })),
+  ]);
 }
 
 Widget _createMarcaViewItem(BuildContext context, MarcaContent marca) {
-  return Container(
-      child: Column(
-    children: <Widget>[
-      Image.network(
-        marca.foto.replaceAll('localhost', '10.0.2.2'),
-        fit: BoxFit.cover,
-        height: 50,
+  void selectedItem(String item) {
+    final snackBar = SnackBar(
+      content: Text(
+        'Selected $item...',
       ),
-      Text(marca.nombre),
-    ],
-  ));
+      backgroundColor: Colors.red,
+    );
+
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(snackBar);
+  }
+
+  return GridTile(
+    child: InkWell(
+      highlightColor: Colors.white,
+      onTap: () => selectedItem(marca.nombre),
+      child: Column(
+        children: <Widget>[
+          Container(
+            decoration: BoxDecoration(
+                color: Colors.white, border: Border.all(color: Colors.black)),
+            child: Image.network(marca.foto.replaceAll('localhost', '10.0.2.2'),
+                height: 60),
+          ),
+        ],
+      ),
+    ),
+  );
 }
