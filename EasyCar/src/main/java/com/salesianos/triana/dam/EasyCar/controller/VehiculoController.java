@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.controller;
 
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDetails;
 import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
 import com.salesianos.triana.dam.EasyCar.dto.vehiculo.CreateVehiculoDto;
@@ -39,7 +40,7 @@ public class VehiculoController {
     }
 
     @GetMapping("/{id}")
-    public GetVehiculoDto findOne(@PathVariable Long id) {
+    public GetVehiculoDetails findOne(@PathVariable Long id) {
         return service.findById(id);
     }
 

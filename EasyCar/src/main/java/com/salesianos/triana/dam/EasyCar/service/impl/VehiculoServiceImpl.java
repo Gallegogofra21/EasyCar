@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.service.impl;
 
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDetails;
 import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.model.Concesionario;
@@ -47,6 +48,11 @@ public class VehiculoServiceImpl implements VehiculoService {
     public GetVehiculoDto createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file, Long idConcesionario) throws IOException {
         String filename = storageService.store(file);
 
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(storageService.store(file))
+                .toUriString();
+
         Concesionario concesionario = concesionarioRepository.findById(idConcesionario).orElseThrow(() -> new SingleEntityNotFoundException(idConcesionario.toString(), Concesionario.class));
 
         Marca marca = marcaRepository.findById(createVehiculoDto.getMarca()).orElseThrow(() -> new SingleEntityNotFoundException(createVehiculoDto.getMarca().toString(), Marca.class));
@@ -63,7 +69,7 @@ public class VehiculoServiceImpl implements VehiculoService {
                 .precio(createVehiculoDto.getPrecio())
                 .marca(marca)
                 .tipo(tipo)
-                .foto1(createVehiculoDto.getFoto1())
+                .foto1(uri)
                 .llantas(createVehiculoDto.getLlantas())
                 .distribucion(createVehiculoDto.getDistribucion())
                 .procedencia(createVehiculoDto.getProcedencia())
@@ -78,14 +84,6 @@ public class VehiculoServiceImpl implements VehiculoService {
         marcaRepository.save(marca);
         tipoRepository.save(tipo);
 
-        BufferedImage img = ImageIO.read(file.getInputStream());
-        OutputStream out = Files.newOutputStream(storageService.load(filename));
-
-        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/download/")
-                .path(storageService.store(file))
-                .toUriString();
-        newVehiculo.setFoto1(uri);
         repository.save(newVehiculo);
 
         return converter.getVehiculoToDto(newVehiculo);
@@ -103,10 +101,10 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
-    public GetVehiculoDto findById(Long id) {
+    public GetVehiculoDetails findById(Long id) {
         Vehiculo vehiculo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
 
-        GetVehiculoDto result = GetVehiculoDto.builder()
+        GetVehiculoDetails result = GetVehiculoDetails.builder()
                 .id(vehiculo.getId())
                 .version(vehiculo.getVersion())
                 .modelo(vehiculo.getModelo())
@@ -115,7 +113,7 @@ public class VehiculoServiceImpl implements VehiculoService {
                 .potencia(vehiculo.getPotencia())
                 .marchas(vehiculo.getMarchas())
                 .precio(vehiculo.getPrecio())
-                .marca(vehiculo.getMarca().getId())
+                .nombreMarca(vehiculo.getMarca().getNombre())
                 .tipo(vehiculo.getTipo().getId())
                 .foto1(vehiculo.getFoto1())
                 .llantas(vehiculo.getLlantas())

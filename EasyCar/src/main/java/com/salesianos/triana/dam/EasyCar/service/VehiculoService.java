@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.service;
 
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDetails;
 import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.model.Marca;
 import com.salesianos.triana.dam.EasyCar.model.Tipo;
@@ -20,7 +21,7 @@ public interface VehiculoService {
 
     GetVehiculoDto createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file, Long id) throws IOException;
     Page<GetVehiculoDto> findAll(Pageable pageable);
-    GetVehiculoDto findById(Long id);
+    GetVehiculoDetails findById(Long id);
     List<GetVehiculoDto> findAllByConcesionario(Concesionario concesionario);
     List<GetVehiculoDto> findAllByMarca(Marca marca);
     List<GetVehiculoDto> findAllByTipo(Tipo tipo);
