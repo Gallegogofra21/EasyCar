@@ -7,6 +7,7 @@ import 'package:flutter_easycar/bloc/vehiculo_bloc/vehiculo_state.dart';
 import 'package:flutter_easycar/models/vehiculo.dart';
 import 'package:flutter_easycar/repository/vehiculo_repository/vehiculo_repository.dart';
 import 'package:flutter_easycar/repository/vehiculo_repository/vehiculo_repository_impl.dart';
+import 'package:flutter_easycar/screens/details_screen.dart';
 import 'package:flutter_easycar/ui/error_page.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -99,112 +100,124 @@ Widget _createVehiculoView(
 Widget _createVehiculoViewItem(BuildContext context, VehiculoContent vehiculo) {
   var precio = (vehiculo.precio * 1000).toString();
 
-  return Container(
-      child: Column(
-    children: <Widget>[
-      Container(
-        child: Image.network(
-          vehiculo.foto1.replaceAll('localhost', '10.0.2.2'),
-          fit: BoxFit.cover,
-          height: 195,
-        ),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-              bottomRight: Radius.circular(10)),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.6),
-              spreadRadius: 5,
-              blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
-            ),
-          ],
-        ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(top: 8.0),
-        child: Row(children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 10),
-            child: Text(
-              vehiculo.nombreMarca,
-              style: const TextStyle(fontSize: 20),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0, top: 10),
-            child: Text(vehiculo.modelo, style: const TextStyle(fontSize: 20)),
-          ),
-        ]),
-      ),
-      Row(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text(vehiculo.version,
-                style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 110.0),
-            child: Text(
-              precio + "€",
-              style: TextStyle(fontSize: 18),
-            ),
-          )
-        ],
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 8.0, top: 5, bottom: 20),
-        child: Row(
-          children: [
-            Text(
-              vehiculo.fechaMatriculacion,
-              style: TextStyle(color: Colors.grey),
-            ),
-            Container(
-                height: 10,
-                child: Row(children: const [
-                  VerticalDivider(
-                    color: Colors.grey,
-                    thickness: 1, //thickness of divier line
+  return GridTile(
+      child: InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const DetailsPage(),
+                    settings: RouteSettings(arguments: vehiculo)));
+          },
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Container(
+                  child: Image.network(
+                      vehiculo.foto1.replaceAll('localhost', '10.0.2.2'),
+                      fit: BoxFit.cover,
+                      height: 300),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.6),
+                        spreadRadius: 5,
+                        blurRadius: 7,
+                        offset:
+                            const Offset(0, 3), // changes position of shadow
+                      ),
+                    ],
                   ),
-                ])),
-            Text(
-              vehiculo.kilometraje,
-              style: TextStyle(color: Colors.grey),
-            ),
-            Container(
-                height: 10,
-                child: Row(children: const [
-                  VerticalDivider(
-                    color: Colors.grey,
-                    thickness: 1, //thickness of divier line
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Row(children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, top: 10),
+                    child: Text(
+                      vehiculo.nombreMarca,
+                      style: const TextStyle(fontSize: 20),
+                    ),
                   ),
-                ])),
-            Text(
-              vehiculo.potencia,
-              style: TextStyle(color: Colors.grey),
-            ),
-            Container(
-                height: 10,
-                child: Row(children: const [
-                  VerticalDivider(
-                    color: Colors.grey,
-                    thickness: 1, //thickness of divier line
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0, top: 10),
+                    child: Text(vehiculo.modelo,
+                        style: const TextStyle(fontSize: 20)),
                   ),
-                ])),
-            Text(
-              vehiculo.marchas,
-              style: const TextStyle(color: Colors.grey),
-            ),
-          ],
-        ),
-      ),
-    ],
-  ));
+                ]),
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8.0),
+                    child: Text(vehiculo.version,
+                        style: const TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w500)),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 110.0),
+                    child: Text(
+                      precio + "€",
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                  )
+                ],
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 5, bottom: 20),
+                child: Row(
+                  children: [
+                    Text(
+                      vehiculo.fechaMatriculacion,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(
+                        height: 10,
+                        child: Row(children: const [
+                          VerticalDivider(
+                            color: Colors.grey,
+                            thickness: 1, //thickness of divier line
+                          ),
+                        ])),
+                    Text(
+                      vehiculo.kilometraje,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(
+                        height: 10,
+                        child: Row(children: const [
+                          VerticalDivider(
+                            color: Colors.grey,
+                            thickness: 1, //thickness of divier line
+                          ),
+                        ])),
+                    Text(
+                      vehiculo.potencia,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    SizedBox(
+                        height: 10,
+                        child: Row(children: const [
+                          VerticalDivider(
+                            color: Colors.grey,
+                            thickness: 1, //thickness of divier line
+                          ),
+                        ])),
+                    Text(
+                      vehiculo.marchas,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          )));
 }

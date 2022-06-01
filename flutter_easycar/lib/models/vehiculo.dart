@@ -69,7 +69,14 @@ class VehiculoContent {
     required this.precio,
     required this.nombreMarca,
     required this.tipo,
+    required this.llantas,
+    required this.distribucion,
+    required this.procedencia,
+    required this.traccion,
     required this.foto1,
+    required this.foto2,
+    required this.foto3,
+    required this.foto4,
     required this.concesionario,
   });
   late final int id;
@@ -82,7 +89,14 @@ class VehiculoContent {
   late final double precio;
   late final String nombreMarca;
   late final int tipo;
+  late final String llantas;
+  late final String distribucion;
+  late final String procedencia;
+  late final String traccion;
   late final String foto1;
+  late final String foto2;
+  late final String foto3;
+  late final String foto4;
   late final int concesionario;
 
   VehiculoContent.fromJson(Map<String, dynamic> json) {
@@ -96,7 +110,14 @@ class VehiculoContent {
     precio = json['precio'];
     nombreMarca = json['nombreMarca'];
     tipo = json['tipo'];
+    llantas = json['llantas'];
+    distribucion = json['distribucion'];
+    procedencia = json['procedencia'];
+    traccion = json['traccion'];
     foto1 = json['foto1'];
+    foto2 = json['foto2'];
+    foto3 = json['foto3'];
+    foto4 = json['foto4'];
     concesionario = json['concesionario'];
   }
 
@@ -112,7 +133,14 @@ class VehiculoContent {
     _data['precio'] = precio;
     _data['nombreMarca'] = nombreMarca;
     _data['tipo'] = tipo;
+    _data['llantas'] = llantas;
+    _data['distribucion'] = distribucion;
+    _data['procedencia'] = procedencia;
+    _data['traccion'] = traccion;
     _data['foto1'] = foto1;
+    _data['foto2'] = foto2;
+    _data['foto3'] = foto3;
+    _data['foto4'] = foto4;
     _data['concesionario'] = concesionario;
     return _data;
   }
@@ -124,23 +152,23 @@ class Pageable {
     required this.offset,
     required this.pageSize,
     required this.pageNumber,
-    required this.unpaged,
     required this.paged,
+    required this.unpaged,
   });
   late final Sort sort;
   late final int offset;
   late final int pageSize;
   late final int pageNumber;
-  late final bool unpaged;
   late final bool paged;
+  late final bool unpaged;
 
   Pageable.fromJson(Map<String, dynamic> json) {
     sort = Sort.fromJson(json['sort']);
     offset = json['offset'];
     pageSize = json['pageSize'];
     pageNumber = json['pageNumber'];
-    unpaged = json['unpaged'];
     paged = json['paged'];
+    unpaged = json['unpaged'];
   }
 
   Map<String, dynamic> toJson() {
@@ -149,8 +177,8 @@ class Pageable {
     _data['offset'] = offset;
     _data['pageSize'] = pageSize;
     _data['pageNumber'] = pageNumber;
-    _data['unpaged'] = unpaged;
     _data['paged'] = paged;
+    _data['unpaged'] = unpaged;
     return _data;
   }
 }
