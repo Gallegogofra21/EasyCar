@@ -15,9 +15,16 @@ public class ConverterVehiculoDto {
                 .potencia(v.getPotencia())
                 .marchas(v.getMarchas())
                 .precio(v.getPrecio())
+                .llantas(v.getLlantas())
+                .distribucion(v.getDistribucion())
+                .procedencia(v.getProcedencia())
+                .traccion(v.getTraccion())
                 .nombreMarca(v.getMarca().getNombre())
                 .tipo(v.getTipo().getId())
                 .foto1(v.getFoto1())
+                .foto2(v.getFoto2())
+                .foto3(v.getFoto3())
+                .foto4(v.getFoto4())
                 .concesionario(v.getConcesionario().getId())
                 .build();
     }

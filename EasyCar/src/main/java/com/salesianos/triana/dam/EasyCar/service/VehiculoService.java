@@ -19,7 +19,7 @@ import java.util.List;
 
 public interface VehiculoService {
 
-    GetVehiculoDto createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file, Long id) throws IOException;
+    GetVehiculoDto createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4, Long id) throws IOException;
     Page<GetVehiculoDto> findAll(Pageable pageable);
     GetVehiculoDetails findById(Long id);
     List<GetVehiculoDto> findAllByConcesionario(Concesionario concesionario);

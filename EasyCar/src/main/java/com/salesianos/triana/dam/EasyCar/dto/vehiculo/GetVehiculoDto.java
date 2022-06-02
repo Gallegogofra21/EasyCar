@@ -25,6 +25,13 @@ public class GetVehiculoDto {
     private Double precio;
     private String nombreMarca;
     private Long tipo;
+    private String llantas;
+    private String distribucion;
+    private String procedencia;
+    private String traccion;
     private String foto1;
+    private String foto2;
+    private String foto3;
+    private String foto4;
     private Long concesionario;
 }

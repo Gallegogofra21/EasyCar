@@ -23,6 +23,9 @@ public class GetVehiculoDetails {
     private String nombreMarca;
     private Long tipo;
     private String foto1;
+    private String foto2;
+    private String foto3;
+    private String foto4;
     private String llantas;
     private String distribucion;
     private String procedencia;

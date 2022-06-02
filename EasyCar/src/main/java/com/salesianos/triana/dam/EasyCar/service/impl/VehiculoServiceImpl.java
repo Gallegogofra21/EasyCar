@@ -45,12 +45,23 @@ public class VehiculoServiceImpl implements VehiculoService {
     private final TipoRepository tipoRepository;
 
     @Override
-    public GetVehiculoDto createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file, Long idConcesionario) throws IOException {
-        String filename = storageService.store(file);
+    public GetVehiculoDto createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4, Long idConcesionario) throws IOException {
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
-                .path(storageService.store(file))
+                .path(storageService.store(file1))
+                .toUriString();
+        String uri2 = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(storageService.store(file2))
+                .toUriString();
+        String uri3 = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(storageService.store(file3))
+                .toUriString();
+        String uri4 = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(storageService.store(file4))
                 .toUriString();
 
         Concesionario concesionario = concesionarioRepository.findById(idConcesionario).orElseThrow(() -> new SingleEntityNotFoundException(idConcesionario.toString(), Concesionario.class));
@@ -70,6 +81,9 @@ public class VehiculoServiceImpl implements VehiculoService {
                 .marca(marca)
                 .tipo(tipo)
                 .foto1(uri)
+                .foto2(uri2)
+                .foto3(uri3)
+                .foto4(uri4)
                 .llantas(createVehiculoDto.getLlantas())
                 .distribucion(createVehiculoDto.getDistribucion())
                 .procedencia(createVehiculoDto.getProcedencia())

@@ -45,8 +45,8 @@ public class VehiculoController {
     }
 
     @PostMapping("/{id}")
-    public ResponseEntity<?> create(@RequestPart("file")MultipartFile file, @Valid @RequestPart("vehiculo")CreateVehiculoDto newVehiculo, @PathVariable Long id) throws IOException {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.createVehiculo(newVehiculo, file, id));
+    public ResponseEntity<?> create(@RequestPart("file1")MultipartFile file1, @RequestPart("file2")MultipartFile file2, @RequestPart("file3")MultipartFile file3, @RequestPart("file4")MultipartFile file4, @Valid @RequestPart("vehiculo")CreateVehiculoDto newVehiculo, @PathVariable Long id) throws IOException {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createVehiculo(newVehiculo, file1, file2, file3, file4, id));
     }
 
     @PutMapping("/{id}")
