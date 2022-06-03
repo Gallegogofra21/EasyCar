@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -67,6 +68,11 @@ public class UserEntityService implements UserDetailsService {
 
     public Usuario findUserById(Long id){
         return repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
+    }
+
+    public GetUserDto getAuthUser(Usuario usuario) {
+        Usuario data = repository.findById(usuario.getId()).orElseThrow(() -> new SingleEntityNotFoundException(usuario.getId().toString(), Usuario.class));
+        return converter.convertUsuarioToNewUser(data);
     }
 
     public Usuario createUser (@Valid CreateUsuarioDto newUser, MultipartFile file) throws IOException{

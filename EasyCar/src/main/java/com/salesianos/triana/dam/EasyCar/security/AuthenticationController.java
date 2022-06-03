@@ -44,11 +44,6 @@ public class AuthenticationController {
                 .body(convertUserToJwtUserResponse(user, jwt));
     }
 
-    @GetMapping("/me")
-    public ResponseEntity<?> quienSoyYo(@AuthenticationPrincipal Usuario user){
-        return ResponseEntity.ok(convertUserToJwtUserResponse(user, null));
-    }
-
     private JwtUserResponse convertUserToJwtUserResponse(Usuario user, String jwt) {
         return JwtUserResponse.builder()
                 .nombre(user.getNombre())
