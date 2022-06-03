@@ -8,15 +8,15 @@ class User {
     required this.email,
     required this.avatar,
   });
-  late final String id;
+  late final int id;
   late final String username;
   late final String nombre;
   late final String apellidos;
   late final String telefono;
   late final String email;
   late final String avatar;
-
-  User.fromJson(Map<String, dynamic> json) {
+  
+  User.fromJson(Map<String, dynamic> json){
     id = json['id'];
     username = json['username'];
     nombre = json['nombre'];

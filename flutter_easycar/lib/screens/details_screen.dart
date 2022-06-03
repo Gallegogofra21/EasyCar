@@ -10,6 +10,7 @@ import 'package:flutter_easycar/screens/search_screen.dart';
 import 'package:intl/intl.dart';
 
 class DetailsPage extends StatefulWidget {
+  
   const DetailsPage({key}) : super(key: key);
 
   @override
