@@ -1,10 +1,10 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { environment } from "src/environments/environment";
-import { AuthLoginResponse } from "../models/auth-interface";
-import { AuthLoginDto } from "../models/dto/AuthLoginDto";
-import { RegisterResponse } from "../models/register-interface";
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
+import { AuthLoginResponse } from '../models/auth-interface';
+import { AuthLoginDto } from '../models/dto/AuthLoginDto';
+import { RegisterResponse } from '../models/register-interface';
 
 const AUTH_BASE_URL = 'auth';
 
@@ -40,5 +40,13 @@ export class AuthService {
 
   setLocalRequestToken(token: string) {
     localStorage.setItem('request_token', token);
+  }
+
+  setLocalUserName(name: string) {
+    localStorage.setItem('name', name);
+  }
+
+  signOut() {
+    localStorage.removeItem('request_token');
   }
 }

@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
   doLogin() {
     this.authService.login(this.loginDto).subscribe(loginResult => {
       this.authService.setLocalRequestToken(loginResult.token);
-      this.route.navigate(['/home']);
+      this.authService.setLocalUserName(loginResult.nombre);
+      this.route.navigate(['/']);
     })
   }
 
