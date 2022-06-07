@@ -16,11 +16,19 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 public interface VehiculoService {
 
     GetVehiculoDto createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4, Long id) throws IOException;
-    Page<GetVehiculoDto> findAll(Pageable pageable);
+
+    Page<GetVehiculoDto> findAll(Pageable pageable,
+                                 Optional<String> marca,
+                                 Optional<String> modelo,
+                                 Optional<Float> precioMax,
+                                 Optional<Float> precioMin,
+                                 Optional<String> tipo);
+
     GetVehiculoDetails findById(Long id);
     List<GetVehiculoDto> findAllByConcesionario(Concesionario concesionario);
     List<GetVehiculoDto> findAllByMarca(Marca marca);

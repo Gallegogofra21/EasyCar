@@ -20,17 +20,19 @@ import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -104,8 +106,72 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
-    public Page<GetVehiculoDto> findAll(Pageable pageable) {
-        Page<Vehiculo> data = repository.findAll(pageable);
+    public Page<GetVehiculoDto> findAll(Pageable pageable,
+                                        final Optional<String> marca,
+                                        final Optional<String> modelo,
+                                        final Optional<Float> precioMax,
+                                        final Optional<Float> precioMin,
+                                        final Optional<String> tipo) {
+        String vacio="";
+
+        Specification<Vehiculo> specMarcaVehiculo = new Specification<Vehiculo>() {
+            @Override
+            public Predicate toPredicate(Root<Vehiculo> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                if (marca.isPresent()) {
+                    return criteriaBuilder.like(criteriaBuilder.lower(root.get("marca")), "%" + marca.get().toLowerCase() + "%");
+                } else {
+                    return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
+                }
+            }
+        };
+
+        Specification<Vehiculo> specModeloVehiculo = new Specification<Vehiculo>() {
+            @Override
+            public Predicate toPredicate(Root<Vehiculo> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                if (modelo.isPresent()) {
+                    return criteriaBuilder.like(criteriaBuilder.lower(root.get("modelo")), "%" + modelo.get().toLowerCase() + "%");
+                } else {
+                    return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
+                }
+            }
+        };
+
+        Specification<Vehiculo> precioMenorQue = new Specification<Vehiculo>() {
+            @Override
+            public Predicate toPredicate(Root<Vehiculo> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                if (precioMax.isPresent()) {
+                    return criteriaBuilder.lessThanOrEqualTo(root.get("precio"), precioMax.get());
+                } else {
+                    return criteriaBuilder.isTrue((criteriaBuilder.literal(true)));
+                }
+            }
+        };
+
+        Specification<Vehiculo> precioMayorQue = new Specification<Vehiculo>() {
+            @Override
+            public Predicate toPredicate(Root<Vehiculo> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                if (precioMin.isPresent()){
+                    return criteriaBuilder.greaterThanOrEqualTo(root.get("precio"), precioMin.get());
+                } else {
+                    return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
+                }
+
+            }
+        };
+
+        Specification<Vehiculo> specTipoVehiculo = new Specification<Vehiculo>() {
+            @Override
+            public Predicate toPredicate(Root<Vehiculo> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+                if (tipo.isPresent()) {
+                    return criteriaBuilder.like(criteriaBuilder.lower(root.get("tipo")), "%" + tipo.get().toLowerCase() + "%");
+                } else {
+                    return criteriaBuilder.isTrue(criteriaBuilder.literal(true));
+                }
+            }
+        };
+
+        Specification<Vehiculo> todos = specMarcaVehiculo.and(specModeloVehiculo).and(precioMayorQue).and(precioMenorQue).and(specTipoVehiculo);
+        Page<Vehiculo> data = repository.findAll(todos, pageable);
 
         if(data.isEmpty()) {
             throw new ListEntityNotFoundException(Vehiculo.class);

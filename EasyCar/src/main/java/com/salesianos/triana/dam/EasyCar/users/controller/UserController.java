@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -44,6 +45,10 @@ public class UserController {
         return ResponseEntity.ok().header("link", paginationLinksUtil.createLinkHeader(result, uriBuilder)).body(result);
     }
 
+    @GetMapping("/me")
+    public GetUserDto findAuthUser (@AuthenticationPrincipal Usuario usuario) {
+        return userEntityService.getAuthUser(usuario);
+    }
     @PostMapping("/auth/register/admin")
     public ResponseEntity<GetUserDto> nuevoAdmin (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateAdminDto newUser) throws IOException{
         Usuario saved = userEntityService.createAdmin(newUser, file);

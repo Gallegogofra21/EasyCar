@@ -69,6 +69,11 @@ public class UserEntityService implements UserDetailsService {
         return repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
     }
 
+
+    public GetUserDto getAuthUser(Usuario usuario) {
+        Usuario data = repository.findById(usuario.getId()).orElseThrow(() -> new SingleEntityNotFoundException(usuario.getId().toString(), Usuario.class));
+        return converter.convertUsuarioToNewUser(data);
+    }
     public Usuario createUser (@Valid CreateUsuarioDto newUser, MultipartFile file) throws IOException{
 
         String filename = storageService.store(file);
