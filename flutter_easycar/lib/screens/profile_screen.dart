@@ -31,37 +31,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<UserBloc>(create: (context) { return UserBloc(userRepository)..add(FetchUserWithType());},
-    child: Scaffold( 
-        appBar: AppBar(
-          title: Padding(
-            padding: const EdgeInsets.only(left: 100.0),
-            child: Image.asset(
-              'assets/images/logo.png',
-              width: 150,
-              fit: BoxFit.cover,
+    return BlocProvider<UserBloc>(
+        create: (context) {
+          return UserBloc(userRepository)..add(FetchUserWithType());
+        },
+        child: Scaffold(
+            appBar: AppBar(
+              title: Padding(
+                padding: const EdgeInsets.only(left: 100.0),
+                child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 150,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              backgroundColor: Colors.grey.shade900,
             ),
-          ),
-          backgroundColor: Colors.grey.shade900,
-        ),
-        body: _createProfile(context)));
+            body: _createProfile(context)));
   }
 }
+
 Widget _createProfile(BuildContext context) {
   return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
     if (state is UserWithPostInitial) {
       return const Center(child: CircularProgressIndicator());
     } else if (state is UserFetchedError) {
-      return ErrorPage(mensaje: state.message, retry: () {
-        context.watch<UserBloc>().add(FetchUserWithType());
-      },);
+      return ErrorPage(
+        mensaje: state.message,
+        retry: () {
+          context.watch<UserBloc>().add(FetchUserWithType());
+        },
+      );
     } else if (state is UsersFetched) {
       return _profile(context, state.users);
     } else {
-      return const ProfileScreen();
+      return const Text('Not support');
     }
   });
 }
+
 Widget _profile(BuildContext context, User user) {
   return SafeArea(
     child: Column(
@@ -107,8 +115,7 @@ Widget _profile(BuildContext context, User user) {
                         Column(
                           children: [
                             TextButton(
-                              onPressed: () {
-                              },
+                              onPressed: () {},
                               child: Text(
                                 'user.followers.length.toString()',
                                 style: const TextStyle(
@@ -128,8 +135,7 @@ Widget _profile(BuildContext context, User user) {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             TextButton(
-                                onPressed: () {
-                                },
+                                onPressed: () {},
                                 child: const Text("832",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
@@ -176,53 +182,45 @@ Widget _profile(BuildContext context, User user) {
                       "Edit Profile",
                       style: TextStyle(color: Colors.black),
                     )))
-
           ],
         ),
         const Divider(
           height: 10,
         ),
-        
-          
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.table_chart_outlined)),
-                IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.person_search)),
-              ],
-            ),
-            const SizedBox(
-              width: 20,
-            ),
-            
-            
-            // Flexible(
-            //   child: GridView.builder(
-            //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //         crossAxisCount: 3,
-            //       ),
-            //       itemCount: user.posts.length,
-            //       itemBuilder: (BuildContext context, int index) {
-            //         return Card(
-            //           color: Colors.white,
-            //           child: Image(
-            //                 image: NetworkImage(user.posts.elementAt(index).contenidoOriginal.toString().replaceFirst('localhost', '10.0.2.2')),
-            //                 fit: BoxFit.cover,
-            //               ));
-                    
-            //       }),
-            // ),
-            
-            const SizedBox(
-              width: 20,
-            ),
+
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+                onPressed: () {}, icon: const Icon(Icons.table_chart_outlined)),
+            IconButton(onPressed: () {}, icon: const Icon(Icons.person_search)),
           ],
-        
-      
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+
+        // Flexible(
+        //   child: GridView.builder(
+        //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        //         crossAxisCount: 3,
+        //       ),
+        //       itemCount: user.posts.length,
+        //       itemBuilder: (BuildContext context, int index) {
+        //         return Card(
+        //           color: Colors.white,
+        //           child: Image(
+        //                 image: NetworkImage(user.posts.elementAt(index).contenidoOriginal.toString().replaceFirst('localhost', '10.0.2.2')),
+        //                 fit: BoxFit.cover,
+        //               ));
+
+        //       }),
+        // ),
+
+        const SizedBox(
+          width: 20,
+        ),
+      ],
     ),
-    
   );
 }
