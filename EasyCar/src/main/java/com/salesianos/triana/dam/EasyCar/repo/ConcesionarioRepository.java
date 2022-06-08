@@ -7,4 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ConcesionarioRepository extends JpaRepository<Concesionario, Long> {
     Page<Concesionario> findAll(Pageable pageable);
+
+    boolean existsByNombre(String nombre);
+
 }

@@ -39,6 +39,10 @@ public class Vehiculo implements Serializable {
     @JoinColumn(name = "tipo_id", foreignKey = @ForeignKey(name = "FK_VEHICULO_TIPO"))
     private Tipo tipo;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "FK_VEHICULO_USER"))
+    private Usuario user;
+
     private String foto1;
     private String foto2;
     private String foto3;

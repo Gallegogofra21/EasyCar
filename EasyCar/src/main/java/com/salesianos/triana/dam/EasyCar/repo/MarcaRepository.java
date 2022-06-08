@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MarcaRepository extends JpaRepository<Marca, Long> {
     Page<Marca> findAll(Pageable pageable);
+    boolean existsByNombre(String nombre);
 }

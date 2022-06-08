@@ -7,6 +7,7 @@ import com.salesianos.triana.dam.EasyCar.service.StorageService;
 import com.salesianos.triana.dam.EasyCar.users.dto.Admin.CreateAdminDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.Gestor.CreateGestorDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.GetUserDto;
+import com.salesianos.triana.dam.EasyCar.users.dto.GetUserFavDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.UserDtoConverter;
 import com.salesianos.triana.dam.EasyCar.users.dto.Usuario.CreateUsuarioDto;
 import com.salesianos.triana.dam.EasyCar.users.model.UserRole;
@@ -190,6 +191,10 @@ public class UserEntityService implements UserDetailsService {
         repository.delete(usuario);
         return ResponseEntity.noContent().build();
 
+    }
+    public GetUserFavDto getUserFavs(Usuario usuario) {
+        Usuario data = repository.findById(usuario.getId()).orElseThrow(() -> new SingleEntityNotFoundException(usuario.getId().toString(), Usuario.class));
+        return converter.convertUsuarioToNewUserFav(data);
     }
 
     public boolean comprobarUsername(String username) {

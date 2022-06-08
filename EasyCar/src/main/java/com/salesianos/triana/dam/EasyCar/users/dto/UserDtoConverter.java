@@ -18,4 +18,10 @@ public class UserDtoConverter {
                 .avatar(p.getAvatar())
                 .build();
     }
+
+    public GetUserFavDto convertUsuarioToNewUserFav(Usuario p) {
+        return GetUserFavDto.builder()
+                .favoritos(p.getVehiculosFav())
+                .build();
+    }
 }

@@ -20,4 +20,6 @@ public interface MarcaService {
     GetMarcaVehiculosDto findById(Long id);
     GetMarcaDto edit(CreateMarcaDto createMarcaDto, MultipartFile file, Long id) throws IOException;
     ResponseEntity<?> delete(Long id) throws IOException;
+
+    public boolean comprobarName(String name);
 }

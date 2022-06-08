@@ -107,4 +107,8 @@ public class MarcaServiceImpl implements MarcaService {
         repository.delete(marca);
         return ResponseEntity.noContent().build();
     }
+
+    public boolean comprobarName(String name) {
+        return repository.existsByNombre(name);
+    }
 }

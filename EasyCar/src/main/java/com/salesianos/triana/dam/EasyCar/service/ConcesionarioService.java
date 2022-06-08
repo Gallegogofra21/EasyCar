@@ -20,4 +20,8 @@ public interface ConcesionarioService {
     GetConcesionarioVehiculosDto findById(Long id);
     GetConcesionarioDto edit(CreateConcesionarioDto createConcesionarioDto, Long id);
     ResponseEntity<?> delete(Long id);
+
+    public boolean comprobarName(String name);
+    public boolean comprobarId(Long id);
+
 }

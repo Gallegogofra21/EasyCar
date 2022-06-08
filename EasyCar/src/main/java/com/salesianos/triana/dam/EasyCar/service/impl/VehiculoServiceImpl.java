@@ -17,6 +17,7 @@ import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.service.StorageService;
 import com.salesianos.triana.dam.EasyCar.service.VehiculoService;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
+import com.salesianos.triana.dam.EasyCar.users.repo.UserEntityRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -45,6 +46,8 @@ public class VehiculoServiceImpl implements VehiculoService {
     private final ConcesionarioRepository concesionarioRepository;
     private final MarcaRepository marcaRepository;
     private final TipoRepository tipoRepository;
+
+    private final UserEntityRepository userRepository;
 
     @Override
     public GetVehiculoDto createVehiculo(CreateVehiculoDto createVehiculoDto, MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4, Long idConcesionario) throws IOException {
@@ -273,8 +276,17 @@ public class VehiculoServiceImpl implements VehiculoService {
         vehiculo.setConcesionario(null);
         vehiculo.setMarca(null);
         vehiculo.setTipo(null);
+        vehiculo.setUser(null);
         repository.save(vehiculo);
         repository.delete(vehiculo);
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public ResponseEntity<?> addVehiculoToFav(Long id, Usuario user) {
+        Vehiculo vehiculo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
+        user.getVehiculosFav().add(vehiculo);
+        userRepository.save(user);
+        return ResponseEntity.ok().build();
     }
 }

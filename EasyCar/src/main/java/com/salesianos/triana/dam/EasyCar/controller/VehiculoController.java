@@ -67,4 +67,10 @@ public class VehiculoController {
         service.delete(id);
         return ResponseEntity.notFound().build();
     }
+
+    @PostMapping("/{id}/fav")
+    public ResponseEntity<?> addVehiculoToFav(@PathVariable Long id, @AuthenticationPrincipal Usuario usuario) {
+        service.addVehiculoToFav(id, usuario);
+        return ResponseEntity.ok().build();
+    }
 }

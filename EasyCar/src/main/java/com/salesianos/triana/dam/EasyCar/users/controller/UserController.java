@@ -3,6 +3,7 @@ package com.salesianos.triana.dam.EasyCar.users.controller;
 import com.salesianos.triana.dam.EasyCar.users.dto.Admin.CreateAdminDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.Gestor.CreateGestorDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.GetUserDto;
+import com.salesianos.triana.dam.EasyCar.users.dto.GetUserFavDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.UserDtoConverter;
 import com.salesianos.triana.dam.EasyCar.users.dto.Usuario.CreateUsuarioDto;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
@@ -78,4 +79,10 @@ public class UserController {
         else
             return ResponseEntity.ok(userDtoConverter.convertUsuarioToNewUser(saved));
     }
+
+    @GetMapping("/usuario/fav")
+    public GetUserFavDto findUserFav (@AuthenticationPrincipal Usuario usuario) {
+        return userEntityService.getUserFavs(usuario);
+    }
+
 }

@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -43,6 +44,10 @@ public class Usuario implements UserDetails {
     @Enumerated
     private UserRole rol;
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<Vehiculo> vehiculosFav = new ArrayList<>();
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
@@ -66,5 +71,10 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @PreRemove
+    public void nullearTipoDeVehiculos() {
+        vehiculosFav.forEach(vehiculo -> vehiculo.setUser(null));
     }
 }

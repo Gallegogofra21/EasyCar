@@ -105,4 +105,8 @@ public class TipoServiceImpl implements TipoService {
         repository.delete(tipo);
         return ResponseEntity.noContent().build();
     }
+
+    public boolean comprobarName(String name) {
+        return repository.existsByNombre(name);
+    }
 }

@@ -99,4 +99,12 @@ public class ConcesionarioServiceImpl implements ConcesionarioService {
         repository.delete(concesionario);
         return ResponseEntity.noContent().build();
     }
+
+    public boolean comprobarName(String name) {
+        return repository.existsByNombre(name);
+    }
+
+    public boolean comprobarId(Long id){
+        return repository.existsById(id);
+    }
 }

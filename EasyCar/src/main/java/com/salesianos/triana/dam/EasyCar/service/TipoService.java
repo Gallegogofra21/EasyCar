@@ -20,4 +20,6 @@ public interface TipoService {
     GetTipoVehiculosDto findById(Long id);
     GetTipoDto edit(CreateTipoDto createTipoDto, MultipartFile file, Long id) throws IOException;
     ResponseEntity<?> delete(Long id) throws IOException;
+
+    public boolean comprobarName(String name);
 }
