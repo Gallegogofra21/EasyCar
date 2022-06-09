@@ -31,7 +31,7 @@ class _TipoDetailsPageState extends State<TipoDetailsPage> {
   @override
   @override
   Widget build(BuildContext context) {
-    final vehiculos = ModalRoute.of(context)!.settings.arguments as TipoDetails;
+    final tipo = ModalRoute.of(context)!.settings.arguments as TipoContent;
     return BlocProvider<TiposBloc>(
         create: (context) {
           return TiposBloc(tipoRepository)..add(const FetchTipoWithType());
@@ -51,21 +51,20 @@ class _TipoDetailsPageState extends State<TipoDetailsPage> {
             body: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  _createTipoVehiculoView(context, vehiculos),
+                  _createTipoVehiculoView(context, tipo),
                 ],
               ),
             )));
   }
 }
 
-Widget _createTipoVehiculoView(
-    BuildContext context, List<TipoVehiculos> vehiculos) {
+Widget _createTipoVehiculoView(BuildContext context, TipoContent tipo) {
   return Column(children: [
     SizedBox(
       height: 590,
       child: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
-          return _createTipoVehiculoViewItem(context, vehiculos[index]);
+          return _createTipoVehiculoViewItem(context, tipo.vehiculos[index]);
         },
         separatorBuilder: (context, index) => const VerticalDivider(
           color: Colors.transparent,
