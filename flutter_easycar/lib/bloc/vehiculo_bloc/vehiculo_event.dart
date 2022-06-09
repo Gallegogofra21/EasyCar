@@ -21,3 +21,10 @@ class FetchVehiculoDetails extends VehiculosEvent {
   @override
   List<Object> get props => [];
 }
+
+class FetchVehiculosByMarca extends VehiculosEvent {
+  const FetchVehiculosByMarca();
+
+  @override
+  List<Object> get props => [];
+}

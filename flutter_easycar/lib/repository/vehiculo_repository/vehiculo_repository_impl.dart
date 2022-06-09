@@ -1,3 +1,4 @@
+import 'package:flutter_easycar/bloc/vehiculo_bloc/vehiculo_event.dart';
 import 'package:flutter_easycar/constants.dart';
 import 'package:flutter_easycar/models/vehiculo_details.dart';
 import 'package:http/http.dart';
@@ -43,6 +44,26 @@ class VehiculoRepositoryImpl extends VehiculoRepository {
         headers: headers);
     if (response.statusCode == 200) {
       return VehiculoDetails.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Fail to load vehiculos');
+    }
+  }
+
+  @override
+  Future<List<VehiculoContent>> fetchVehiculosByMarca(id) async {
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${token}'
+    };
+
+    final response = await _client.get(
+        Uri.parse('${Constant.ApiBaseUrl}/vehiculo/marca/${id}'),
+        headers: headers);
+    if (response.statusCode == 200) {
+      return VehiculoResponse.fromJson(json.decode(response.body)).content;
     } else {
       throw Exception('Fail to load vehiculos');
     }

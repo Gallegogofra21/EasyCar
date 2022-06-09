@@ -20,6 +20,15 @@ class VehiculosFetched extends VehiculosState {
   List<Object> get props => [vehiculos];
 }
 
+class VehiculosByMarcaFetched extends VehiculosState {
+  final List<VehiculoContent> vehiculos;
+
+  const VehiculosByMarcaFetched(this.vehiculos);
+
+  @override
+  List<Object> get props => [vehiculos];
+}
+
 class VehiculosDetailsFetched extends VehiculosState {
   final VehiculoDetails vehiculo;
   final int id;

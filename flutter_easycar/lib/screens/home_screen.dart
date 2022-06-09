@@ -13,6 +13,7 @@ import 'package:flutter_easycar/models/tipo.dart';
 import 'package:flutter_easycar/bloc/tipo_bloc/tipos_bloc.dart';
 import 'package:flutter_easycar/bloc/tipo_bloc/tipos_state.dart';
 import 'package:flutter_easycar/screens/tipo_details.dart';
+import 'package:flutter_easycar/screens/vehiculos_marca_screen.dart';
 import 'package:flutter_easycar/ui/error_page.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -233,7 +234,15 @@ Widget _createMarcaViewItem(BuildContext context, MarcaContent marca) {
   return GridTile(
     child: InkWell(
       highlightColor: Colors.white,
-      onTap: () => selectedItem(marca.nombre),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => VehiculosMarcaScreen(
+                      id: marca.id,
+                    ),
+                settings: RouteSettings(arguments: marca.id)));
+      },
       child: Column(
         children: <Widget>[
           Container(
