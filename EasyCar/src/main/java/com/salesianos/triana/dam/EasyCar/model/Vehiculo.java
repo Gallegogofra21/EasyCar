@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import lombok.*;
 
@@ -28,6 +29,7 @@ public class Vehiculo implements Serializable {
     private Double precio;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "concesionario_id", foreignKey = @ForeignKey(name = "FK_VEHICULO_CONCESIONARIO"))
     private Concesionario concesionario;
 
@@ -36,6 +38,7 @@ public class Vehiculo implements Serializable {
     private Marca marca;
 
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "tipo_id", foreignKey = @ForeignKey(name = "FK_VEHICULO_TIPO"))
     private Tipo tipo;
 

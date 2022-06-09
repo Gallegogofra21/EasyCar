@@ -10,7 +10,7 @@ public class ConverterTipoDto {
                 .id(t.getId())
                 .nombre(t.getNombre())
                 .foto(t.getFoto())
-                 .numVehiculos(t.getVehiculos().size())
+                 .vehiculos(t.getVehiculos())
                 .build();
     }
 }

@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.users.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
 import lombok.AllArgsConstructor;
@@ -39,6 +40,7 @@ public class Usuario implements UserDetails {
     private String password2;
 
     @OneToOne
+    @JsonIgnore
     private Concesionario concesionario;
 
     @Enumerated

@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,6 +24,8 @@ public class Marca implements Serializable {
 
     @OneToMany(mappedBy = "marca", fetch = FetchType.LAZY)
     @Builder.Default
+    // Uso JSON ignore para evitar recursividad en Listado de Tipos para Flutter
+    @JsonIgnore
     private List<Vehiculo> vehiculos = new ArrayList<>();
 
     @PreRemove
