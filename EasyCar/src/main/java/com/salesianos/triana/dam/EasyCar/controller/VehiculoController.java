@@ -48,8 +48,15 @@ public class VehiculoController {
     }
 
     @GetMapping("/marca/{id}")
-    public ResponseEntity<?> findAll(@PathVariable Long id, Pageable pageable, HttpServletRequest request) {
+    public ResponseEntity<?> findAllByMarca(@PathVariable Long id, Pageable pageable, HttpServletRequest request) {
         Page<GetVehiculoDto> result = service.findAllVehiculosByMarca(id, pageable);
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
+        return ResponseEntity.ok().header("link", paginationLinksUtil.createLinkHeader(result, uriBuilder)).body(result);
+    }
+
+    @GetMapping("/tipo/{id}")
+    public ResponseEntity<?> findAllByTipo(@PathVariable Long id, Pageable pageable, HttpServletRequest request) {
+        Page<GetVehiculoDto> result = service.findAllVehiculosByTipo(id, pageable);
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
         return ResponseEntity.ok().header("link", paginationLinksUtil.createLinkHeader(result, uriBuilder)).body(result);
     }

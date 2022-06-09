@@ -24,5 +24,12 @@ public interface VehiculoRepository extends JpaRepository<Vehiculo, Long> {
             WHERE m.ID = :id
             """, nativeQuery = true)
     Page<Vehiculo> findAllVehiculosByMarca (@Param("id") Long id, Pageable pageable);
+
+    @Query(value = """
+            SELECT *
+            FROM VEHICULO v JOIN TIPO t ON (t.ID = v.TIPO_ID)
+            WHERE t.ID = :id
+            """, nativeQuery = true)
+    Page<Vehiculo> findAllVehiculosByTipo (@Param("id") Long id, Pageable pageable);
     List<Vehiculo> findAllByTipo(Tipo tipo);
 }

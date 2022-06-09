@@ -196,6 +196,17 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
+    public Page<GetVehiculoDto> findAllVehiculosByTipo(@PathVariable Long id, Pageable pageable) {
+        Page<Vehiculo> data = repository.findAllVehiculosByTipo(id, pageable);
+
+        if(data.isEmpty()) {
+            throw new ListEntityNotFoundException(Vehiculo.class);
+        } else {
+            return data.map(converter::getVehiculoToDto);
+        }
+    }
+
+    @Override
     public GetVehiculoDetails findById(Long id) {
         Vehiculo vehiculo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
 
