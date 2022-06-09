@@ -24,6 +24,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -175,6 +176,17 @@ public class VehiculoServiceImpl implements VehiculoService {
 
         Specification<Vehiculo> todos = specMarcaVehiculo.and(specModeloVehiculo).and(precioMayorQue).and(precioMenorQue).and(specTipoVehiculo);
         Page<Vehiculo> data = repository.findAll(todos, pageable);
+
+        if(data.isEmpty()) {
+            throw new ListEntityNotFoundException(Vehiculo.class);
+        } else {
+            return data.map(converter::getVehiculoToDto);
+        }
+    }
+
+    @Override
+    public Page<GetVehiculoDto> findAllVehiculosByMarca(@PathVariable Long id, Pageable pageable) {
+        Page<Vehiculo> data = repository.findAllVehiculosByMarca(id, pageable);
 
         if(data.isEmpty()) {
             throw new ListEntityNotFoundException(Vehiculo.class);

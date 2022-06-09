@@ -33,6 +33,8 @@ public interface VehiculoService {
     List<GetVehiculoDto> findAllByConcesionario(Concesionario concesionario);
     List<GetVehiculoDto> findAllByMarca(Marca marca);
     List<GetVehiculoDto> findAllByTipo(Tipo tipo);
+
+    Page<GetVehiculoDto> findAllVehiculosByMarca(Long id, Pageable pageable);
     GetVehiculoDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file, Usuario usuario, Long id);
     ResponseEntity<?> delete(Long id) throws IOException;
     ResponseEntity<?> addVehiculoToFav(Long id, Usuario user);
