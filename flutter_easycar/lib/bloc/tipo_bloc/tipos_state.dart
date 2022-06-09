@@ -13,12 +13,21 @@ class TiposInitial extends TiposState {}
 
 class TiposFetched extends TiposState {
   final List<TipoContent> tipos;
-  final List<TipoVehiculos> vehiculos;
 
-  const TiposFetched(this.tipos, this.vehiculos);
+  const TiposFetched(this.tipos);
 
   @override
   List<Object> get props => [tipos];
+}
+
+class TipoDetailsFetched extends TiposState {
+  final TipoDetails tipo;
+  final int id;
+
+  const TipoDetailsFetched(this.tipo, this.id);
+
+  @override
+  List<Object> get props => [this.tipo];
 }
 
 class TipoFetchError extends TiposState {
@@ -27,15 +36,4 @@ class TipoFetchError extends TiposState {
 
   @override
   List<Object> get props => [mensaje];
-}
-
-class TipoDetailsFetched extends TiposState {
-  final TipoDetails tipo;
-  final List<TipoVehiculos> vehiculos;
-  final int id;
-
-  const TipoDetailsFetched(this.tipo, this.id, this.vehiculos);
-
-  @override
-  List<Object> get props => [this.tipo];
 }

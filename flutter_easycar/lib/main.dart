@@ -6,6 +6,7 @@ import 'package:flutter_easycar/screens/menu_screen.dart';
 import 'package:flutter_easycar/screens/profile_screen.dart';
 import 'package:flutter_easycar/screens/register_screen.dart';
 import 'package:flutter_easycar/screens/search_screen.dart';
+import 'package:flutter_easycar/screens/tipo_details.dart';
 
 void main() {
   runApp(const MyApp());

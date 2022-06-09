@@ -12,6 +12,7 @@ import 'package:flutter_easycar/repository/tipo_repository/tipo_repository_impl.
 import 'package:flutter_easycar/models/tipo.dart';
 import 'package:flutter_easycar/bloc/tipo_bloc/tipos_bloc.dart';
 import 'package:flutter_easycar/bloc/tipo_bloc/tipos_state.dart';
+import 'package:flutter_easycar/screens/tipo_details.dart';
 import 'package:flutter_easycar/ui/error_page.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -152,22 +153,15 @@ Widget _createTipoView(BuildContext context, List<TipoContent> tipos) {
 }
 
 Widget _createTipoViewItem(BuildContext context, TipoContent tipo) {
-  void selectedItem(String item) {
-    final snackBar = SnackBar(
-      content: Text(
-        'Selected $item...',
-      ),
-      backgroundColor: Colors.red,
-    );
-
-    ScaffoldMessenger.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(snackBar);
-  }
-
   return GridTile(
     child: InkWell(
-      onTap: () => selectedItem(tipo.nombre),
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const TipoDetailsPage(),
+                settings: RouteSettings(arguments: tipo.id)));
+      },
       child: Column(
         children: <Widget>[
           Image.network(tipo.foto.replaceAll('localhost', '10.0.2.2'),

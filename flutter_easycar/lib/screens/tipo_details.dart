@@ -31,8 +31,7 @@ class _TipoDetailsPageState extends State<TipoDetailsPage> {
   @override
   @override
   Widget build(BuildContext context) {
-    final vehiculos =
-        ModalRoute.of(context)!.settings.arguments as List<TipoVehiculos>;
+    final vehiculos = ModalRoute.of(context)!.settings.arguments as TipoDetails;
     return BlocProvider<TiposBloc>(
         create: (context) {
           return TiposBloc(tipoRepository)..add(const FetchTipoWithType());
@@ -52,21 +51,21 @@ class _TipoDetailsPageState extends State<TipoDetailsPage> {
             body: SingleChildScrollView(
               child: Column(
                 children: <Widget>[
-                  _createVehiculoView(context, vehiculos),
+                  _createTipoVehiculoView(context, vehiculos),
                 ],
               ),
             )));
   }
 }
 
-Widget _createVehiculoView(
+Widget _createTipoVehiculoView(
     BuildContext context, List<TipoVehiculos> vehiculos) {
   return Column(children: [
     SizedBox(
       height: 590,
       child: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
-          return _createVehiculoViewItem(context, vehiculos[index]);
+          return _createTipoVehiculoViewItem(context, vehiculos[index]);
         },
         separatorBuilder: (context, index) => const VerticalDivider(
           color: Colors.transparent,
@@ -78,7 +77,8 @@ Widget _createVehiculoView(
   ]);
 }
 
-Widget _createVehiculoViewItem(BuildContext context, TipoVehiculos vehiculo) {
+Widget _createTipoVehiculoViewItem(
+    BuildContext context, TipoVehiculos vehiculo) {
   var precio = (vehiculo.precio * 1000).toString();
 
   return GridTile(

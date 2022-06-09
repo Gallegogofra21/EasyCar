@@ -8,13 +8,13 @@ class TiposBloc extends Bloc<TiposEvent, TiposState> {
 
   TiposBloc(this.tipoRepository) : super(TiposInitial()) {
     on<FetchTipoWithType>(_tiposFetched);
+    on<FetchTipoDetails>(_tipoDetailsFetched);
   }
 
   void _tiposFetched(FetchTipoWithType event, Emitter<TiposState> emit) async {
     try {
       final tipos = await tipoRepository.fetchTipos();
-      final vehiculos = await tipoRepository.fetchTipoVehiculos();
-      emit(TiposFetched(tipos, vehiculos));
+      emit(TiposFetched(tipos));
       return;
     } on Exception catch (e) {
       emit(TipoFetchError(e.toString()));
@@ -25,8 +25,7 @@ class TiposBloc extends Bloc<TiposEvent, TiposState> {
       FetchTipoDetails event, Emitter<TiposState> emit) async {
     try {
       final tipo = await tipoRepository.fetchTipoDetails(event.id);
-      final vehiculos = await tipoRepository.fetchTipoVehiculos();
-      emit(TipoDetailsFetched(tipo, event.id, vehiculos));
+      emit(TipoDetailsFetched(tipo, event.id));
       return;
     } on Exception catch (e) {
       emit(TipoFetchError((e.toString())));
