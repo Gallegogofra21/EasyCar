@@ -1,5 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import lombok.*;
 
