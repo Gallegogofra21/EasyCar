@@ -61,7 +61,7 @@ class _TipoDetailsPageState extends State<TipoDetailsPage> {
 Widget _createTipoVehiculoView(BuildContext context, TipoContent tipo) {
   return Column(children: [
     SizedBox(
-      height: 590,
+      height: 860,
       child: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
           return _createTipoVehiculoViewItem(context, tipo.vehiculos[index]);
@@ -70,14 +70,14 @@ Widget _createTipoVehiculoView(BuildContext context, TipoContent tipo) {
           color: Colors.transparent,
           width: 6.0,
         ),
-        itemCount: vehiculos.length,
+        itemCount: tipo.vehiculos.length,
       ),
     ),
   ]);
 }
 
 Widget _createTipoVehiculoViewItem(
-    BuildContext context, TipoVehiculos vehiculo) {
+    BuildContext context, TipoVehiculo vehiculo) {
   var precio = (vehiculo.precio * 1000).toString();
 
   return GridTile(
@@ -123,7 +123,7 @@ Widget _createTipoVehiculoViewItem(
                   Padding(
                     padding: const EdgeInsets.only(left: 8.0, top: 10),
                     child: Text(
-                      vehiculo.nombreMarca,
+                      vehiculo.marca.nombre,
                       style: const TextStyle(fontSize: 20),
                     ),
                   ),

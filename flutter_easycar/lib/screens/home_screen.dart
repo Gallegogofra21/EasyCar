@@ -160,7 +160,7 @@ Widget _createTipoViewItem(BuildContext context, TipoContent tipo) {
             context,
             MaterialPageRoute(
                 builder: (context) => const TipoDetailsPage(),
-                settings: RouteSettings(arguments: tipo.id)));
+                settings: RouteSettings(arguments: tipo)));
       },
       child: Column(
         children: <Widget>[

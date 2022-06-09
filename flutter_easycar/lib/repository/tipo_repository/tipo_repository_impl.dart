@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter_easycar/models/tipo.dart';
 import 'package:flutter_easycar/models/tipo_details.dart';
-import 'package:flutter_easycar/models/tipo_dto.dart';
 import 'package:flutter_easycar/repository/tipo_repository/tipo_repository.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
