@@ -13,10 +13,23 @@ class TiposBloc extends Bloc<TiposEvent, TiposState> {
   void _tiposFetched(FetchTipoWithType event, Emitter<TiposState> emit) async {
     try {
       final tipos = await tipoRepository.fetchTipos();
-      emit(TiposFetched(tipos));
+      final vehiculos = await tipoRepository.fetchTipoVehiculos();
+      emit(TiposFetched(tipos, vehiculos));
       return;
     } on Exception catch (e) {
       emit(TipoFetchError(e.toString()));
+    }
+  }
+
+  void _tipoDetailsFetched(
+      FetchTipoDetails event, Emitter<TiposState> emit) async {
+    try {
+      final tipo = await tipoRepository.fetchTipoDetails(event.id);
+      final vehiculos = await tipoRepository.fetchTipoVehiculos();
+      emit(TipoDetailsFetched(tipo, event.id, vehiculos));
+      return;
+    } on Exception catch (e) {
+      emit(TipoFetchError((e.toString())));
     }
   }
 }
