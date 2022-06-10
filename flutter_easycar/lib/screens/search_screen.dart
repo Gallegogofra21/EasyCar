@@ -82,7 +82,7 @@ Widget _createVehiculoView(
     BuildContext context, List<VehiculoContent> vehiculos) {
   return Column(children: [
     SizedBox(
-      height: 590,
+      height: 790,
       child: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
           return _createVehiculoViewItem(context, vehiculos[index]);

@@ -161,7 +161,7 @@ Widget _createTipoViewItem(BuildContext context, TipoContent tipo) {
             context,
             MaterialPageRoute(
                 builder: (context) => VehiculosTipoScreen(
-                      id2: tipo.id,
+                      id: tipo.id,
                     ),
                 settings: RouteSettings(arguments: tipo.id)));
       },
@@ -241,9 +241,9 @@ Widget _createMarcaViewItem(BuildContext context, MarcaContent marca) {
             context,
             MaterialPageRoute(
                 builder: (context) => VehiculosMarcaScreen(
-                      id: marca.id,
+                      nombre: marca.nombre,
                     ),
-                settings: RouteSettings(arguments: marca.id)));
+                settings: RouteSettings(arguments: marca.nombre)));
       },
       child: Column(
         children: <Widget>[

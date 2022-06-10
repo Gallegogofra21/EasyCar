@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'details_screen.dart';
 
 class VehiculosTipoScreen extends StatefulWidget {
-  final dynamic id2;
-  const VehiculosTipoScreen({Key? key, required this.id2}) : super(key: key);
+  final dynamic id;
+  const VehiculosTipoScreen({Key? key, required this.id}) : super(key: key);
 
   @override
   _VehiculosTipoScreenState createState() => _VehiculosTipoScreenState();
@@ -21,7 +21,7 @@ class _VehiculosTipoScreenState extends State<VehiculosTipoScreen> {
   @override
   void initState() {
     super.initState();
-    vehiculos = fetchVehiculos(widget.id2);
+    vehiculos = fetchVehiculosTipo(widget.id);
   }
 
   @override
@@ -56,7 +56,7 @@ class _VehiculosTipoScreenState extends State<VehiculosTipoScreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => DetailsPage(),
+                                          builder: (context) => DetailsPage2(),
                                           settings: RouteSettings(
                                               arguments:
                                                   snapshot.data!.single)));
@@ -213,7 +213,7 @@ class _VehiculosTipoScreenState extends State<VehiculosTipoScreen> {
   }
 }
 
-Future<List<VehiculoContent>> fetchVehiculos(id) async {
+Future<List<VehiculoContent>> fetchVehiculosTipo(id) async {
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
 

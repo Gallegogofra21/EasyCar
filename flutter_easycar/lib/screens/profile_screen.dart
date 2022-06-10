@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easycar/bloc/user_bloc/user_bloc.dart';
 import 'package:flutter_easycar/bloc/user_bloc/user_event.dart';
@@ -33,7 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return BlocProvider<UserBloc>(
         create: (context) {
-          return UserBloc(userRepository)..add(FetchUserWithType());
+          return UserBloc(userRepository)..add(const FetchUserWithType());
         },
         child: Scaffold(
             appBar: AppBar(
@@ -59,7 +60,7 @@ Widget _createProfile(BuildContext context) {
       return ErrorPage(
         mensaje: state.message,
         retry: () {
-          context.watch<UserBloc>().add(FetchUserWithType());
+          context.watch<UserBloc>().add(const FetchUserWithType());
         },
       );
     } else if (state is UsersFetched) {
@@ -79,9 +80,11 @@ Widget _profile(BuildContext context, User user) {
             Row(
               children: [
                 Container(
-                  margin: const EdgeInsets.only(top: 12),
-                  width: 100.0,
-                  height: 100.0,
+                  margin: const EdgeInsets.only(
+                    top: 20,
+                  ),
+                  width: 150.0,
+                  height: 150.0,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
@@ -91,134 +94,95 @@ Widget _profile(BuildContext context, User user) {
                             .replaceFirst('localhost', '10.0.2.2'))),
                   ),
                 ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Column(
-                          children: [
-                            TextButton(
-                              onPressed: null,
-                              child: Text(
-                                'user.posts.length.toString(),',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                            ),
-                            Text("posts"),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          children: [
-                            TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                'user.followers.length.toString()',
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black),
-                              ),
-                            ),
-                            const Text(
-                              "followers",
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            TextButton(
-                                onPressed: () {},
-                                child: const Text("832",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black))),
-                            const Text("following"),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
               ],
               mainAxisAlignment: MainAxisAlignment.spaceAround,
             ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(user.username.toString()),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    '${user.username}',
-                    style: const TextStyle(color: Colors.grey),
+            Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: Container(
+                  height: 35,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.grey.shade200),
                   ),
-                )
-              ],
-            ),
-            Container(
-                height: 35,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.grey.shade200),
-                ),
-                width: 320,
-                child: TextButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Edit Profile",
-                      style: TextStyle(color: Colors.black),
-                    )))
+                  width: 320,
+                  child: TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        "Edit Profile",
+                        style: TextStyle(color: Colors.black),
+                      ))),
+            )
           ],
         ),
-        const Divider(
-          height: 10,
+        const Padding(
+          padding: EdgeInsets.only(top: 8.0),
+          child: Divider(
+            height: 10,
+          ),
         ),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+        Column(
           children: [
-            IconButton(
-                onPressed: () {}, icon: const Icon(Icons.table_chart_outlined)),
-            IconButton(onPressed: () {}, icon: const Icon(Icons.person_search)),
+            const Padding(
+              padding: EdgeInsets.only(right: 300.0, top: 15, bottom: 15),
+              child: Text('Correo electrónico',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(color: Colors.grey, fontSize: 16)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 285.0),
+              child: Text(
+                user.email,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(right: 300.0, top: 20),
+              child: Text('Nombre de usuario',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(color: Colors.grey, fontSize: 16)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 285.0),
+              child: Text(
+                user.username,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              ),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(right: 370.0, top: 20),
+              child: Text('Nombre',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(color: Colors.grey, fontSize: 16)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 285.0),
+              child: Text(user.nombre,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(right: 365.0, top: 20),
+              child: Text('Apellidos',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(color: Colors.grey, fontSize: 16)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 285.0),
+              child: Text(user.apellidos,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            ),
+            const Padding(
+              padding: EdgeInsets.only(right: 370.0, top: 20),
+              child: Text('Teléfono',
+                  textAlign: TextAlign.left,
+                  style: TextStyle(color: Colors.grey, fontSize: 16)),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 285.0),
+              child: Text(user.telefono,
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            ),
           ],
-        ),
-        const SizedBox(
-          width: 20,
-        ),
-
-        // Flexible(
-        //   child: GridView.builder(
-        //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        //         crossAxisCount: 3,
-        //       ),
-        //       itemCount: user.posts.length,
-        //       itemBuilder: (BuildContext context, int index) {
-        //         return Card(
-        //           color: Colors.white,
-        //           child: Image(
-        //                 image: NetworkImage(user.posts.elementAt(index).contenidoOriginal.toString().replaceFirst('localhost', '10.0.2.2')),
-        //                 fit: BoxFit.cover,
-        //               ));
-
-        //       }),
-        // ),
-
-        const SizedBox(
-          width: 20,
         ),
       ],
     ),
