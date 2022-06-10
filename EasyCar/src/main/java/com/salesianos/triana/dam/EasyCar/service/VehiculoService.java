@@ -34,7 +34,7 @@ public interface VehiculoService {
     List<GetVehiculoDto> findAllByMarca(Marca marca);
     List<GetVehiculoDto> findAllByTipo(Tipo tipo);
 
-    Page<GetVehiculoDto> findAllVehiculosByMarca(Long id, Pageable pageable);
+    Page<GetVehiculoDto> findAllVehiculosByMarca(String nombre, Pageable pageable);
     Page<GetVehiculoDto> findAllVehiculosByTipo(Long id, Pageable pageable);
     GetVehiculoDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file, Usuario usuario, Long id);
     ResponseEntity<?> delete(Long id) throws IOException;

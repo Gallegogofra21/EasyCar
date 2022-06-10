@@ -185,8 +185,8 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
-    public Page<GetVehiculoDto> findAllVehiculosByMarca(@PathVariable Long id, Pageable pageable) {
-        Page<Vehiculo> data = repository.findAllVehiculosByMarca(id, pageable);
+    public Page<GetVehiculoDto> findAllVehiculosByMarca(@PathVariable String nombre, Pageable pageable) {
+        Page<Vehiculo> data = repository.findAllVehiculosByMarca(nombre, pageable);
 
         if(data.isEmpty()) {
             throw new ListEntityNotFoundException(Vehiculo.class);

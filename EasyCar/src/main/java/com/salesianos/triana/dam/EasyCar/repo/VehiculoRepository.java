@@ -21,9 +21,9 @@ public interface VehiculoRepository extends JpaRepository<Vehiculo, Long> {
     @Query(value = """
             SELECT *
             FROM VEHICULO v JOIN MARCA m ON (m.ID = v.MARCA_ID)
-            WHERE m.ID = :id
+            WHERE m.NOMBRE = :nombre
             """, nativeQuery = true)
-    Page<Vehiculo> findAllVehiculosByMarca (@Param("id") Long id, Pageable pageable);
+    Page<Vehiculo> findAllVehiculosByMarca (@Param("nombre") String nombre, Pageable pageable);
 
     @Query(value = """
             SELECT *

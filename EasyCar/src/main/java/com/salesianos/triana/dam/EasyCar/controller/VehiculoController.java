@@ -1,11 +1,7 @@
 package com.salesianos.triana.dam.EasyCar.controller;
 
-import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDetails;
-import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
-import com.salesianos.triana.dam.EasyCar.model.Marca;
-import com.salesianos.triana.dam.EasyCar.model.Tipo;
-import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
 import com.salesianos.triana.dam.EasyCar.dto.vehiculo.CreateVehiculoDto;
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.service.VehiculoService;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
 import com.salesianos.triana.dam.EasyCar.util.PaginationLinksUtil;
@@ -19,7 +15,6 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriComponentsBuilder;
-
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -47,9 +42,9 @@ public class VehiculoController {
         return ResponseEntity.ok().header("link", paginationLinksUtil.createLinkHeader(result, uriBuilder)).body(result);
     }
 
-    @GetMapping("/marca/{id}")
-    public ResponseEntity<?> findAllByMarca(@PathVariable Long id, Pageable pageable, HttpServletRequest request) {
-        Page<GetVehiculoDto> result = service.findAllVehiculosByMarca(id, pageable);
+    @GetMapping("/marca/{nombre}")
+    public ResponseEntity<?> findAllByMarca(@PathVariable String nombre, Pageable pageable, HttpServletRequest request) {
+        Page<GetVehiculoDto> result = service.findAllVehiculosByMarca(nombre, pageable);
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
         return ResponseEntity.ok().header("link", paginationLinksUtil.createLinkHeader(result, uriBuilder)).body(result);
     }
