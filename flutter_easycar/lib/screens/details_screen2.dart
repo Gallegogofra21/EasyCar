@@ -14,16 +14,16 @@ import 'package:flutter_easycar/screens/search_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DetailsPage extends StatefulWidget {
+class DetailsPage2 extends StatefulWidget {
   final int id2;
 
-  const DetailsPage({key, required this.id2}) : super(key: key);
+  const DetailsPage2({key, required this.id2}) : super(key: key);
 
   @override
-  _DetailsPageState createState() => _DetailsPageState();
+  _DetailsPageState2 createState() => _DetailsPageState2();
 }
 
-class _DetailsPageState extends State<DetailsPage> {
+class _DetailsPageState2 extends State<DetailsPage2> {
   late Future<VehiculoContent> vehiculo;
   late VehiculoRepository vehiculoRepository;
 

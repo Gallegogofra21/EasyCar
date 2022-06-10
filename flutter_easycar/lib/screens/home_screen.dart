@@ -12,8 +12,8 @@ import 'package:flutter_easycar/repository/tipo_repository/tipo_repository_impl.
 import 'package:flutter_easycar/models/tipo.dart';
 import 'package:flutter_easycar/bloc/tipo_bloc/tipos_bloc.dart';
 import 'package:flutter_easycar/bloc/tipo_bloc/tipos_state.dart';
-import 'package:flutter_easycar/screens/tipo_details.dart';
 import 'package:flutter_easycar/screens/vehiculos_marca_screen.dart';
+import 'package:flutter_easycar/screens/vehiculos_tipo_screen.dart';
 import 'package:flutter_easycar/ui/error_page.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -160,8 +160,10 @@ Widget _createTipoViewItem(BuildContext context, TipoContent tipo) {
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => const TipoDetailsPage(),
-                settings: RouteSettings(arguments: tipo)));
+                builder: (context) => VehiculosTipoScreen(
+                      id2: tipo.id,
+                    ),
+                settings: RouteSettings(arguments: tipo.id)));
       },
       child: Column(
         children: <Widget>[

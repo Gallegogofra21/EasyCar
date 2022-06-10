@@ -1,36 +1,27 @@
 import 'dart:convert';
-import 'package:flutter_easycar/screens/search_screen.dart';
+import 'package:flutter_easycar/screens/details_screen2.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easycar/bloc/vehiculo_bloc/vehiculo_bloc.dart';
-import 'package:flutter_easycar/bloc/vehiculo_bloc/vehiculo_event.dart';
-import 'package:flutter_easycar/bloc/vehiculo_bloc/vehiculo_state.dart';
 import 'package:flutter_easycar/constants.dart';
 import 'package:flutter_easycar/models/vehiculo.dart';
-import 'package:flutter_easycar/repository/vehiculo_repository/vehiculo_repository.dart';
-import 'package:flutter_easycar/repository/vehiculo_repository/vehiculo_repository_impl.dart';
-import 'package:flutter_easycar/screens/details_screen.dart';
-import 'package:flutter_easycar/ui/error_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'details_screen2.dart';
+import 'details_screen.dart';
 
-class VehiculosMarcaScreen extends StatefulWidget {
-  final dynamic id;
-  const VehiculosMarcaScreen({Key? key, required this.id}) : super(key: key);
+class VehiculosTipoScreen extends StatefulWidget {
+  final dynamic id2;
+  const VehiculosTipoScreen({Key? key, required this.id2}) : super(key: key);
 
   @override
-  _VehiculosMarcaScreenState createState() => _VehiculosMarcaScreenState();
+  _VehiculosTipoScreenState createState() => _VehiculosTipoScreenState();
 }
 
-class _VehiculosMarcaScreenState extends State<VehiculosMarcaScreen> {
+class _VehiculosTipoScreenState extends State<VehiculosTipoScreen> {
   late Future<List<VehiculoContent>> vehiculos;
   @override
   void initState() {
     super.initState();
-    vehiculos = fetchVehiculos(widget.id);
+    vehiculos = fetchVehiculos(widget.id2);
   }
 
   @override
@@ -233,7 +224,7 @@ Future<List<VehiculoContent>> fetchVehiculos(id) async {
   };
   print(id);
   final response = await http.get(
-      Uri.parse('${Constant.ApiBaseUrl}/vehiculo/marca/${id}'),
+      Uri.parse('${Constant.ApiBaseUrl}/vehiculo/tipo/${id}'),
       headers: headers);
   print(response.statusCode);
 
@@ -242,9 +233,4 @@ Future<List<VehiculoContent>> fetchVehiculos(id) async {
   } else {
     throw Exception('Failed to load vehiculos');
   }
-}
-
-Widget _getPrecio(VehiculoContent vehiculo) {
-  double precioDoble = vehiculo.precio;
-  return Text(precioDoble.toString());
 }

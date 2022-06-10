@@ -6,7 +6,6 @@ import 'package:flutter_easycar/screens/menu_screen.dart';
 import 'package:flutter_easycar/screens/profile_screen.dart';
 import 'package:flutter_easycar/screens/register_screen.dart';
 import 'package:flutter_easycar/screens/search_screen.dart';
-import 'package:flutter_easycar/screens/tipo_details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,7 +27,6 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/search': (context) => const SearchScreen(),
-        '/details': (context) => const DetailsPage(),
         '/profile': (context) => const ProfileScreen()
       },
     );
