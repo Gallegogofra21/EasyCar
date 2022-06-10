@@ -29,7 +29,7 @@ public interface VehiculoService {
                                  Optional<Float> precioMin,
                                  Optional<String> tipo);
 
-    GetVehiculoDetails findById(Long id);
+    GetVehiculoDto findById(Long id);
     List<GetVehiculoDto> findAllByConcesionario(Concesionario concesionario);
     List<GetVehiculoDto> findAllByMarca(Marca marca);
     List<GetVehiculoDto> findAllByTipo(Tipo tipo);

@@ -207,10 +207,10 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
-    public GetVehiculoDetails findById(Long id) {
+    public GetVehiculoDto findById(Long id) {
         Vehiculo vehiculo = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
 
-        GetVehiculoDetails result = GetVehiculoDetails.builder()
+        GetVehiculoDto result = GetVehiculoDto.builder()
                 .id(vehiculo.getId())
                 .version(vehiculo.getVersion())
                 .modelo(vehiculo.getModelo())

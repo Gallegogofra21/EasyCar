@@ -62,7 +62,7 @@ public class VehiculoController {
     }
 
     @GetMapping("/{id}")
-    public GetVehiculoDetails findOne(@PathVariable Long id) {
+    public GetVehiculoDto findOne(@PathVariable Long id) {
         return service.findById(id);
     }
 
