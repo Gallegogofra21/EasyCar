@@ -65,8 +65,7 @@ class _VehiculosMarcaScreenState extends State<VehiculosMarcaScreen> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => DetailsPage2(
-                                              id2: snapshot.data!.single.id),
+                                          builder: (context) => DetailsPage(),
                                           settings: RouteSettings(
                                               arguments:
                                                   snapshot.data!.single)));

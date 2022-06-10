@@ -106,7 +106,7 @@ Widget _createVehiculoViewItem(BuildContext context, VehiculoContent vehiculo) {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => DetailsPage(id2: vehiculo.id),
+                    builder: (context) => DetailsPage(),
                     settings: RouteSettings(arguments: vehiculo)));
           },
           child: Column(
