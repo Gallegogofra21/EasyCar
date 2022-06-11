@@ -8,6 +8,7 @@ import 'package:flutter_easycar/bloc/user_bloc/user_state.dart';
 import 'package:flutter_easycar/models/user.dart';
 import 'package:flutter_easycar/repository/user_repository/user_repository.dart';
 import 'package:flutter_easycar/repository/user_repository/user_repository_impl.dart';
+import 'package:flutter_easycar/screens/edit_screen.dart';
 import 'package:flutter_easycar/ui/error_page.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -107,7 +108,11 @@ Widget _profile(BuildContext context, User user) {
                   ),
                   width: 320,
                   child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: ((context) => EditScreen())
+                        ));
+                      },
                       child: const Text(
                         "Edit Profile",
                         style: TextStyle(color: Colors.black),

@@ -53,4 +53,27 @@ class AuthRepositoryImpl extends AuthRepository {
       throw Exception('Fail to register');
     }
   }
+
+  @override
+  Future<User> edit(RegisterDto registerDto, String image) async {
+    var uri =
+        Uri.parse('https://easy-car-fgg.herokuapp.com/profile/me');
+    var request = http.MultipartRequest('POST', uri)
+      ..files.add(await http.MultipartFile.fromPath('file', image,
+          contentType: MediaType('multipart', 'form-data')))
+      ..files.add(await http.MultipartFile.fromString(
+          'user', jsonEncode(registerDto.toJson()),
+          contentType: MediaType('application', 'json')));
+
+    var response = await request.send();
+    final respStr = await response.stream.bytesToString();
+    print(respStr);
+
+    if (response.statusCode == 200) {
+      return User.fromJson(await jsonDecode(respStr));
+    } else {
+      print(response.statusCode);
+      throw Exception('Fail to edit');
+    }
+  }
 }
