@@ -153,7 +153,7 @@ public class UserEntityService implements UserDetailsService {
         }
     }
 
-    public Usuario edit(CreateUsuarioDto createUsuarioDto, MultipartFile file, Long id) throws IOException {
+    public Usuario edit(CreateUsuarioDto createUsuarioDto, MultipartFile file, Usuario usuario) throws IOException {
         String filename = storageService.store(file);
 
         String extension = StringUtils.getFilenameExtension(filename);
@@ -171,7 +171,7 @@ public class UserEntityService implements UserDetailsService {
                 .path(filename)
                 .toUriString();
 
-        return repository.findById(id).map(c -> {
+        return repository.findById(usuario.getId()).map(c -> {
             c.setNombre(createUsuarioDto.getNombre());
             c.setEmail(createUsuarioDto.getEmail());
             c.setUsername(createUsuarioDto.getUsername());
