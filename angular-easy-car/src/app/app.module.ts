@@ -13,12 +13,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { SideMenuComponent } from './shared/side-menu/side-menu.component';
 import { MaterialImportsModule } from './modules/material-imports.module';
+import { TipoListComponent } from './components/tipo-list/tipo-list.component';
+import { TipoItemComponent } from './components/tipo-item/tipo-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    TipoListComponent,
+    TipoItemComponent
   ],
   imports: [
     BrowserModule,

@@ -25,5 +25,6 @@ export class SideMenuComponent implements OnInit {
 
   logout() {
     localStorage.removeItem('request_token');
+    localStorage.removeItem('name');
   }
 }
