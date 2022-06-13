@@ -371,7 +371,7 @@ class _EditScreenState extends State<EditScreen> {
               prefs.setString('password2', password2.text);
               print(path);
 
-              Navigator.pushNamed(context, '/profile');
+              Navigator.pushNamed(context, '/');
             },
             child: const Text('Editar'),
           ),
