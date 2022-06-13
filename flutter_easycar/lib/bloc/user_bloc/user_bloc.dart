@@ -10,15 +10,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<FetchUserWithType>(_usersFetched);
   }
 
-  void _usersFetched(
-    FetchUserWithType event, Emitter<UserState> emit) async {
-      try {
-        final users = await userRepository.fetchUser();
-        emit(UsersFetched(users));
-        return;
-      } on Exception catch (e) {
-        emit(UserFetchedError(e.toString()));
-      }
+  void _usersFetched(FetchUserWithType event, Emitter<UserState> emit) async {
+    try {
+      final users = await userRepository.fetchUser();
+      emit(UsersFetched(users));
+      return;
+    } on Exception catch (e) {
+      emit(UserFetchedError(e.toString()));
     }
-
+  }
 }

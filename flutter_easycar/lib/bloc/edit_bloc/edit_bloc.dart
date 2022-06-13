@@ -10,11 +10,10 @@ class EditBloc extends Bloc<EditEvent, EditState> {
     on<DoEditEvent>(_doEditEvent);
   }
 
-  void _doEditEvent(
-      DoEditEvent event, Emitter<EditState> emit) async {
+  void _doEditEvent(DoEditEvent event, Emitter<EditState> emit) async {
     try {
       final loginResponse =
-          await authRepository.register(event.registerDto, event.image);
+          await authRepository.edit(event.registerDto, event.image);
       emit(EditSuccessState(loginResponse));
       return;
     } on Exception catch (e) {

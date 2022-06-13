@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easycar/bloc/edit_bloc/edit_bloc.dart';
 import 'package:flutter_easycar/bloc/edit_bloc/edit_event.dart';
+import 'package:flutter_easycar/bloc/edit_bloc/edit_state.dart';
 import 'package:flutter_easycar/bloc/image_pick_bloc/image_pick_bloc.dart';
 import 'package:flutter_easycar/bloc/image_pick_bloc/image_pick_event.dart';
 import 'package:flutter_easycar/bloc/image_pick_bloc/image_pick_state.dart';
-import 'package:flutter_easycar/bloc/register_bloc/register_bloc.dart';
-import 'package:flutter_easycar/bloc/register_bloc/register_event.dart';
-import 'package:flutter_easycar/bloc/register_bloc/register_state.dart';
 import 'package:flutter_easycar/models/register_dto.dart';
 import 'package:flutter_easycar/models/user.dart';
 import 'package:flutter_easycar/repository/auth_repository/auth_repository.dart';
@@ -88,7 +86,7 @@ class _EditScreenState extends State<EditScreen> {
           ),
           BlocProvider(
             create: (context) {
-              return RegisterBloc(authRepository);
+              return EditBloc(authRepository);
             },
           ),
         ],
@@ -103,24 +101,24 @@ class _EditScreenState extends State<EditScreen> {
         child: Container(
             color: Colors.grey.shade400,
             padding: const EdgeInsets.all(20),
-            child: BlocConsumer<RegisterBloc, RegisterState>(
-                listenWhen: (context, state) {
-              return state is RegisterSuccessState || state is LoginErrorState;
+            child:
+                BlocConsumer<EditBloc, EditState>(listenWhen: (context, state) {
+              return state is EditSuccessState || state is LoginErrorState;
             }, listener: (context, state) async {
-              if (state is RegisterSuccessState) {
-                _loginSuccess(context, state.registerResponse);
+              if (state is EditSuccessState) {
+                _loginSuccess(context, state.editResponse);
               } else if (state is LoginErrorState) {
                 _showSnackbar(context, state.message);
               }
             }, buildWhen: (context, state) {
-              return state is RegisterInitial || state is RegisterLoading;
+              return state is EditInitial || state is EditLoading;
             }, builder: (ctx, state) {
-              if (state is RegisterInitial) {
-                return _register(ctx);
-              } else if (state is RegisterLoading) {
+              if (state is EditInitial) {
+                return _edit(ctx);
+              } else if (state is EditLoading) {
                 return const Center(child: CircularProgressIndicator());
               } else {
-                return _register(ctx);
+                return _edit(ctx);
               }
             })),
       ),
@@ -146,7 +144,7 @@ class _EditScreenState extends State<EditScreen> {
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  _register(BuildContext context) {
+  _edit(BuildContext context) {
     return SingleChildScrollView(
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         Column(
@@ -291,7 +289,6 @@ class _EditScreenState extends State<EditScreen> {
                   ),
                 ],
               ),
-            
               Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: BlocConsumer<ImagePickBlocBloc, ImagePickBlocState>(
@@ -361,7 +358,6 @@ class _EditScreenState extends State<EditScreen> {
             child: const Text('Editar'),
           ),
         ),
-      
       ]),
     );
   }

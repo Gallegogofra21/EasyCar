@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter_easycar/constants.dart';
 import 'package:flutter_easycar/models/auth/login_dto.dart';
 import 'package:flutter_easycar/models/auth/login_response.dart';
 import 'package:flutter_easycar/models/register_dto.dart';
@@ -56,14 +57,22 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<User> edit(RegisterDto registerDto, String image) async {
-    var uri =
-        Uri.parse('https://easy-car-fgg.herokuapp.com/profile/me');
-    var request = http.MultipartRequest('POST', uri)
+    final prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('token');
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${token}'
+    };
+
+    var uri = await Uri.parse('${Constant.ApiBaseUrl}/profile/');
+    var request = http.MultipartRequest('PUT', uri)
       ..files.add(await http.MultipartFile.fromPath('file', image,
           contentType: MediaType('multipart', 'form-data')))
       ..files.add(await http.MultipartFile.fromString(
           'user', jsonEncode(registerDto.toJson()),
-          contentType: MediaType('application', 'json')));
+          contentType: MediaType('application', 'json')))
+      ..headers.addAll(headers);
 
     var response = await request.send();
     final respStr = await response.stream.bytesToString();
