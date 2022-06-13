@@ -41,6 +41,8 @@ class _EditScreenState extends State<EditScreen> {
   final _formKey = GlobalKey<FormState>();
   TextEditingController username = TextEditingController();
   TextEditingController name = TextEditingController();
+  TextEditingController apellidos = TextEditingController();
+  TextEditingController telefono = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController fechaNacimiento = TextEditingController();
   TextEditingController password2 = TextEditingController();
@@ -193,6 +195,40 @@ class _EditScreenState extends State<EditScreen> {
                     },
                   )),
               Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: TextFormField(
+                    controller: apellidos,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Apellidos',
+                        labelText: 'Apellidos',
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white))),
+                    onSaved: (String? value) {},
+                    validator: (String? value) {
+                      return (value == null || value.isEmpty)
+                          ? 'El campo está vacío.'
+                          : null;
+                    },
+                  )),
+              Padding(
+                  padding: const EdgeInsets.only(bottom: 10.0),
+                  child: TextFormField(
+                    controller: telefono,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: 'Telefono',
+                        labelText: 'Telefono',
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white))),
+                    onSaved: (String? value) {},
+                    validator: (String? value) {
+                      return (value == null || value.isEmpty)
+                          ? 'El campo está vacío.'
+                          : null;
+                    },
+                  )),
+              Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: DateTimeFormField(
                   initialDate: DateTime(2001, 9, 7),
@@ -335,6 +371,9 @@ class _EditScreenState extends State<EditScreen> {
               if (_formKey.currentState!.validate()) {
                 final loginDto = RegisterDto(
                     username: username.text,
+                    nombre: name.text,
+                    apellidos: apellidos.text,
+                    telefono: telefono.text,
                     fechaNacimiento:
                         DateFormat("yyyy-MM-dd").format(selectedDate),
                     email: email.text,
@@ -346,6 +385,8 @@ class _EditScreenState extends State<EditScreen> {
               }
               prefs.setString('username', username.text);
               prefs.setString('name', name.text);
+              prefs.setString('apellidos', apellidos.text);
+              prefs.setString('telefono', telefono.text);
               prefs.setString('email', email.text);
               prefs.setString('fechaNacimiento',
                   DateFormat("yyyy-MM-dd").format(selectedDate));

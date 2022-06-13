@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_easycar/models/register_dto.dart';
+import 'package:flutter_easycar/models/user.dart';
 
 abstract class RegisterEvent extends Equatable {
   const RegisterEvent();

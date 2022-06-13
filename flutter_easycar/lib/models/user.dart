@@ -15,8 +15,8 @@ class User {
   late final String telefono;
   late final String email;
   late final String avatar;
-  
-  User.fromJson(Map<String, dynamic> json){
+
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     username = json['username'];
     nombre = json['nombre'];
