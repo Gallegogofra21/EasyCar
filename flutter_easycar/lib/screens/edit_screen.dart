@@ -103,18 +103,7 @@ class _EditScreenState extends State<EditScreen> {
         child: Container(
             color: Colors.grey.shade400,
             padding: const EdgeInsets.all(20),
-            child:
-                BlocConsumer<EditBloc, EditState>(listenWhen: (context, state) {
-              return state is EditSuccessState || state is LoginErrorState;
-            }, listener: (context, state) async {
-              if (state is EditSuccessState) {
-                _loginSuccess(context, state.editResponse);
-              } else if (state is LoginErrorState) {
-                _showSnackbar(context, state.message);
-              }
-            }, buildWhen: (context, state) {
-              return state is EditInitial || state is EditLoading;
-            }, builder: (ctx, state) {
+            child: BlocBuilder<EditBloc, EditState>(builder: (ctx, state) {
               if (state is EditInitial) {
                 return _edit(ctx);
               } else if (state is EditLoading) {
@@ -125,18 +114,6 @@ class _EditScreenState extends State<EditScreen> {
             })),
       ),
     );
-  }
-
-  Future<void> _loginSuccess(BuildContext context, User late) async {
-    _prefs.then((SharedPreferences prefs) {
-      prefs.setString('token', late.email);
-      prefs.setString('avatar', late.avatar);
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
-      );
-    });
   }
 
   void _showSnackbar(BuildContext context, String message) {
