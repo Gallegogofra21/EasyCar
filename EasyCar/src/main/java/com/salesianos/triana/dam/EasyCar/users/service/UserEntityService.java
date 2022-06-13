@@ -180,7 +180,7 @@ public class UserEntityService implements UserDetailsService {
             c.setAvatar(uri);
             return repository.save(c);
 
-        }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
+        }).orElseThrow(() -> new SingleEntityNotFoundException(usuario.getId().toString(), Usuario.class));
 
     }
 

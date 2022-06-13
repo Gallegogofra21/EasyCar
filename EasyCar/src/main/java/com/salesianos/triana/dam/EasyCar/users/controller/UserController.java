@@ -85,7 +85,7 @@ public class UserController {
         return userEntityService.getUserFavs(usuario);
     }
 
-    @PutMapping("/usuario/")
+    @PutMapping("/profile/")
     public ResponseEntity<GetUserDto> edit (@RequestPart MultipartFile file, @Valid @RequestPart("user") CreateUsuarioDto newUser, @AuthenticationPrincipal Usuario currentUser) throws IOException{
         Usuario saved = userEntityService.edit(newUser , file, currentUser);
 
