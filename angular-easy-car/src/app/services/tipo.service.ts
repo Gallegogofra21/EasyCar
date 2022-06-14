@@ -37,6 +37,7 @@ export class TipoService {
 
   editTipo(tipo: TipoDto, id:number, file: File) {
     let formData = new FormData();
+    console.log(tipo);
     formData.append('tipo', new Blob([JSON.stringify(tipo)], {
       type:'application/json'
     }));

@@ -15,7 +15,7 @@
   </div>
     <div class="margenSup">
 
-      <a [routerLink]="['/tipo',tipoInput?.id]"> <button mat-raised-button color="primary" (click)="editTipo('1500ms', '500ms', tipoInput, tipoInput.id)">Editar</button></a>
+      <a [routerLink]="['/tipo',tipoInput?.id]"> <button mat-raised-button color="primary" (click)="editTipo(tipoInput, tipoInput?.id)">Editar</button></a>
       <button class="button" mat-raised-button color="primary" (click)="getDeleteTipo(tipoInput?.id)"><mat-icon>delete</mat-icon></button>
 
     </div>

@@ -33,13 +33,11 @@ export class TipoItemComponent implements OnInit {
     }
   }
 
-  editTipo(enterAnimationDuration: string, exitAnimationDuration: string, tipo: Tipo, idTipo: number): void {
+  editTipo(tipo: Tipo, idTipo: number): void {
     this.dialog.open(DialogEditTipoComponent, {
       data: {tipo: tipo, id: idTipo},
       width: '300px',
       height: '300px',
-      enterAnimationDuration,
-      exitAnimationDuration,
     });
   }
 
