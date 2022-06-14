@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  file!: File;
 
   registerDto = new RegisterGestorDto();
 
@@ -24,7 +25,6 @@ export class RegisterComponent implements OnInit {
     fechaNacimiento: new FormControl(''),
     password: new FormControl(''),
     password2: new FormControl(''),
-    rol: new FormControl('')
   })
 
   constructor(private authService: AuthService, private route: Router) { }
@@ -32,9 +32,13 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onFileChanged(event: any) {
+    this.file = event.target.files[0];
+  }
+
   doRegister() {
-    this.authService.registerGestor(this.registerResponse).subscribe(res => {
-      window.open(`${environment.apiBaseUrl}/usuarios/`)
+    this.authService.registerGestor(this.registerDto, this.file).subscribe(res => {
+      this.route.navigate(['/users']);
     })
     }
 

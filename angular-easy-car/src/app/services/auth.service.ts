@@ -4,14 +4,14 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthLoginResponse } from '../models/auth-interface';
 import { AuthLoginDto } from '../models/dto/AuthLoginDto';
-import { RegisterAdmin, RegisterGestor } from '../models/register-interface';
+import { RegisterAdmin, RegisterGestor, RegisterGestorDto } from '../models/register-interface';
 
 const AUTH_BASE_URL = 'auth';
+
 const token = localStorage.getItem('request_token');
 
 const DEFAULT_HEADERS = {
   headers: new HttpHeaders({
-    'Content-Type': 'application/json',
     'Authorization' : `Bearer ${token}`
   })
 };
@@ -31,9 +31,15 @@ export class AuthService {
     return this.http.post<AuthLoginResponse>(requestUrl, loginDto);
   }
 
-  registerGestor(register: RegisterGestor): Observable<RegisterGestor> {
+  registerGestor(register: RegisterGestorDto, file: File) {
     let requestUrl = `${this.authBaseUrl}/register/gestor`;
-    return this.http.post<RegisterGestor>(requestUrl, register, DEFAULT_HEADERS)
+
+    let formData = new FormData();
+    formData.append('user', new Blob([JSON.stringify(register)], {
+      type:'application/json'
+    }));
+    formData.append("file", file);
+    return this.http.post<RegisterGestorDto>(requestUrl, formData, DEFAULT_HEADERS)
   }
 
   setLocalRequestToken(token: string) {
