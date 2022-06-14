@@ -1,8 +1,8 @@
 export interface Tipo {
-  id: number;
+  id: any;
   nombre: string;
   foto: string;
-  numVehiculos: number;
+  numVehiculos: any;
 }
 
 export interface Sort {
@@ -38,4 +38,15 @@ export interface TipoResponse {
   numberOfElements: number;
   first: boolean;
   empty: boolean;
+}
+
+export class TipoDto {
+  nombre: string;
+  foto: string;
+
+
+  constructor() {
+    this.nombre = '';
+    this.foto = '';
+  }
 }

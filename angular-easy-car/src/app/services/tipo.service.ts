@@ -3,13 +3,19 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { TipoDetails } from '../models/tipo-details-interface';
-import { Tipo, TipoResponse } from '../models/tipo-interface';
+import { Tipo, TipoDto, TipoResponse } from '../models/tipo-interface';
 
 const token = localStorage.getItem('request_token');
 
 const DEFAULT_HEADERS = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
+    'Authorization' : `Bearer ${token}`
+  })
+};
+
+const DEFAULT_HEADERS_TOKEN = {
+  headers: new HttpHeaders({
     'Authorization' : `Bearer ${token}`
   })
 };
@@ -29,8 +35,13 @@ export class TipoService {
     return this.http.get<TipoDetails>(`${environment.apiBaseUrl}/tipo/${id}`, DEFAULT_HEADERS);
   }
 
-  editTipo(id:string, tipo: Tipo) {
-    return this.http.put<TipoDetails>(`${environment.apiBaseUrl}/tipo/${id}`, tipo, DEFAULT_HEADERS);
+  editTipo(tipo: TipoDto, id:number, file: File) {
+    let formData = new FormData();
+    formData.append('tipo', new Blob([JSON.stringify(tipo)], {
+      type:'application/json'
+    }));
+    formData.append("file", file);
+    return this.http.put<Tipo>(`${environment.apiBaseUrl}/tipo/${id}`, formData, DEFAULT_HEADERS_TOKEN);
   }
 
   createTipo(tipo: Tipo) {

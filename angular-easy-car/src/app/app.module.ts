@@ -22,6 +22,8 @@ import { VehiculoItemComponent } from './components/vehiculo-item/vehiculo-item.
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserItemComponent } from './components/user-item/user-item.component';
 import { RegisterComponent } from './components/register/register.component';
+import { DialogEditTipoComponent } from './components/dialog-edit-tipo/dialog-edit-tipo.component';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,8 @@ import { RegisterComponent } from './components/register/register.component';
     VehiculoItemComponent,
     UserListComponent,
     UserItemComponent,
-    RegisterComponent
+    RegisterComponent,
+    DialogEditTipoComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +52,8 @@ import { RegisterComponent } from './components/register/register.component';
     FlexLayoutModule,
     MatFormFieldModule,
     MatInputModule,
-    MatDialogModule
+    MatDialogModule,
+    RxReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

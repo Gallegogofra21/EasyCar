@@ -28,6 +28,10 @@ export class UserService {
     return this.http.post<User>(`${environment.apiBaseUrl}/auth/register/gestor`, DEFAULT_HEADERS);
   }
 
+  // editGestor(): Observable<User> {
+  //   return this.http.put(`${environment.apiBaseUrl}/profile`)
+  // }
+
   deleteUser(id: number): Observable<User> {
     return this.http.delete<User>(`${environment.apiBaseUrl}/usuario/${id}`, DEFAULT_HEADERS);
   }

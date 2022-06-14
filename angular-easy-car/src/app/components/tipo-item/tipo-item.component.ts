@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Tipo } from 'src/app/models/tipo-interface';
+import { Tipo, TipoResponse } from 'src/app/models/tipo-interface';
 import { TipoService } from 'src/app/services/tipo.service';
+import { DialogEditTipoComponent } from '../dialog-edit-tipo/dialog-edit-tipo.component';
 
 @Component({
   selector: 'app-tipo-item',
@@ -14,10 +16,13 @@ export class TipoItemComponent implements OnInit {
 
   constructor(private tipoService: TipoService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
+
+
 
   getDeleteTipo(id : number | undefined) {
     if (id != null) {
@@ -26,6 +31,16 @@ export class TipoItemComponent implements OnInit {
         window.location.reload();
       })
     }
+  }
+
+  editTipo(enterAnimationDuration: string, exitAnimationDuration: string, tipo: Tipo, idTipo: number): void {
+    this.dialog.open(DialogEditTipoComponent, {
+      data: {tipo: tipo, id: idTipo},
+      width: '300px',
+      height: '300px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   }
 
 }
