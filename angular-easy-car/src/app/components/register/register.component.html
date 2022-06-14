@@ -1,0 +1,36 @@
+<form class="example-form" [formGroup]="form">
+  <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Username</mat-label>
+      <input matInput placeholder="Write your username" formControlName="username" name="username">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Write your name" formControlName="nombre" name="nombre">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Apellidos</mat-label>
+      <input matInput placeholder="Write your apellidos" formControlName="apellidos" name="apellidos">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Telefono</mat-label>
+      <input matInput placeholder="Write your telefono" formControlName="telefono" name="telefono">
+    </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label for="email">Email</mat-label>
+    <input matInput placeholder="Write your email" formControlName="email" name="email">
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Fecha de nacimiento</mat-label>
+    <input matInput placeholder="Write your fecha de nacimiento" formControlName="fechaNacimiento" name="fechaNacimiento">
+  </mat-form-field>
+  <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Password</mat-label>
+      <input matInput placeholder="Write your password" type="password" formControlName="password" name="password">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Password2</mat-label>
+      <input matInput placeholder="Write your password2" type="password2" formControlName="password2" name="password2">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" [routerLink]="['/users']">Registrarse</button>
+</form>

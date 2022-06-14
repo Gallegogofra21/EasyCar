@@ -21,6 +21,7 @@ import { VehiculoListComponent } from './components/vehiculo-list/vehiculo-list.
 import { VehiculoItemComponent } from './components/vehiculo-item/vehiculo-item.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { UserItemComponent } from './components/user-item/user-item.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { UserItemComponent } from './components/user-item/user-item.component';
     VehiculoListComponent,
     VehiculoItemComponent,
     UserListComponent,
-    UserItemComponent
+    UserItemComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

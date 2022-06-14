@@ -4,15 +4,18 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthLoginResponse } from '../models/auth-interface';
 import { AuthLoginDto } from '../models/dto/AuthLoginDto';
-import { RegisterResponse } from '../models/register-interface';
+import { RegisterAdmin, RegisterGestor } from '../models/register-interface';
 
 const AUTH_BASE_URL = 'auth';
+const token = localStorage.getItem('request_token');
 
 const DEFAULT_HEADERS = {
-  headers: new HttpHeaders ({
-    'Content-Type' : 'application/json'
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Authorization' : `Bearer ${token}`
   })
 };
+
 
 @Injectable({
   providedIn: 'root'
@@ -28,14 +31,9 @@ export class AuthService {
     return this.http.post<AuthLoginResponse>(requestUrl, loginDto);
   }
 
-  registerAdmin(register: RegisterResponse): Observable<RegisterResponse> {
-    let requestUrl = `${this.authBaseUrl}/register/admin`;
-    return this.http.post<RegisterResponse>(requestUrl, register);
-  }
-
-  registerGestor(register: RegisterResponse): Observable<RegisterResponse> {
+  registerGestor(register: RegisterGestor): Observable<RegisterGestor> {
     let requestUrl = `${this.authBaseUrl}/register/gestor`;
-    return this.http.post<RegisterResponse>(requestUrl, register)
+    return this.http.post<RegisterGestor>(requestUrl, register, DEFAULT_HEADERS)
   }
 
   setLocalRequestToken(token: string) {
