@@ -3,8 +3,10 @@
     <h3 class="sidenav-title">Menú</h3>
     <mat-list role="list">
       <mat-list-item role="listitem"><a [routerLink]="['/tipos']" (click)="sidenav.toggle()" routerLinkActive="router-link-active"><mat-icon class="sidenav-icon">home</mat-icon> Tipos</a></mat-list-item>
-      <mat-list-item role="listitem"><a [routerLink]="['/listas']" (click)="sidenav.toggle()" routerLinkActive="router-link-active"><mat-icon class="sidenav-icon">list</mat-icon> Listas</a></mat-list-item>
-      <mat-list-item role="listitem"><a [routerLink]="['/favorites']" (click)="sidenav.toggle()" routerLinkActive="router-link-active"><mat-icon class="sidenav-icon">favorite</mat-icon> Favoritas</a></mat-list-item>
+      <mat-list-item role="listitem"><a [routerLink]="['/marcas']" (click)="sidenav.toggle()" routerLinkActive="router-link-active"><mat-icon class="sidenav-icon">list</mat-icon> Marcas</a></mat-list-item>
+      <mat-list-item role="listitem"><a [routerLink]="['/vehiculos']" (click)="sidenav.toggle()" routerLinkActive="router-link-active"><mat-icon class="sidenav-icon">favorite</mat-icon> Vehiculos</a></mat-list-item>
+      <mat-list-item role="listitem"><a [routerLink]="['/users']" (click)="sidenav.toggle()" routerLinkActive="router-link-active"><mat-icon class="sidenav-icon">User</mat-icon> Usuarios</a></mat-list-item>
+
 
       <mat-divider></mat-divider>
       <mat-list-item role="listitem"><mat-icon class="sidenav-icon">settings</mat-icon> Ajustes</mat-list-item>
@@ -21,6 +23,7 @@
       <span class="example-spacer"></span>
       <button mat-button [matMenuTriggerFor]="menu">{{ getName() }}</button>
       <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/login']" >Login</button>
       <button mat-menu-item (click)="logout()">Logout</button>
       </mat-menu>
       <img class="example-icon profile-photo" width="48px" [src]="getPhoto()" />

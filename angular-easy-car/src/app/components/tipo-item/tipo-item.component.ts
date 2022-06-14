@@ -12,7 +12,9 @@ export class TipoItemComponent implements OnInit {
   @Input() tipoInput!: Tipo;
   id !: string;
 
-  constructor(private tipoService: TipoService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private tipoService: TipoService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
   }

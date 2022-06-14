@@ -21,6 +21,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginDto).subscribe(loginResult => {
       this.authService.setLocalRequestToken(loginResult.token);
       this.authService.setLocalUserName(loginResult.nombre);
+      this.authService.setLocalFoto(loginResult.avatar);
       this.route.navigate(['/']);
     })
   }

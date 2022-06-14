@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user-interface';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./side-menu.component.css']
 })
 export class SideMenuComponent implements OnInit {
+  @Input() userInput!: User;
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -20,11 +22,12 @@ export class SideMenuComponent implements OnInit {
   }
 
   getPhoto() {
-    return localStorage.getItem('photo');
+    return localStorage.getItem('foto');
   }
 
   logout() {
     localStorage.removeItem('request_token');
     localStorage.removeItem('name');
+    localStorage.removeItem('foto');
   }
 }

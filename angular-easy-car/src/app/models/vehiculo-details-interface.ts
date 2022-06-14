@@ -1,4 +1,4 @@
-export interface Vehiculo {
+export interface VehiculoDetails {
   id: number;
   version: string;
   modelo: string;
@@ -18,11 +18,4 @@ export interface Vehiculo {
   foto3: string;
   foto4: string;
   concesionario: number;
-}
-
-export interface MarcaDetails {
-  id: number;
-  nombre: string;
-  vehiculos: Vehiculo[];
-  foto: string;
 }

@@ -46,6 +46,10 @@ export class AuthService {
     localStorage.setItem('name', name);
   }
 
+  setLocalFoto(foto: string) {
+    localStorage.setItem('foto', foto);
+  }
+
   signOut() {
     localStorage.removeItem('request_token');
   }

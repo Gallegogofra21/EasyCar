@@ -15,6 +15,12 @@ import { SideMenuComponent } from './shared/side-menu/side-menu.component';
 import { MaterialImportsModule } from './modules/material-imports.module';
 import { TipoListComponent } from './components/tipo-list/tipo-list.component';
 import { TipoItemComponent } from './components/tipo-item/tipo-item.component';
+import { MarcaListComponent } from './components/marca-list/marca-list.component';
+import { MarcaItemComponent } from './components/marca-item/marca-item.component';
+import { VehiculoListComponent } from './components/vehiculo-list/vehiculo-list.component';
+import { VehiculoItemComponent } from './components/vehiculo-item/vehiculo-item.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { UserItemComponent } from './components/user-item/user-item.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +28,13 @@ import { TipoItemComponent } from './components/tipo-item/tipo-item.component';
     LoginComponent,
     SideMenuComponent,
     TipoListComponent,
-    TipoItemComponent
+    TipoItemComponent,
+    MarcaListComponent,
+    MarcaItemComponent,
+    VehiculoListComponent,
+    VehiculoItemComponent,
+    UserListComponent,
+    UserItemComponent
   ],
   imports: [
     BrowserModule,
