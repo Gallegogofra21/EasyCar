@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Route } from '@angular/router';
-import { Vehiculo } from 'src/app/models/marca-details-interface';
+import { Vehiculo } from 'src/app/models/vehiculo-interface';
 import { VehiculoService } from 'src/app/services/vehiculo.service';
+import { DialogEditVehiculoComponent } from '../dialog-edit-vehiculo/dialog-edit-vehiculo.component';
 
 @Component({
   selector: 'app-vehiculo-item',
@@ -13,7 +15,8 @@ export class VehiculoItemComponent implements OnInit {
   id !: string;
 
   constructor(private vehiculoService: VehiculoService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -25,6 +28,14 @@ export class VehiculoItemComponent implements OnInit {
         window.location.reload();
       })
     }
+  }
+
+  editVehiculo(vehiculo: Vehiculo, idVehiculo: number): void {
+    this.dialog.open(DialogEditVehiculoComponent, {
+      data: {vehiculo: vehiculo, id: idVehiculo},
+      width: '500px',
+      height: '500px',
+    });
   }
 
 }

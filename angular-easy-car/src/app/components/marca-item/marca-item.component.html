@@ -15,7 +15,7 @@
   </div>
     <div class="margenSup">
 
-      <a [routerLink]="['/marca',marcaInput?.id]"> <button mat-raised-button color="primary">Ver Más</button></a>
+      <a [routerLink]="['/marca',marcaInput?.id]"> <button mat-raised-button color="primary" (click)="editMarca(marcaInput, marcaInput?.id)">Editar</button></a>
       <button class="button" mat-raised-button color="primary" (click)="getDeleteMarca(marcaInput?.id)"><mat-icon>delete</mat-icon></button>
 
     </div>

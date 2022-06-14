@@ -1,8 +1,9 @@
-export interface Marca {
+export interface Concesionario {
   id: any;
   nombre: string;
-  foto: string;
+  direccion: string;
   numVehiculos: number;
+  usuarioId: number;
 }
 
 export interface Sort {
@@ -26,12 +27,12 @@ export interface Sort2 {
   unsorted: boolean;
 }
 
-export interface MarcaResponse {
-  content: Marca[];
+export interface ConcesionarioResponse {
+  content: Concesionario[];
   pageable: Pageable;
   last: boolean;
-  totalElements: number;
   totalPages: number;
+  totalElements: number;
   size: number;
   number: number;
   sort: Sort2;
@@ -40,14 +41,13 @@ export interface MarcaResponse {
   empty: boolean;
 }
 
-export class MarcaDto {
+export class ConcesionarioDto {
   nombre: string;
-  foto: string;
+  direccion: string;
 
 
   constructor() {
     this.nombre = '';
-    this.foto = '';
+    this.direccion = '';
   }
-
 }

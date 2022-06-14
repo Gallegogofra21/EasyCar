@@ -1,7 +1,7 @@
 <mat-card>
   <br />
   <div class="crop">
-    <img mat-card-image [src]="vehiculoInput?.foto1" alt="Foto de la marca"/>
+    <img mat-card-image [src]="vehiculoInput?.foto1" alt="Foto del vehiculo"/>
   </div>
 
   <div class="contenedor">
@@ -15,7 +15,7 @@
   </div>
     <div class="margenSup">
 
-      <a [routerLink]="['/vehiculo',vehiculoInput?.id]"> <button mat-raised-button color="primary">Ver Más</button></a>
+      <a [routerLink]="['/vehiculo',vehiculoInput?.id]"> <button mat-raised-button color="primary" (click)="editVehiculo(vehiculoInput, vehiculoInput?.id)">Editar</button></a>
       <button class="button" mat-raised-button color="primary" (click)="getDeleteVehiculo(vehiculoInput?.id)"><mat-icon>delete</mat-icon></button>
 
     </div>

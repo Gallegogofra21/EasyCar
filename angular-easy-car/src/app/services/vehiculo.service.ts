@@ -3,13 +3,19 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { VehiculoDetails } from '../models/vehiculo-details-interface';
-import { Vehiculo, VehiculoResponse } from '../models/vehiculo-interface';
+import { Vehiculo, VehiculoDto, VehiculoResponse } from '../models/vehiculo-interface';
 
 const token = localStorage.getItem('request_token');
 
 const DEFAULT_HEADERS = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
+    'Authorization' : `Bearer ${token}`
+  })
+};
+
+const DEFAULT_HEADERS_TOKEN = {
+  headers: new HttpHeaders({
     'Authorization' : `Bearer ${token}`
   })
 };
@@ -29,8 +35,16 @@ export class VehiculoService {
     return this.http.get<VehiculoDetails>(`${environment.apiBaseUrl}/vehiculo/${id}`, DEFAULT_HEADERS);
   }
 
-  editVehiculo(id:string, vehiculo: Vehiculo) {
-    return this.http.put<VehiculoDetails>(`${environment.apiBaseUrl}/vehiculo/${id}`, DEFAULT_HEADERS)
+  editVehiculo(vehiculo: VehiculoDto, id: number, file1: File, file2: File, file3: File, file4: File) {
+    let formData = new FormData();
+    formData.append('vehiculo', new Blob([JSON.stringify(vehiculo)], {
+      type:'application/json'
+    }));
+    formData.append("file1", file1);
+    formData.append("file2", file2);
+    formData.append("file3", file3);
+    formData.append("file4", file4);
+    return this.http.put<Vehiculo>(`${environment.apiBaseUrl}/vehiculo/${id}`, formData, DEFAULT_HEADERS_TOKEN);
   }
 
   createVehiculo(vehiculo: Vehiculo) {

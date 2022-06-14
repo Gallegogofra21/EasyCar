@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Marca } from 'src/app/models/marca-interface';
 import { MarcaService } from 'src/app/services/marca.service';
+import { DialogEditMarcaComponent } from '../dialog-edit-marca/dialog-edit-marca.component';
 
 @Component({
   selector: 'app-marca-item',
@@ -14,7 +16,8 @@ export class MarcaItemComponent implements OnInit {
 
   constructor(private marcaService: MarcaService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private dialog: MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -26,6 +29,14 @@ export class MarcaItemComponent implements OnInit {
         window.location.reload();
       })
     }
+  }
+
+  editMarca(marca: Marca, idMarca: number): void {
+    this.dialog.open(DialogEditMarcaComponent, {
+      data: {marca: marca, id: idMarca},
+      width: '300px',
+      height: '300px',
+    });
   }
 
 }

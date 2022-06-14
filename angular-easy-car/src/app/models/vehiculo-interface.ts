@@ -1,5 +1,5 @@
 export interface Vehiculo {
-  id: number;
+  id: any;
   version: string;
   modelo: string;
   fechaMatriculacion: string;
@@ -53,4 +53,46 @@ export interface VehiculoResponse {
   first: boolean;
   numberOfElements: number;
   empty: boolean;
+}
+
+export class VehiculoDto {
+  version: string;
+  modelo: string;
+  fechaMatriculacion: string;
+  kilometraje: string;
+  potencia: string;
+  marchas: string;
+  precio: number;
+  nombreMarca: string;
+  tipo: number;
+  llantas: string;
+  distribucion: string;
+  procedencia: string;
+  traccion: string;
+  foto1: string;
+  foto2: string;
+  foto3: string;
+  foto4: string;
+  concesionario: number;
+
+  constructor() {
+    this.version = '';
+    this.modelo = '';
+    this.fechaMatriculacion = '';
+    this.kilometraje = '';
+    this.potencia = '';
+    this.marchas = '';
+    this.precio = 0;
+    this.nombreMarca = '';
+    this.tipo = 0;
+    this.llantas = '';
+    this.distribucion = '';
+    this.procedencia = '';
+    this.traccion = '';
+    this.foto1 = '';
+    this.foto2 = '';
+    this.foto3 = '';
+    this.foto4 = '';
+    this.concesionario = 0;
+  }
 }

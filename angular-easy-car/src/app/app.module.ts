@@ -24,6 +24,11 @@ import { UserItemComponent } from './components/user-item/user-item.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DialogEditTipoComponent } from './components/dialog-edit-tipo/dialog-edit-tipo.component';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { DialogEditMarcaComponent } from './components/dialog-edit-marca/dialog-edit-marca.component';
+import { ConcesionarioListComponent } from './components/concesionario-list/concesionario-list.component';
+import { ConcesionarioItemComponent } from './components/concesionario-item/concesionario-item.component';
+import { DialogEditConcesionarioComponent } from './components/dialog-edit-concesionario/dialog-edit-concesionario.component';
+import { DialogEditVehiculoComponent } from './components/dialog-edit-vehiculo/dialog-edit-vehiculo.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,12 @@ import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
     UserListComponent,
     UserItemComponent,
     RegisterComponent,
-    DialogEditTipoComponent
+    DialogEditTipoComponent,
+    DialogEditMarcaComponent,
+    ConcesionarioListComponent,
+    ConcesionarioItemComponent,
+    DialogEditConcesionarioComponent,
+    DialogEditVehiculoComponent
   ],
   imports: [
     BrowserModule,
