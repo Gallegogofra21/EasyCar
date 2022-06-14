@@ -190,7 +190,7 @@ public class UserEntityService implements UserDetailsService {
 
         Usuario usuario = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
         storageService.deleteFile(usuario.getAvatar());
-        if(usuario.getRol().toString().equals("USUARIO")) {
+        if(usuario.getConcesionario() == null) {
             repository.delete(usuario);
         } else {
             concesionarioService.delete(usuario.getConcesionario().getId());
