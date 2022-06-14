@@ -27,7 +27,7 @@ public class Concesionario implements Serializable {
     @Builder.Default
     private List<Vehiculo> vehiculos = new ArrayList<>();
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "usuario_id", foreignKey = @ForeignKey(name = "FK_CONCESIONARIO_USUARIO"))
     private Usuario usuario;
 

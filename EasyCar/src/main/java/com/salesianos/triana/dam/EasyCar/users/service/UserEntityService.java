@@ -2,7 +2,7 @@ package com.salesianos.triana.dam.EasyCar.users.service;
 
 import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
-import com.salesianos.triana.dam.EasyCar.service.BaseService;
+import com.salesianos.triana.dam.EasyCar.service.ConcesionarioService;
 import com.salesianos.triana.dam.EasyCar.service.StorageService;
 import com.salesianos.triana.dam.EasyCar.users.dto.Admin.CreateAdminDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.Gestor.CreateGestorDto;
@@ -42,6 +42,8 @@ public class UserEntityService implements UserDetailsService {
     private final StorageService storageService;
     private final UserEntityRepository repository;
     private final UserDtoConverter converter;
+
+    private final ConcesionarioService concesionarioService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -188,6 +190,7 @@ public class UserEntityService implements UserDetailsService {
 
         Usuario usuario = repository.findById(id).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
         storageService.deleteFile(usuario.getAvatar());
+        concesionarioService.delete(usuario.getConcesionario().getId());
         repository.delete(usuario);
         return ResponseEntity.noContent().build();
 

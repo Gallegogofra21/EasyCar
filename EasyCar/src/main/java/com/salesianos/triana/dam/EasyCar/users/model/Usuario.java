@@ -40,7 +40,6 @@ public class Usuario implements UserDetails {
     private String password2;
 
     @OneToOne
-    @JsonIgnore
     private Concesionario concesionario;
 
     @Enumerated

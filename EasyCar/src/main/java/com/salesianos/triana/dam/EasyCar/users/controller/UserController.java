@@ -96,4 +96,10 @@ public class UserController {
         }
     }
 
+    @DeleteMapping("/usuario/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) throws IOException{
+        userEntityService.delete(id);
+        return ResponseEntity.notFound().build();
+    }
+
 }
