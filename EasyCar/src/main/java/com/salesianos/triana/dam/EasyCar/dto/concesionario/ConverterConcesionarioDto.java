@@ -29,4 +29,12 @@ public class ConverterConcesionarioDto {
         }
         return result;
     }
+
+    public GetConcesionarioSingleDto getConcesionarioToSingleDto(Concesionario c) {
+        return GetConcesionarioSingleDto.builder()
+                .id(c.getId())
+                .nombre(c.getNombre())
+                .direccion(c.getDireccion())
+                .build();
+    }
 }

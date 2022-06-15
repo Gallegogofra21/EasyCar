@@ -1,9 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.service.impl;
 
-import com.salesianos.triana.dam.EasyCar.dto.concesionario.ConverterConcesionarioDto;
-import com.salesianos.triana.dam.EasyCar.dto.concesionario.CreateConcesionarioDto;
-import com.salesianos.triana.dam.EasyCar.dto.concesionario.GetConcesionarioDto;
-import com.salesianos.triana.dam.EasyCar.dto.concesionario.GetConcesionarioVehiculosDto;
+import com.salesianos.triana.dam.EasyCar.dto.concesionario.*;
 import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
@@ -73,15 +70,14 @@ public class ConcesionarioServiceImpl implements ConcesionarioService {
     }
 
     @Override
-    public GetConcesionarioDto edit(CreateConcesionarioDto createConcesionarioDto, Long id) {
+    public GetConcesionarioSingleDto edit(CreateConcesionarioDto createConcesionarioDto, Long id) {
             Concesionario concesionario = repository.findById(id).map(c -> {
                 c.setNombre(createConcesionarioDto.getNombre());
                 c.setDireccion(createConcesionarioDto.getDireccion());
-                c.setVehiculos(createConcesionarioDto.getVehiculos());
                 return repository.save(c);
             }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Concesionario.class));
 
-            return converter.getConcesionarioToDto(concesionario);
+            return converter.getConcesionarioToSingleDto(concesionario);
     }
 
     @Override

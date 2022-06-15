@@ -45,7 +45,7 @@ public class ConcesionarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> edit (@PathVariable Long id, @Valid @RequestParam CreateConcesionarioDto newConcesionario) {
+    public ResponseEntity<?> edit (@PathVariable Long id, @Valid @RequestPart("concesionario") CreateConcesionarioDto newConcesionario) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.edit(newConcesionario, id));
     }
 

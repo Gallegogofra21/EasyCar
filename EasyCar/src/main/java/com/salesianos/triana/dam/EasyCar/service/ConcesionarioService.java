@@ -2,6 +2,7 @@ package com.salesianos.triana.dam.EasyCar.service;
 
 import com.salesianos.triana.dam.EasyCar.dto.concesionario.CreateConcesionarioDto;
 import com.salesianos.triana.dam.EasyCar.dto.concesionario.GetConcesionarioDto;
+import com.salesianos.triana.dam.EasyCar.dto.concesionario.GetConcesionarioSingleDto;
 import com.salesianos.triana.dam.EasyCar.dto.concesionario.GetConcesionarioVehiculosDto;
 import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
@@ -18,7 +19,7 @@ public interface ConcesionarioService {
     GetConcesionarioDto createConcesionario(CreateConcesionarioDto createConcesionarioDto, Long idGestor);
     Page<GetConcesionarioDto> findAll(Pageable pageable);
     GetConcesionarioVehiculosDto findById(Long id);
-    GetConcesionarioDto edit(CreateConcesionarioDto createConcesionarioDto, Long id);
+    GetConcesionarioSingleDto edit(CreateConcesionarioDto createConcesionarioDto, Long id);
     ResponseEntity<?> delete(Long id);
 
     public boolean comprobarName(String name);

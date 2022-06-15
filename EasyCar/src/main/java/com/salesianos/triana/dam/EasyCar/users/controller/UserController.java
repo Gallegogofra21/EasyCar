@@ -1,6 +1,7 @@
 package com.salesianos.triana.dam.EasyCar.users.controller;
 
 import com.salesianos.triana.dam.EasyCar.users.dto.Admin.CreateAdminDto;
+import com.salesianos.triana.dam.EasyCar.users.dto.EditUserDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.Gestor.CreateGestorDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.GetUserDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.GetUserFavDto;
@@ -86,8 +87,19 @@ public class UserController {
     }
 
     @PutMapping("/profile/")
-    public ResponseEntity<GetUserDto> edit (@RequestPart MultipartFile file, @Valid @RequestPart("user") CreateUsuarioDto newUser, @AuthenticationPrincipal Usuario currentUser) throws IOException{
+    public ResponseEntity<GetUserDto> edit (@RequestPart MultipartFile file, @Valid @RequestPart("user") EditUserDto newUser, @AuthenticationPrincipal Usuario currentUser) throws IOException{
         Usuario saved = userEntityService.edit(newUser , file, currentUser);
+
+        if (saved == null) {
+            return ResponseEntity.badRequest().build();
+        } else {
+            return ResponseEntity.ok(userDtoConverter.convertUsuarioToNewUser(saved));
+        }
+    }
+
+    @PutMapping("/usuario/{id}")
+    public ResponseEntity<GetUserDto> editById (@RequestPart MultipartFile file, @Valid @RequestPart("user") EditUserDto newUser, @PathVariable Long id) throws IOException{
+        Usuario saved = userEntityService.editById(newUser , file, id);
 
         if (saved == null) {
             return ResponseEntity.badRequest().build();

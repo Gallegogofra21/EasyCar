@@ -5,6 +5,7 @@ import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundE
 import com.salesianos.triana.dam.EasyCar.service.ConcesionarioService;
 import com.salesianos.triana.dam.EasyCar.service.StorageService;
 import com.salesianos.triana.dam.EasyCar.users.dto.Admin.CreateAdminDto;
+import com.salesianos.triana.dam.EasyCar.users.dto.EditUserDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.Gestor.CreateGestorDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.GetUserDto;
 import com.salesianos.triana.dam.EasyCar.users.dto.GetUserFavDto;
@@ -155,7 +156,7 @@ public class UserEntityService implements UserDetailsService {
         }
     }
 
-    public Usuario edit(CreateUsuarioDto createUsuarioDto, MultipartFile file, Usuario usuario) throws IOException {
+    public Usuario edit(EditUserDto createUsuarioDto, MultipartFile file, Usuario usuario) throws IOException {
         String filename = storageService.store(file);
 
         String extension = StringUtils.getFilenameExtension(filename);
@@ -183,6 +184,37 @@ public class UserEntityService implements UserDetailsService {
             return repository.save(c);
 
         }).orElseThrow(() -> new SingleEntityNotFoundException(usuario.getId().toString(), Usuario.class));
+
+    }
+
+    public Usuario editById(EditUserDto createUsuarioDto, MultipartFile file, Long id) throws IOException {
+        String filename = storageService.store(file);
+
+        String extension = StringUtils.getFilenameExtension(filename);
+
+        BufferedImage img = ImageIO.read(file.getInputStream());
+
+        BufferedImage imgScale = storageService.resizer(img, 128);
+
+        OutputStream out = Files.newOutputStream(storageService.load(filename));
+
+        ImageIO.write(imgScale, extension, out);
+
+        String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .path("/download/")
+                .path(filename)
+                .toUriString();
+
+        return repository.findById(id).map(c -> {
+            c.setNombre(createUsuarioDto.getNombre());
+            c.setEmail(createUsuarioDto.getEmail());
+            c.setUsername(createUsuarioDto.getUsername());
+            c.setPassword(createUsuarioDto.getPassword());
+            c.setPassword2(createUsuarioDto.getPassword2());
+            c.setAvatar(uri);
+            return repository.save(c);
+
+        }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Usuario.class));
 
     }
 

@@ -1,9 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.service.impl;
 
-import com.salesianos.triana.dam.EasyCar.dto.marca.ConverterMarcaDto;
-import com.salesianos.triana.dam.EasyCar.dto.marca.CreateMarcaDto;
-import com.salesianos.triana.dam.EasyCar.dto.marca.GetMarcaDto;
-import com.salesianos.triana.dam.EasyCar.dto.marca.GetMarcaVehiculosDto;
+import com.salesianos.triana.dam.EasyCar.dto.marca.*;
 import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
@@ -82,7 +79,7 @@ public class MarcaServiceImpl implements MarcaService {
     }
 
     @Override
-    public GetMarcaDto edit(CreateMarcaDto createMarcaDto, MultipartFile file, Long id) throws IOException {
+    public GetMarcaSingleDto edit(CreateMarcaDto createMarcaDto, MultipartFile file, Long id) throws IOException {
         String filename = storageService.store(file);
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
@@ -97,7 +94,7 @@ public class MarcaServiceImpl implements MarcaService {
             return repository.save(m);
         }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Marca.class));
 
-        return converter.getMarcaToDto(marca);
+        return converter.getMarcaToVehiculosDto(marca);
     }
 
     @Override

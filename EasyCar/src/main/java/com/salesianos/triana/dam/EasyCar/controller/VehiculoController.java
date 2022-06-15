@@ -67,8 +67,8 @@ public class VehiculoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> edit(@PathVariable Long id, @Valid @RequestPart("vehiculo") CreateVehiculoDto newVehiculo, @RequestPart("file") MultipartFile file, @AuthenticationPrincipal Usuario usuario) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.edit(newVehiculo, file, usuario, id));
+    public ResponseEntity<?> edit(@PathVariable Long id, @Valid @RequestPart("vehiculo") CreateVehiculoDto newVehiculo, @RequestPart("file1")MultipartFile file1, @RequestPart("file2")MultipartFile file2, @RequestPart("file3")MultipartFile file3, @RequestPart("file4")MultipartFile file4, @AuthenticationPrincipal Usuario usuario) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.edit(newVehiculo, file1, file2, file3, file4, usuario, id));
     }
 
     @DeleteMapping("/{id}")

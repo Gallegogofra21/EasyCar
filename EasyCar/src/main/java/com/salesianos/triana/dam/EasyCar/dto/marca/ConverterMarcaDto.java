@@ -13,4 +13,13 @@ public class ConverterMarcaDto {
                 .numVehiculos(m.getVehiculos().size())
                 .build();
     }
+
+    public GetMarcaSingleDto getMarcaToVehiculosDto(Marca m) {
+        return GetMarcaSingleDto.builder()
+                .id(m.getId())
+                .nombre(m.getNombre())
+                .foto(m.getFoto())
+                .vehiculos(m.getVehiculos())
+                .build();
+    }
 }
