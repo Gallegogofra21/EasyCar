@@ -30,6 +30,10 @@ import { ConcesionarioItemComponent } from './components/concesionario-item/conc
 import { DialogEditConcesionarioComponent } from './components/dialog-edit-concesionario/dialog-edit-concesionario.component';
 import { DialogEditVehiculoComponent } from './components/dialog-edit-vehiculo/dialog-edit-vehiculo.component';
 import { DialogEditUserComponent } from './components/dialog-edit-user/dialog-edit-user.component';
+import { CreateTipoComponent } from './components/create-tipo/create-tipo.component';
+import { CreateMarcaComponent } from './components/create-marca/create-marca.component';
+import { CreateConcesionarioComponent } from './components/create-concesionario/create-concesionario.component';
+import { CreateVehiculoComponent } from './components/create-vehiculo/create-vehiculo.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +55,11 @@ import { DialogEditUserComponent } from './components/dialog-edit-user/dialog-ed
     ConcesionarioItemComponent,
     DialogEditConcesionarioComponent,
     DialogEditVehiculoComponent,
-    DialogEditUserComponent
+    DialogEditUserComponent,
+    CreateTipoComponent,
+    CreateMarcaComponent,
+    CreateConcesionarioComponent,
+    CreateVehiculoComponent
   ],
   imports: [
     BrowserModule,

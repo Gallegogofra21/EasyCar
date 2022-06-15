@@ -30,6 +30,10 @@ export class UserService {
     return this.http.get<UserResponse>(`${environment.apiBaseUrl}/usuario/`, DEFAULT_HEADERS);
   }
 
+  getOneUser(id: string) {
+    return this.http.get<User>(`${environment.apiBaseUrl}/usuario/${id}`, DEFAULT_HEADERS);
+  }
+
   createGestor(): Observable<User> {
     return this.http.post<User>(`${environment.apiBaseUrl}/auth/register/gestor`, DEFAULT_HEADERS);
   }

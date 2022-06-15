@@ -45,8 +45,13 @@ export class MarcaService {
     return this.http.put<Marca>(`${environment.apiBaseUrl}/marca/${id}`, formData, DEFAULT_HEADERS_TOKEN);
   }
 
-  createMarca(marca: Marca) {
-    return this.http.post<Marca>(`${environment.apiBaseUrl}/marca`, marca, DEFAULT_HEADERS);
+  createMarca(marca: MarcaDto, file: File) {
+    let formData = new FormData();
+    formData.append('marca', new Blob([JSON.stringify(marca)], {
+      type:'application/json'
+    }));
+    formData.append("file", file);
+    return this.http.post<MarcaDto>(`${environment.apiBaseUrl}/marca/`, formData, DEFAULT_HEADERS_TOKEN);
   }
 
   deleteMarca(id: number): Observable<Marca> {

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { VehiculoDetails } from '../models/vehiculo-details-interface';
-import { Vehiculo, VehiculoDto, VehiculoResponse } from '../models/vehiculo-interface';
+import { CreateVehiculoDto, Vehiculo, VehiculoDto, VehiculoResponse } from '../models/vehiculo-interface';
 
 const token = localStorage.getItem('request_token');
 
@@ -47,8 +47,13 @@ export class VehiculoService {
     return this.http.put<Vehiculo>(`${environment.apiBaseUrl}/vehiculo/${id}`, formData, DEFAULT_HEADERS_TOKEN);
   }
 
-  createVehiculo(vehiculo: Vehiculo) {
-    return this.http.post<Vehiculo>(`${environment.apiBaseUrl}/vehiculo`, vehiculo, DEFAULT_HEADERS);
+  createVehiculo(vehiculo: CreateVehiculoDto, file: File, id: any) {
+    let formData = new FormData();
+    formData.append('vehiculo', new Blob([JSON.stringify(vehiculo)], {
+      type: 'application/json'
+    }));
+    formData.append('file', file);
+    return this.http.post<Vehiculo>(`${environment.apiBaseUrl}/vehiculo/${id}`, formData, DEFAULT_HEADERS_TOKEN);
   }
 
   deleteVehiculo(id: number): Observable<Vehiculo> {

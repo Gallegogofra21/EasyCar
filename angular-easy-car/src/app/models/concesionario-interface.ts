@@ -3,7 +3,7 @@ export interface Concesionario {
   nombre: string;
   direccion: string;
   numVehiculos: number;
-  usuarioId: number;
+  usuarioId: any;
 }
 
 export interface Sort {
@@ -42,6 +42,17 @@ export interface ConcesionarioResponse {
 }
 
 export class ConcesionarioDto {
+  nombre: string;
+  direccion: string;
+
+
+  constructor() {
+    this.nombre = '';
+    this.direccion = '';
+  }
+}
+
+export class CreateConcesionarioDto {
   nombre: string;
   direccion: string;
 

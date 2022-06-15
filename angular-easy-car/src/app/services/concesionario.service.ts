@@ -2,8 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Concesionario, ConcesionarioDto, ConcesionarioResponse } from '../models/concesionario-interface';
-import { Marca, MarcaResponse } from '../models/marca-interface';
+import { Concesionario, ConcesionarioDto, ConcesionarioResponse, CreateConcesionarioDto } from '../models/concesionario-interface';
 
 const token = localStorage.getItem('request_token');
 
@@ -43,8 +42,12 @@ export class ConcesionarioService {
     return this.http.put<Concesionario>(`${environment.apiBaseUrl}/concesionario/${id}`, formData, DEFAULT_HEADERS_TOKEN)
   }
 
-  createConcesionario(concesionario: Concesionario) {
-    return this.http.post<Concesionario>(`${environment.apiBaseUrl}/concesionario`, concesionario, DEFAULT_HEADERS);
+  createConcesionario(concesionario: CreateConcesionarioDto, id: any) {
+    let formData = new FormData();
+    formData.append('concesionario', new Blob([JSON.stringify(concesionario)], {
+      type: 'application/json'
+    }));
+    return this.http.post<CreateConcesionarioDto>(`${environment.apiBaseUrl}/concesionario/${id}`, formData, DEFAULT_HEADERS_TOKEN);
   }
 
   deleteConcesionario(id: number): Observable<Concesionario> {

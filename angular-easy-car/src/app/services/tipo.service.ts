@@ -45,8 +45,13 @@ export class TipoService {
     return this.http.put<Tipo>(`${environment.apiBaseUrl}/tipo/${id}`, formData, DEFAULT_HEADERS_TOKEN);
   }
 
-  createTipo(tipo: Tipo) {
-    return this.http.post<Tipo>(`${environment.apiBaseUrl}/tipo`, tipo, DEFAULT_HEADERS);
+  createTipo(tipo: TipoDto, file: File) {
+    let formData = new FormData();
+    formData.append('tipo', new Blob([JSON.stringify(tipo)], {
+      type:'application/json'
+    }));
+    formData.append("file", file);
+    return this.http.post<TipoDto>(`${environment.apiBaseUrl}/tipo/`, formData, DEFAULT_HEADERS_TOKEN);
   }
 
   deleteTipo(id: number): Observable<Tipo> {
