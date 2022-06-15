@@ -1,5 +1,5 @@
 export interface User {
-  id: number;
+  id: any;
   username: string;
   nombre: string;
   apellidos: string;
@@ -41,4 +41,22 @@ export interface UserResponse {
   first: boolean;
   numberOfElements: number;
   empty: boolean;
+}
+
+export class UserDto {
+  username: string;
+  nombre: string;
+  apellidos: string;
+  telefono: string;
+  email: string;
+  avatar: string;
+
+  constructor() {
+    this.username = '';
+    this.nombre = '';
+    this.apellidos = '';
+    this.telefono = '';
+    this.email = '';
+    this.avatar = '';
+  }
 }

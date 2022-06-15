@@ -15,7 +15,7 @@
   </div>
     <div class="margenSup">
 
-      <a [routerLink]="['/user',userInput?.id]"> <button mat-raised-button color="primary">Ver Más</button></a>
+      <a [routerLink]="['/user',userInput?.id]"> <button mat-raised-button color="primary" (click)="editUser(userInput, userInput?.id)">Editar</button></a>
       <button class="button" mat-raised-button color="primary" (click)="getDeleteUser(userInput?.id)"><mat-icon>delete</mat-icon></button>
 
     </div>

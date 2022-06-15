@@ -30,16 +30,6 @@
     </mat-form-field>
     <br>
     <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Marca</mat-label>
-      <input matInput placeholder="Write your marca" formControlName="nombreMarca">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Tipo</mat-label>
-      <input matInput placeholder="Write your tipo" formControlName="tipo">
-    </mat-form-field>
-    <br>
-    <mat-form-field class="example-full-width" appearance="fill">
       <mat-label>Llantas</mat-label>
       <input matInput placeholder="Write your llantas" formControlName="llantas">
     </mat-form-field>
@@ -59,14 +49,9 @@
       <input matInput placeholder="Write your traccion" formControlName="traccion">
     </mat-form-field>
     <br>
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Concesionario</mat-label>
-      <input matInput placeholder="Write your concesionario" formControlName="concesionario">
-    </mat-form-field>
-    <br>
     <input class="input" type="file" id="file1" (change)="onFileChanged1($event)">
-    <input class="input" type="file" id="file1" (change)="onFileChanged2($event)">
-    <input class="input" type="file" id="file1" (change)="onFileChanged3($event)">
-    <input class="input" type="file" id="file1" (change)="onFileChanged4($event)">
+    <!-- <input class="input" type="file" id="file2" (change)="onFileChanged2($event)">
+    <input class="input" type="file" id="file3" (change)="onFileChanged3($event)">
+    <input class="input" type="file" id="file4" (change)="onFileChanged4($event)"> -->
     <button class="button" mat-raised-button color="primary" type="submit" (click)="editVehiculo()">Editar</button>
 </form>

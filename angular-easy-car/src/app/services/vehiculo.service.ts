@@ -35,15 +35,15 @@ export class VehiculoService {
     return this.http.get<VehiculoDetails>(`${environment.apiBaseUrl}/vehiculo/${id}`, DEFAULT_HEADERS);
   }
 
-  editVehiculo(vehiculo: VehiculoDto, id: number, file1: File, file2: File, file3: File, file4: File) {
+  editVehiculo(vehiculo: VehiculoDto, id: number, file1: File) {
     let formData = new FormData();
     formData.append('vehiculo', new Blob([JSON.stringify(vehiculo)], {
       type:'application/json'
     }));
     formData.append("file1", file1);
-    formData.append("file2", file2);
-    formData.append("file3", file3);
-    formData.append("file4", file4);
+    // formData.append("file2", file2);
+    // formData.append("file3", file3);
+    // formData.append("file4", file4);
     return this.http.put<Vehiculo>(`${environment.apiBaseUrl}/vehiculo/${id}`, formData, DEFAULT_HEADERS_TOKEN);
   }
 

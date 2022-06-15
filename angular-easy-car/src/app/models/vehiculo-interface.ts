@@ -63,8 +63,6 @@ export class VehiculoDto {
   potencia: string;
   marchas: string;
   precio: number;
-  nombreMarca: string;
-  tipo: number;
   llantas: string;
   distribucion: string;
   procedencia: string;
@@ -73,7 +71,7 @@ export class VehiculoDto {
   foto2: string;
   foto3: string;
   foto4: string;
-  concesionario: number;
+
 
   constructor() {
     this.version = '';
@@ -83,8 +81,6 @@ export class VehiculoDto {
     this.potencia = '';
     this.marchas = '';
     this.precio = 0;
-    this.nombreMarca = '';
-    this.tipo = 0;
     this.llantas = '';
     this.distribucion = '';
     this.procedencia = '';
@@ -93,6 +89,5 @@ export class VehiculoDto {
     this.foto2 = '';
     this.foto3 = '';
     this.foto4 = '';
-    this.concesionario = 0;
   }
 }

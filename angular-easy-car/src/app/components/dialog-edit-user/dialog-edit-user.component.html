@@ -1,0 +1,29 @@
+<form class="example-form" [formGroup]="formulario">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Username</mat-label>
+    <input matInput placeholder="Write your username" formControlName="username">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput placeholder="Write your username" formControlName="nombre">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Apellidos</mat-label>
+      <input matInput placeholder="Write your apellidos" formControlName="apellidos">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Telefono</mat-label>
+      <input matInput placeholder="Write your telefono" formControlName="telefono">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Correo electrónico</mat-label>
+      <input matInput placeholder="Write your email" formControlName="email">
+    </mat-form-field>
+    <br>
+    <input class="input" type="file" id="file" (change)="onFileChanged($event)">
+    <button class="button" mat-raised-button color="primary" type="submit" (click)="editUser()">Editar</button>
+</form>

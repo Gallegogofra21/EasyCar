@@ -29,6 +29,7 @@ import { ConcesionarioListComponent } from './components/concesionario-list/conc
 import { ConcesionarioItemComponent } from './components/concesionario-item/concesionario-item.component';
 import { DialogEditConcesionarioComponent } from './components/dialog-edit-concesionario/dialog-edit-concesionario.component';
 import { DialogEditVehiculoComponent } from './components/dialog-edit-vehiculo/dialog-edit-vehiculo.component';
+import { DialogEditUserComponent } from './components/dialog-edit-user/dialog-edit-user.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { DialogEditVehiculoComponent } from './components/dialog-edit-vehiculo/d
     ConcesionarioListComponent,
     ConcesionarioItemComponent,
     DialogEditConcesionarioComponent,
-    DialogEditVehiculoComponent
+    DialogEditVehiculoComponent,
+    DialogEditUserComponent
   ],
   imports: [
     BrowserModule,
