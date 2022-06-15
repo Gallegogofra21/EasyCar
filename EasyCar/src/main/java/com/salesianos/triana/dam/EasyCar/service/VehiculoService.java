@@ -1,6 +1,7 @@
 package com.salesianos.triana.dam.EasyCar.service;
 
 import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDetails;
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoSingleDto;
 import com.salesianos.triana.dam.EasyCar.model.Concesionario;
 import com.salesianos.triana.dam.EasyCar.model.Marca;
 import com.salesianos.triana.dam.EasyCar.model.Tipo;
@@ -36,7 +37,7 @@ public interface VehiculoService {
 
     Page<GetVehiculoDto> findAllVehiculosByMarca(String nombre, Pageable pageable);
     Page<GetVehiculoDto> findAllVehiculosByTipo(Long id, Pageable pageable);
-    GetVehiculoDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file1, Usuario usuario, Long id);
+    GetVehiculoSingleDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file1, Usuario usuario, Long id);
     ResponseEntity<?> delete(Long id) throws IOException;
     ResponseEntity<?> addVehiculoToFav(Long id, Usuario user);
 }

@@ -1,6 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.service.impl;
 
-import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDetails;
+import com.salesianos.triana.dam.EasyCar.dto.vehiculo.*;
 import com.salesianos.triana.dam.EasyCar.errores.exception.ListEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.errores.exception.SingleEntityNotFoundException;
 import com.salesianos.triana.dam.EasyCar.model.Concesionario;
@@ -11,9 +11,6 @@ import com.salesianos.triana.dam.EasyCar.repo.ConcesionarioRepository;
 import com.salesianos.triana.dam.EasyCar.repo.MarcaRepository;
 import com.salesianos.triana.dam.EasyCar.repo.TipoRepository;
 import com.salesianos.triana.dam.EasyCar.repo.VehiculoRepository;
-import com.salesianos.triana.dam.EasyCar.dto.vehiculo.ConverterVehiculoDto;
-import com.salesianos.triana.dam.EasyCar.dto.vehiculo.CreateVehiculoDto;
-import com.salesianos.triana.dam.EasyCar.dto.vehiculo.GetVehiculoDto;
 import com.salesianos.triana.dam.EasyCar.service.StorageService;
 import com.salesianos.triana.dam.EasyCar.service.VehiculoService;
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
@@ -257,13 +254,7 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
-    public GetVehiculoDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file1, Usuario usuario, Long id) {
-
-        Concesionario concesionario = concesionarioRepository.findById(createVehiculoDto.getConcesionario()).orElseThrow(() -> new SingleEntityNotFoundException(createVehiculoDto.getConcesionario().toString(), Concesionario.class));
-
-        Marca marca = marcaRepository.findById(createVehiculoDto.getMarca()).orElseThrow(() -> new SingleEntityNotFoundException(createVehiculoDto.getMarca().toString(), Marca.class));
-
-        Tipo tipo = tipoRepository.findById(createVehiculoDto.getTipo()).orElseThrow(() -> new SingleEntityNotFoundException(createVehiculoDto.getTipo().toString(), Tipo.class));
+    public GetVehiculoSingleDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file1, Usuario usuario, Long id) {
 
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
@@ -278,18 +269,15 @@ public class VehiculoServiceImpl implements VehiculoService {
             v.setPotencia(createVehiculoDto.getPotencia());
             v.setMarchas(createVehiculoDto.getMarchas());
             v.setPrecio(createVehiculoDto.getPrecio());
-            v.setMarca(marca);
-            v.setTipo(tipo);
             v.setFoto1(uri);
             v.setLlantas(createVehiculoDto.getLlantas());
             v.setDistribucion(createVehiculoDto.getDistribucion());
             v.setProcedencia(createVehiculoDto.getProcedencia());
             v.setTraccion(createVehiculoDto.getTraccion());
-            v.setConcesionario(concesionario);
             return repository.save(v);
         }).orElseThrow(() -> new SingleEntityNotFoundException(id.toString(), Vehiculo.class));
 
-        return converter.getVehiculoToDto(vehiculo);
+        return converter.getVehiculoToSingleDto(vehiculo);
     }
 
     @Override
