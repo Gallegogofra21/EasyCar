@@ -36,7 +36,7 @@ public interface VehiculoService {
 
     Page<GetVehiculoDto> findAllVehiculosByMarca(String nombre, Pageable pageable);
     Page<GetVehiculoDto> findAllVehiculosByTipo(Long id, Pageable pageable);
-    GetVehiculoDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4, Usuario usuario, Long id);
+    GetVehiculoDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file1, Usuario usuario, Long id);
     ResponseEntity<?> delete(Long id) throws IOException;
     ResponseEntity<?> addVehiculoToFav(Long id, Usuario user);
 }

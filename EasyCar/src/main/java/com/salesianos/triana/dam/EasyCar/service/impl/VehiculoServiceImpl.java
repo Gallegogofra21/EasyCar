@@ -257,7 +257,7 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
-    public GetVehiculoDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file1, MultipartFile file2, MultipartFile file3, MultipartFile file4, Usuario usuario, Long id) {
+    public GetVehiculoDto edit(CreateVehiculoDto createVehiculoDto, MultipartFile file1, Usuario usuario, Long id) {
 
         Concesionario concesionario = concesionarioRepository.findById(createVehiculoDto.getConcesionario()).orElseThrow(() -> new SingleEntityNotFoundException(createVehiculoDto.getConcesionario().toString(), Concesionario.class));
 
@@ -268,18 +268,6 @@ public class VehiculoServiceImpl implements VehiculoService {
         String uri = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/download/")
                 .path(storageService.store(file1))
-                .toUriString();
-        String uri2 = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/download/")
-                .path(storageService.store(file2))
-                .toUriString();
-        String uri3 = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/download/")
-                .path(storageService.store(file3))
-                .toUriString();
-        String uri4 = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/download/")
-                .path(storageService.store(file4))
                 .toUriString();
 
         Vehiculo vehiculo = repository.findById(id).map(v -> {
@@ -293,9 +281,6 @@ public class VehiculoServiceImpl implements VehiculoService {
             v.setMarca(marca);
             v.setTipo(tipo);
             v.setFoto1(uri);
-            v.setFoto2(uri2);
-            v.setFoto3(uri3);
-            v.setFoto4(uri4);
             v.setLlantas(createVehiculoDto.getLlantas());
             v.setDistribucion(createVehiculoDto.getDistribucion());
             v.setProcedencia(createVehiculoDto.getProcedencia());
