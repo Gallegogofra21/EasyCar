@@ -73,7 +73,7 @@ Widget _createVehiculo(BuildContext context) {
     } else if (state is VehiculosFetched) {
       return _createVehiculoView(context, state.vehiculos);
     } else {
-      return const Text('Not support');
+      return const Text('Not supportt');
     }
   });
 }
