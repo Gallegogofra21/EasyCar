@@ -39,7 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
       child: Scaffold(
           appBar: AppBar(
             title: Padding(
-              padding: const EdgeInsets.only(left: 100.0),
+              padding: const EdgeInsets.only(left: 80.0),
               child: Image.asset(
                 'assets/images/logo.png',
                 width: 150,
@@ -82,7 +82,7 @@ Widget _createVehiculoView(
     BuildContext context, List<VehiculoContent> vehiculos) {
   return Column(children: [
     SizedBox(
-      height: 790,
+      height: 670,
       child: ListView.separated(
         itemBuilder: (BuildContext context, int index) {
           return _createVehiculoViewItem(context, vehiculos[index]);

@@ -325,21 +325,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10.0),
-                    child: Checkbox(
-                        value: isPublic,
-                        onChanged: (value) {
-                          setState(() {
-                            isPublic = value!;
-                          });
-                        }),
-                  ),
-                  const Text('Perfil público'),
-                ],
-              ),
               Padding(
                 padding: const EdgeInsets.only(bottom: 10.0),
                 child: BlocConsumer<ImagePickBlocBloc, ImagePickBlocState>(

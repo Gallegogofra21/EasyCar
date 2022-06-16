@@ -44,7 +44,7 @@ class _VehiculosMarcaScreenState extends State<VehiculosMarcaScreen> {
     return Scaffold(
         appBar: AppBar(
           title: Padding(
-            padding: const EdgeInsets.only(left: 100.0),
+            padding: const EdgeInsets.only(left: 80.0),
             child: Image.asset(
               'assets/images/logo.png',
               width: 150,
@@ -213,7 +213,8 @@ class _VehiculosMarcaScreenState extends State<VehiculosMarcaScreen> {
                       itemCount: snapshot.data!.length),
                 );
               } else if (snapshot.hasError) {
-                return Center(child: Text('Something went wrong :('));
+                return Center(
+                    child: Text('Esta marca todavía no tiene vehículos'));
               }
               return const CircularProgressIndicator();
             },

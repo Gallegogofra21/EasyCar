@@ -36,7 +36,7 @@ class _DetailsPageState extends State<DetailsPage> {
         child: Scaffold(
             appBar: AppBar(
               title: Padding(
-                padding: const EdgeInsets.only(left: 100.0),
+                padding: const EdgeInsets.only(left: 80.0),
                 child: Image.asset(
                   'assets/images/logo.png',
                   width: 150,
@@ -93,7 +93,7 @@ Widget _createVehiculoViewItem(BuildContext context, VehiculoContent vehiculo) {
           child: Row(
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 16.0),
+                padding: const EdgeInsets.only(),
                 child: Container(
                   child: Image.network(
                     vehiculo.foto2.replaceAll('localhost', '10.0.2.2'),
@@ -257,14 +257,14 @@ Widget _createVehiculoViewItem(BuildContext context, VehiculoContent vehiculo) {
         Row(
           children: [
             const Padding(
-              padding: EdgeInsets.only(left: 20.0),
+              padding: EdgeInsets.only(left: 10.0),
               child: Text(
                 'Precio al contado*',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 200.0, top: 10),
+              padding: const EdgeInsets.only(left: 150.0, top: 10),
               child: Text(
                 precio + "€",
                 style:

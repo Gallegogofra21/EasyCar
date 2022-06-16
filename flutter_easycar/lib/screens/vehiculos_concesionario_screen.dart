@@ -206,7 +206,8 @@ class _VehiculosConcesionarioScreenState
                       itemCount: snapshot.data!.length),
                 );
               } else if (snapshot.hasError) {
-                return Center(child: Text('Something went wrong :('));
+                return Center(
+                    child: Text('Este concesionario aún no tiene vehiculos'));
               }
               return const CircularProgressIndicator();
             },

@@ -40,7 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         child: Scaffold(
             appBar: AppBar(
               title: Padding(
-                padding: const EdgeInsets.only(left: 100.0),
+                padding: const EdgeInsets.only(left: 80.0),
                 child: Image.asset(
                   'assets/images/logo.png',
                   width: 150,
@@ -129,61 +129,61 @@ Widget _profile(BuildContext context, User user) {
         Column(
           children: [
             const Padding(
-              padding: EdgeInsets.only(right: 300.0, top: 15, bottom: 15),
+              padding: EdgeInsets.only(top: 15, bottom: 15),
               child: Text('Correo electrónico',
                   textAlign: TextAlign.left,
                   style: TextStyle(color: Colors.grey, fontSize: 16)),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 285.0),
+              padding: const EdgeInsets.only(),
               child: Text(
                 user.email,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),
             const Padding(
-              padding: EdgeInsets.only(right: 300.0, top: 20),
+              padding: EdgeInsets.only(top: 20),
               child: Text('Nombre de usuario',
                   textAlign: TextAlign.left,
                   style: TextStyle(color: Colors.grey, fontSize: 16)),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 285.0),
+              padding: const EdgeInsets.only(),
               child: Text(
                 user.username,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),
             const Padding(
-              padding: EdgeInsets.only(right: 370.0, top: 20),
+              padding: EdgeInsets.only(top: 20),
               child: Text('Nombre',
                   textAlign: TextAlign.left,
                   style: TextStyle(color: Colors.grey, fontSize: 16)),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 285.0),
+              padding: const EdgeInsets.only(),
               child: Text(user.nombre,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ),
             const Padding(
-              padding: EdgeInsets.only(right: 365.0, top: 20),
+              padding: EdgeInsets.only(top: 20),
               child: Text('Apellidos',
                   textAlign: TextAlign.left,
                   style: TextStyle(color: Colors.grey, fontSize: 16)),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 285.0),
+              padding: const EdgeInsets.only(),
               child: Text(user.apellidos,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ),
             const Padding(
-              padding: EdgeInsets.only(right: 370.0, top: 20),
+              padding: EdgeInsets.only(top: 20),
               child: Text('Teléfono',
                   textAlign: TextAlign.left,
                   style: TextStyle(color: Colors.grey, fontSize: 16)),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 285.0),
+              padding: const EdgeInsets.only(),
               child: Text(user.telefono,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ),

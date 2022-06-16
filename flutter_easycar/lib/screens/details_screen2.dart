@@ -36,7 +36,7 @@ class _DetailsPage2State extends State<DetailsPage2> {
         child: Scaffold(
             appBar: AppBar(
               title: Padding(
-                padding: const EdgeInsets.only(left: 100.0),
+                padding: const EdgeInsets.only(left: 80.0),
                 child: Image.asset(
                   'assets/images/logo.png',
                   width: 150,
