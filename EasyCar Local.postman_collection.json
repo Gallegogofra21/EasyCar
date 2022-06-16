@@ -1,0 +1,1040 @@
+{
+	"info": {
+		"_postman_id": "1b69175e-fcb8-4160-9360-0eddc2659b92",
+		"name": "EasyCar Local",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17654606"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"Admin@gmail.com\",\r\n    \"password\":\"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/auth/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Pictures/descarga.jpg"
+								},
+								{
+									"key": "user",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar API/json/Admin.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/auth/register/admin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Gestor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar/fotos/3.png"
+								},
+								{
+									"key": "user",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar API/json/Gestor.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/auth/register/gestor",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"gestor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Pictures/descarga.jpg"
+								},
+								{
+									"key": "user",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar API/json/Usuario.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/auth/register/usuario",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"auth",
+								"register",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehiculo",
+			"item": [
+				{
+					"name": "Create Vehiculo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUxMzEzMjExLCJub21icmUiOiJGcmFuIn0.rqPZWfHoB4HpGOkEUEcV0oXFEODQ27tZL600x7rYUao",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file1",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar/fotos/Vehiculos/Volkswagen1.jpg"
+								},
+								{
+									"key": "vehiculo",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar/json/VehiculoEdit.json"
+								},
+								{
+									"key": "file2",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar/fotos/Vehiculos/Volkswagen2.jpg"
+								},
+								{
+									"key": "file3",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar/fotos/Vehiculos/Volkswagen3.jpg"
+								},
+								{
+									"key": "file4",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar/fotos/Vehiculos/Volkswagen4.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/vehiculo/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vehiculo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Vehiculos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/vehiculo/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vehiculo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Vehiculo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vehiculo/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vehiculo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Vehiculo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vehiculo/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vehiculo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vehiculo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vehiculo/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vehiculo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/vehiculo/1/fav",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"vehiculo",
+								"1",
+								"fav"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Vehiculos By Marca Copy 2",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Vehiculos By Tipo Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/vehiculo/tipo/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"vehiculo",
+								"tipo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Vehiculos By Concesionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/vehiculo/tipo/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"vehiculo",
+								"tipo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tipo",
+			"item": [
+				{
+					"name": "List Tipos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tipo/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tipo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Tipo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tipo/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tipo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Tipo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "tipo",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar API/json/Tipo.json"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar API/fotos/Tipos/monovolumen-blue-hover.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/tipo/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tipo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Tipo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tipo/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tipo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Marca",
+			"item": [
+				{
+					"name": "List Marcas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/marca/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"marca",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Marca",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/marca/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"marca",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Marca",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "marca",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar API/json/Marca.json"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar/fotos/Peugeot.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/marca/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"marca",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Marca",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/marca/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"marca",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Concesionario",
+			"item": [
+				{
+					"name": "List Concesionarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/concesionario/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"concesionario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Concesionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/concesionario/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"concesionario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Concesionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "concesionario",
+									"type": "file",
+									"src": "/C:/Users/gallego.gofra21/Desktop/EasyCar API/json/Concesionario.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/concesionario/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"concesionario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Concesionario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/concesionario/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"concesionario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Concesionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/concesionario/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"concesionario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "FindAll Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUyODEyOTY0LCJub21icmUiOiJGcmFuIiwicm9sIjoiQURNSU4ifQ.kN-Yum1IEtRVAfEHTrYI0QBb2xrr447YwANtf0-cxMQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuario/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Auth User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjU0MzI2NDMxLCJub21icmUiOiJGcmFuIiwicm9sIjoiQURNSU4ifQ.zm7g4Ft9mtsWfPL-Tx4rRhaWyauhPiyp5MkaOBV97lQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/me",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar/fotos/UserLogin.png"
+								},
+								{
+									"key": "user",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar/json/UserEdit.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/profile/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuario/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne User",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar/json/Usuario.json"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar/fotos/Perfil.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/usuario/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
