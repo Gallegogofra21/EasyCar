@@ -1,6 +1,6 @@
 package com.salesianos.triana.dam.EasyCar.validacion.validadores;
 
-import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityService;
+import com.salesianos.triana.dam.EasyCar.users.service.UserEntityService;
 import com.salesianos.triana.dam.EasyCar.validacion.anotaciones.UniqueUsernameUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.util.StringUtils;

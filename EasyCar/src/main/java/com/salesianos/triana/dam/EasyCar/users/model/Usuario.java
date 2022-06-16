@@ -1,5 +1,8 @@
 package com.salesianos.triana.dam.EasyCar.users.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.salesianos.triana.dam.EasyCar.model.Concesionario;
+import com.salesianos.triana.dam.EasyCar.model.Vehiculo;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +13,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -33,6 +38,16 @@ public class Usuario implements UserDetails {
     private String avatar;
     private String password;
     private String password2;
+
+    @OneToOne
+    private Concesionario concesionario;
+
+    @Enumerated
+    private UserRole rol;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @Builder.Default
+    private List<Vehiculo> vehiculosFav = new ArrayList<>();
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -57,5 +72,10 @@ public class Usuario implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @PreRemove
+    public void nullearTipoDeVehiculos() {
+        vehiculosFav.forEach(vehiculo -> vehiculo.setUser(null));
     }
 }

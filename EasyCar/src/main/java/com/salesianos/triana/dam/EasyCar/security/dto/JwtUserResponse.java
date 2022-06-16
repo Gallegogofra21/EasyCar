@@ -12,5 +12,6 @@ public class JwtUserResponse {
     private String email;
     private String nombre;
     private String avatar;
+    private String rol;
     private String token;
 }

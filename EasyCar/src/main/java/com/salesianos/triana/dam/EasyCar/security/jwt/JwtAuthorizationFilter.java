@@ -1,7 +1,7 @@
 package com.salesianos.triana.dam.EasyCar.security.jwt;
 
 import com.salesianos.triana.dam.EasyCar.users.model.Usuario;
-import com.salesianos.triana.dam.EasyCar.users.service.impl.UserEntityService;
+import com.salesianos.triana.dam.EasyCar.users.service.UserEntityService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.java.Log;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -16,7 +16,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Optional;
 
 @Log
 @Component
@@ -34,20 +33,19 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
             if(StringUtils.hasText(token) && jwtProvider.validateToken(token)) {
                 Long userId = jwtProvider.getUserIdFromJwt(token);
 
-                Optional<Usuario> usuario = usuarioService.loadUserById(userId);
+                Usuario usuario = usuarioService.findById(userId);
 
-                if(usuario.isPresent()){
-                    Usuario user = usuario.get();
                     UsernamePasswordAuthenticationToken authenticacion =
                             new UsernamePasswordAuthenticationToken(
-                                    user,
-                                    user.getAuthorities()
+                                    usuario,
+                                    usuario.getRol(),
+                                    usuario.getAuthorities()
                             );
                     authenticacion.setDetails(new WebAuthenticationDetails(request));
 
                     SecurityContextHolder.getContext().setAuthentication(authenticacion);
                 }
-            }
+
         }catch (Exception ex) {
             log.info("No se ha podido establecer el contexto de seguridad (" + ex.getMessage() + ")");
         }

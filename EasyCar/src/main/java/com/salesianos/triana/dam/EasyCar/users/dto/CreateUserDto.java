@@ -19,6 +19,7 @@ public class CreateUserDto {
     //@NotBlank(message = "{user.name.blank}")
     private String nombre;
     private String apellidos;
+    private String telefono;
     @NotBlank(message = "{user.email.blank}")
     @UniqueEmailUser(message = "{user.email.unique}")
     private String email;
@@ -26,5 +27,6 @@ public class CreateUserDto {
     private String password;
     private String password2;
     private String avatar;
+    private String rol;
 
 }
