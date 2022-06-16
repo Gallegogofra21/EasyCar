@@ -1,0 +1,15 @@
+{
+    "version": "1.8 TFSI S tronic Coupe",
+    "modelo": "TT",
+    "fechaMatriculacion": "13-06-2008",
+    "kilometraje":"18625km",
+    "potencia":"180CV",
+    "precio": 24.990,
+    "marchas": "AUTOMATICO",
+    "tipo": "1",
+    "llantas": "R18",
+    "distribucion": "Cadena",
+    "procedencia": "Nacional",
+    "traccion": "Delantera",
+    "marca": "1"
+}
