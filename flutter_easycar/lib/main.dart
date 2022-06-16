@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easycar/models/vehiculo.dart';
+import 'package:flutter_easycar/screens/details_screen.dart';
 import 'package:flutter_easycar/screens/login_screen.dart';
 import 'package:flutter_easycar/screens/menu_screen.dart';
+import 'package:flutter_easycar/screens/profile_screen.dart';
 import 'package:flutter_easycar/screens/register_screen.dart';
 import 'package:flutter_easycar/screens/search_screen.dart';
 
@@ -24,6 +27,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => const LoginScreen(),
         '/register': (context) => const RegisterScreen(),
         '/search': (context) => const SearchScreen(),
+        '/profile': (context) => const ProfileScreen()
       },
     );
   }

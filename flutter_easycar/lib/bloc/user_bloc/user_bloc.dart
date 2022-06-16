@@ -4,17 +4,16 @@ import 'package:flutter_easycar/bloc/user_bloc/user_state.dart';
 import 'package:flutter_easycar/repository/user_repository/user_repository.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  final UserRepository public;
+  final UserRepository userRepository;
 
-  UserBloc(this.public) : super(UserWithPostInitial()) {
-    on<FetchUserWithType>(_publicacionesFetched);
+  UserBloc(this.userRepository) : super(UserWithPostInitial()) {
+    on<FetchUserWithType>(_usersFetched);
   }
 
-  void _publicacionesFetched(
-      FetchUserWithType event, Emitter<UserState> emit) async {
+  void _usersFetched(FetchUserWithType event, Emitter<UserState> emit) async {
     try {
-      final movies = await public.fetchUsers(event.type);
-      emit(UsersFetched(movies, event.type));
+      final users = await userRepository.fetchUser();
+      emit(UsersFetched(users));
       return;
     } on Exception catch (e) {
       emit(UserFetchedError(e.toString()));

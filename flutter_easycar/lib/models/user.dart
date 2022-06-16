@@ -8,7 +8,7 @@ class User {
     required this.email,
     required this.avatar,
   });
-  late final String id;
+  late final int id;
   late final String username;
   late final String nombre;
   late final String apellidos;
