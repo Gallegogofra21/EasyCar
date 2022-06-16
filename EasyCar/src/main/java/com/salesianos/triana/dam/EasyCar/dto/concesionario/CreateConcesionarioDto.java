@@ -17,6 +17,7 @@ public class CreateConcesionarioDto {
     //@UniqueNameConcesionario(message = "{concesionario.nombre.unico}")
     private String nombre;
     private String direccion;
+    private String foto;
     private List<Vehiculo> vehiculos;
     private Long usuarioId;
 }

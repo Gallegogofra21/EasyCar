@@ -16,11 +16,11 @@ import java.util.List;
 
 public interface ConcesionarioService {
 
-    GetConcesionarioDto createConcesionario(CreateConcesionarioDto createConcesionarioDto, Long idGestor);
+    GetConcesionarioDto createConcesionario(CreateConcesionarioDto createConcesionarioDto, Long idGestor, MultipartFile file) throws IOException;
     Page<GetConcesionarioDto> findAll(Pageable pageable);
     GetConcesionarioVehiculosDto findById(Long id);
-    GetConcesionarioSingleDto edit(CreateConcesionarioDto createConcesionarioDto, Long id);
-    ResponseEntity<?> delete(Long id);
+    GetConcesionarioSingleDto edit(CreateConcesionarioDto createConcesionarioDto, Long id, MultipartFile file) throws IOException;
+    ResponseEntity<?> delete(Long id) throws IOException;
 
     public boolean comprobarName(String name);
     public boolean comprobarId(Long id);

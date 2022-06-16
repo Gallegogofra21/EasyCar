@@ -22,6 +22,7 @@ public class Concesionario implements Serializable {
 
     private String nombre;
     private String direccion;
+    private String foto;
 
     @OneToMany( cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "concesionario", fetch = FetchType.LAZY)
     @Builder.Default

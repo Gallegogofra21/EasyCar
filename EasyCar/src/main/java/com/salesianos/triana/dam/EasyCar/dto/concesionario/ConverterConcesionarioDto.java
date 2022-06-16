@@ -20,6 +20,7 @@ public class ConverterConcesionarioDto {
                 .id(c.getId())
                 .nombre(c.getNombre())
                 .direccion(c.getDireccion())
+                 .foto(c.getFoto())
                 .usuarioId(c.getUsuario().getId())
                 .build();
         if(c.getVehiculos() == null) {
@@ -35,6 +36,7 @@ public class ConverterConcesionarioDto {
                 .id(c.getId())
                 .nombre(c.getNombre())
                 .direccion(c.getDireccion())
+                .foto(c.getFoto())
                 .build();
     }
 }

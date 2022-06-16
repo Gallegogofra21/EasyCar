@@ -14,6 +14,7 @@ public class GetConcesionarioVehiculosDto {
     private Long id;
     private String nombre;
     private String direccion;
+    private String foto;
     private List<GetVehiculoDto> vehiculos;
     private Long gestorId;
 }
