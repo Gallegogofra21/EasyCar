@@ -4,6 +4,7 @@ export interface Concesionario {
   direccion: string;
   numVehiculos: number;
   usuarioId: any;
+  foto: string;
 }
 
 export interface Sort {
@@ -44,21 +45,25 @@ export interface ConcesionarioResponse {
 export class ConcesionarioDto {
   nombre: string;
   direccion: string;
+  foto: string;
 
 
   constructor() {
     this.nombre = '';
     this.direccion = '';
+    this.foto = '';
   }
 }
 
 export class CreateConcesionarioDto {
   nombre: string;
   direccion: string;
+  foto: string;
 
 
   constructor() {
     this.nombre = '';
     this.direccion = '';
+    this.foto = '';
   }
 }

@@ -33,10 +33,16 @@ a, a:active, a:hover, a:visited {
 }
 
 .mat-toolbar.mat-primary {
-  background: rgb(0, 0, 0);
+  background: rgb(32, 32, 32);
 }
 
 a span{
   color: aliceblue;
   text-decoration: none;
+}
+
+.logo {
+  margin-right: 700px;
+  height: 60px;
+  width: 100px;
 }
