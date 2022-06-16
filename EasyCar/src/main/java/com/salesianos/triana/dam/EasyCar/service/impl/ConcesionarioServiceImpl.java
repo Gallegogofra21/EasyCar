@@ -56,6 +56,7 @@ public class ConcesionarioServiceImpl implements ConcesionarioService {
                 .nombre(concesionario.getNombre())
                 .direccion(concesionario.getDireccion())
                 .vehiculos(vehiculosConcesionario)
+                .foto(concesionario.getFoto())
                 .gestorId(concesionario.getUsuario().getId())
                 .build();
         return result;

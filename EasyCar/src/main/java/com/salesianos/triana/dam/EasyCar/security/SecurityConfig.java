@@ -60,13 +60,29 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .antMatchers(HttpMethod.GET,"/profile/**").authenticated()
                 .antMatchers(HttpMethod.PUT, "/profile/**").authenticated()
-            
+                .antMatchers(HttpMethod.GET,"/usuario/**").authenticated()
+                .antMatchers(HttpMethod.PUT,"/usuario/**").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/usuario/**").authenticated()
 
                 .antMatchers(HttpMethod.GET, "/vehiculo/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/vehiculo/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/vehiculo/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/vehiculo/**").authenticated()
 
                 .antMatchers(HttpMethod.GET, "/concesionario/**").authenticated()
                 .antMatchers(HttpMethod.POST, "/concesionario/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/concesionario/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/concesionario/**").authenticated()
+
+                .antMatchers(HttpMethod.GET, "/tipo/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/tipo/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/tipo/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/tipo/**").authenticated()
+
+                .antMatchers(HttpMethod.GET, "/marca/**").authenticated()
+                .antMatchers(HttpMethod.POST, "/marca/**").authenticated()
+                .antMatchers(HttpMethod.PUT, "/marca/**").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/marca/**").authenticated()
 
                 .antMatchers(HttpMethod.GET, "/download/**").anonymous()
 

@@ -13,7 +13,7 @@ import java.util.List;
 @Builder
 public class CreateTipoDto {
     @NotBlank(message = "{tipo.nombre.blank}")
-    //@UniqueNameTipo(message = "{tipo.nombre.unico}")
+    @UniqueNameTipo(message = "{tipo.nombre.unico}")
     private String nombre;
     private String foto;
     @Builder.Default

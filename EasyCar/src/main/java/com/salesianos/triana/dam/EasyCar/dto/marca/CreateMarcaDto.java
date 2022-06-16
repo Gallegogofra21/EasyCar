@@ -14,7 +14,7 @@ import java.util.List;
 public class CreateMarcaDto {
 
     @NotBlank(message = "{marca.nombre.blank}")
-    //@UniqueNameMarca(message = "{marca.nombre.unico}")
+    @UniqueNameMarca(message = "{marca.nombre.unico}")
     private String nombre;
     private String foto;
     @Builder.Default

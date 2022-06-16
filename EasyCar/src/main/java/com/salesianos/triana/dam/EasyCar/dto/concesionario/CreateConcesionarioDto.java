@@ -14,7 +14,7 @@ import java.util.List;
 public class CreateConcesionarioDto {
 
     @NotBlank(message = "{concesionario.nombre.blank}")
-    //@UniqueNameConcesionario(message = "{concesionario.nombre.unico}")
+    @UniqueNameConcesionario(message = "{concesionario.nombre.unico}")
     private String nombre;
     private String direccion;
     private String foto;
