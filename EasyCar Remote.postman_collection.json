@@ -1,0 +1,1017 @@
+{
+	"info": {
+		"_postman_id": "0d3352b1-4d32-4e0c-bda6-249c9d541aee",
+		"name": "EasyCar Remote",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17654606"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.collectionVariables.set(\"token\", jsonData.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\":\"Admin@gmail.com\",\r\n    \"password\":\"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/auth/login",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar/fotos/Perfil.jpg"
+								},
+								{
+									"key": "user",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar/json/Admin.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/auth/register/admin",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"register",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register Gestor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"foto\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/auth/register/gestor",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"register",
+								"gestor"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/fotos/Perfil.jpg"
+								},
+								{
+									"key": "user",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/json/Usuario.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/auth/register/usuario",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"auth",
+								"register",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehiculo",
+			"item": [
+				{
+					"name": "Create Vehiculo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUxMzEzMjExLCJub21icmUiOiJGcmFuIn0.rqPZWfHoB4HpGOkEUEcV0oXFEODQ27tZL600x7rYUao",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file1",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/fotos/Vehiculos/Volkswagen1.jpg"
+								},
+								{
+									"key": "vehiculo",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/json/VehiculoEdit.json"
+								},
+								{
+									"key": "file2",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/fotos/Vehiculos/Volkswagen2.jpg"
+								},
+								{
+									"key": "file3",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/fotos/Vehiculos/Volkswagen3.jpg"
+								},
+								{
+									"key": "file4",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/fotos/Vehiculos/Volkswagen4.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/vehiculo/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"vehiculo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Vehiculos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/vehiculo/",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"vehiculo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Vehiculo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/vehiculo/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"vehiculo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Vehiculo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/vehiculo/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"vehiculo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Vehiculo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/vehiculo/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"vehiculo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Vehiculos By Marca",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/vehiculo/marca/2",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"vehiculo",
+								"marca",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find All Vehiculos By Tipo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/vehiculo/tipo/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"vehiculo",
+								"tipo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tipo",
+			"item": [
+				{
+					"name": "List Tipos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/tipo/",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"tipo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Tipo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/tipo/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"tipo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Tipo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "tipo",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar/json/Tipo.json"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar/fotos/Tipos/monovolumen-blue-hover.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/tipo/",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"tipo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Tipo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "tipo",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/json/Tipo.json"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/fotos/Tipos/monovolumen-blue-hover.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/tipo/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"tipo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Marca",
+			"item": [
+				{
+					"name": "List Marcas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/marca/",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"marca",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Marca",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/marca/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"marca",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Marca",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "marca",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/json/Marca.json"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/fotos/Marcas/LogoMercedes.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/marca/",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"marca",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Marca",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/marca/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"marca",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Concesionario",
+			"item": [
+				{
+					"name": "List Concesionarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/concesionario/",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"concesionario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindOne Concesionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/concesionario/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"concesionario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Concesionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "concesionario",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar API/json/Concesionario.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/concesionario/3",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"concesionario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Concesionario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/concesionario/1",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"concesionario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Concesionario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/concesionario/3",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"concesionario",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "FindAll Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjUyODEyOTY0LCJub21icmUiOiJGcmFuIiwicm9sIjoiQURNSU4ifQ.kN-Yum1IEtRVAfEHTrYI0QBb2xrr447YwANtf0-cxMQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/usuario/",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"usuario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Auth User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwiaWF0IjoxNjU0MzI2NDMxLCJub21icmUiOiJGcmFuIiwicm9sIjoiQURNSU4ifQ.zm7g4Ft9mtsWfPL-Tx4rRhaWyauhPiyp5MkaOBV97lQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://easy-car-fgg.herokuapp.com/me",
+							"protocol": "https",
+							"host": [
+								"easy-car-fgg",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar/fotos/UserLogin.png"
+								},
+								{
+									"key": "user",
+									"type": "file",
+									"src": "/C:/Users/Fran/Desktop/EasyCar/json/UserEdit.json"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8080/profile/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"profile",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User Copy",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuario/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": ""
+		}
+	]
+}
