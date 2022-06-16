@@ -1,0 +1,12 @@
+<div>
+  <img src="../../../assets/images/Fondo1.jpg">
+</div>
+<div id="contenedor1">
+  <h1>Todos los concesionarios gestionados por ti:</h1>
+</div>
+<a [routerLink]="['/create-concesionario',]"> <button mat-raised-button color="primary">Nuevo concesionario</button></a>
+<ul>
+  <app-concesionario-item *ngFor="let concesionario of concesionarioList; let i = index" [concesionarioInput]="concesionario"></app-concesionario-item>
+</ul>
+
+<!-- <footer><button mat-button *ngFor="let pagina of counter(paginas); let i=index" (click)="getInmobiliarias(i)">{{i}}</button></footer> -->

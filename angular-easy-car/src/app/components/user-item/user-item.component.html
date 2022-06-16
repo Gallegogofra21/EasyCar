@@ -1,0 +1,23 @@
+<mat-card>
+  <br />
+  <div class="crop">
+    <img mat-card-image [src]="userInput?.avatar" alt="Foto de la marca"/>
+  </div>
+
+  <div class="contenedor">
+    <div>
+      <mat-card-title>{{ userInput?.nombre }} {{ userInput?.apellidos }} </mat-card-title>
+      <mat-card-subtitle>{{ userInput?.username }} <br />
+      </mat-card-subtitle>
+    </div>
+
+
+  </div>
+    <div class="margenSup">
+
+      <a [routerLink]="['/user',userInput?.id]"> <button mat-raised-button color="primary" (click)="editUser(userInput, userInput.id)">Editar</button></a>
+      <button class="button" mat-raised-button color="primary" (click)="getDeleteUser(userInput?.id)"><mat-icon>delete</mat-icon></button>
+
+    </div>
+
+</mat-card>

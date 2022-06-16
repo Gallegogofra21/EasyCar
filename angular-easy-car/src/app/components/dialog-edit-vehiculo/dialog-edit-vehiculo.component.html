@@ -1,0 +1,62 @@
+<form class="example-form" [formGroup]="formulario">
+  <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Version</mat-label>
+      <input matInput placeholder="Write your version" formControlName="version">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Modelo</mat-label>
+      <input matInput placeholder="Write your modelo" formControlName="modelo">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Fecha de matriculación</mat-label>
+      <input matInput placeholder="Write your fecha de matriculacion" formControlName="fechaMatriculacion">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Kilometraje</mat-label>
+      <input matInput placeholder="Write your fecha de kilometraje" formControlName="kilometraje">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Potencia</mat-label>
+      <input matInput placeholder="Write your potencia" formControlName="potencia">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Marchas</mat-label>
+      <input matInput placeholder="Write your marchas" formControlName="marchas">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Precio</mat-label>
+      <input matInput placeholder="Write your precio" formControlName="precio">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Llantas</mat-label>
+      <input matInput placeholder="Write your llantas" formControlName="llantas">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Distribución</mat-label>
+      <input matInput placeholder="Write your distribucion" formControlName="distribucion">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Procedencia</mat-label>
+      <input matInput placeholder="Write your procedencia" formControlName="procedencia">
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Tracción</mat-label>
+      <input matInput placeholder="Write your traccion" formControlName="traccion">
+    </mat-form-field>
+    <br>
+    <input class="input" type="file" id="file1" (change)="onFileChanged1($event)">
+    <!-- <input class="input" type="file" id="file2" (change)="onFileChanged2($event)">
+    <input class="input" type="file" id="file3" (change)="onFileChanged3($event)">
+    <input class="input" type="file" id="file4" (change)="onFileChanged4($event)"> -->
+    <button class="button" mat-raised-button color="primary" type="submit" (click)="editVehiculo()">Editar</button>
+</form>
