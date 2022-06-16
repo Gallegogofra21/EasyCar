@@ -8,20 +8,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'details_screen.dart';
 
-class VehiculosTipoScreen extends StatefulWidget {
+class VehiculosConcesionarioScreen extends StatefulWidget {
   final dynamic id;
-  const VehiculosTipoScreen({Key? key, required this.id}) : super(key: key);
+  const VehiculosConcesionarioScreen({Key? key, required this.id})
+      : super(key: key);
 
   @override
-  _VehiculosTipoScreenState createState() => _VehiculosTipoScreenState();
+  _VehiculosConcesionarioScreenState createState() =>
+      _VehiculosConcesionarioScreenState();
 }
 
-class _VehiculosTipoScreenState extends State<VehiculosTipoScreen> {
+class _VehiculosConcesionarioScreenState
+    extends State<VehiculosConcesionarioScreen> {
   late Future<List<VehiculoContent>> vehiculos;
   @override
   void initState() {
     super.initState();
-    vehiculos = fetchVehiculosTipo(widget.id);
+    vehiculos = fetchVehiculosConcesionario(widget.id);
   }
 
   @override
@@ -213,7 +216,7 @@ class _VehiculosTipoScreenState extends State<VehiculosTipoScreen> {
   }
 }
 
-Future<List<VehiculoContent>> fetchVehiculosTipo(id) async {
+Future<List<VehiculoContent>> fetchVehiculosConcesionario(id) async {
   final prefs = await SharedPreferences.getInstance();
   String? token = prefs.getString('token');
 
@@ -223,7 +226,7 @@ Future<List<VehiculoContent>> fetchVehiculosTipo(id) async {
   };
   print(id);
   final response = await http.get(
-      Uri.parse('${Constant.ApiBaseUrl}/vehiculo/tipo/${id}'),
+      Uri.parse('${Constant.ApiBaseUrl}/vehiculo/concesionario/${id}'),
       headers: headers);
   print(response.statusCode);
 

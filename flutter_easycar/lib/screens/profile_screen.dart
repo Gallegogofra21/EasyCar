@@ -90,9 +90,8 @@ Widget _profile(BuildContext context, User user) {
                     shape: BoxShape.circle,
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                        image: NetworkImage(user.avatar
-                            .toString()
-                            .replaceFirst('localhost', '10.0.2.2'))),
+                        image: NetworkImage(
+                            user.avatar.replaceFirst('localhost', '10.0.2.2'))),
                   ),
                 ),
               ],
@@ -109,9 +108,10 @@ Widget _profile(BuildContext context, User user) {
                   width: 320,
                   child: TextButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(
-                          builder: ((context) => EditScreen())
-                        ));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => EditScreen())));
                       },
                       child: const Text(
                         "Edit Profile",

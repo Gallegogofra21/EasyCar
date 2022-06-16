@@ -1,3 +1,3 @@
 class Constant {
-  static String ApiBaseUrl = "https://easy-car-fgg.herokuapp.com";
+  static String ApiBaseUrl = "http://10.0.2.2:8080";
 }

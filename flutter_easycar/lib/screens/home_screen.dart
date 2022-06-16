@@ -80,7 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     )
                   ]),
                   const Padding(
-                    padding: EdgeInsets.only(top: 8.0, left: 50),
+                    padding: EdgeInsets.only(top: 8.0, left: 10),
                     child: Text(
                       'Elige el coche que mejor se adapte a tus necesidades',
                       style:
@@ -106,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 100.0, top: 150),
+                        padding: const EdgeInsets.only(left: 120.0, top: 150),
                         child: _createMarca(context),
                       ),
                     ],
@@ -175,7 +175,7 @@ Widget _createTipoViewItem(BuildContext context, TipoContent tipo) {
             alignment: Alignment.center,
             child: Text(
               tipo.nombre,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
             ),
           ),
         ],
@@ -207,7 +207,7 @@ Widget _createMarcaView(BuildContext context, List<MarcaContent> marcas) {
   return Column(children: [
     SizedBox(
         height: 150,
-        width: 180,
+        width: 250,
         child: GridView.builder(
             scrollDirection: Axis.horizontal,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -235,7 +235,6 @@ Widget _createMarcaViewItem(BuildContext context, MarcaContent marca) {
 
   return GridTile(
     child: InkWell(
-      highlightColor: Colors.white,
       onTap: () {
         Navigator.push(
             context,
@@ -247,11 +246,18 @@ Widget _createMarcaViewItem(BuildContext context, MarcaContent marca) {
       },
       child: Column(
         children: <Widget>[
-          Container(
-            decoration: BoxDecoration(
-                color: Colors.white, border: Border.all(color: Colors.black)),
-            child: Image.network(marca.foto.replaceAll('localhost', '10.0.2.2'),
-                height: 60),
+          Padding(
+            padding: const EdgeInsets.only(left: 1.0, right: 1),
+            child: Container(
+              width: 100,
+              height: 70,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.black54)),
+              child: Image.network(
+                  marca.foto.replaceAll('localhost', '10.0.2.2'),
+                  height: 60),
+            ),
           ),
         ],
       ),

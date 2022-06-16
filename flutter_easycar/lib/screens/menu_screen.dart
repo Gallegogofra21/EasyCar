@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easycar/screens/fav_screen.dart';
+import 'package:flutter_easycar/screens/concesionarios_screen.dart';
 import 'package:flutter_easycar/screens/home_screen.dart';
 import 'package:flutter_easycar/screens/profile_screen.dart';
 import 'package:flutter_easycar/screens/search_screen.dart';
@@ -18,7 +18,7 @@ class _MenuScreenState extends State<MenuScreen> {
   List<Widget> pages = [
     const HomeScreen(),
     const SearchScreen(),
-    const FavScreen(),
+    const ConcesionariosScreen(),
     const ProfileScreen(),
   ];
 
