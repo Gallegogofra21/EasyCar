@@ -1,0 +1,23 @@
+<mat-card>
+  <br />
+  <div class="crop">
+    <img mat-card-image [src]="vehiculoInput?.foto1" alt="Foto del vehiculo"/>
+  </div>
+
+  <div class="contenedor">
+    <div>
+      <mat-card-title>{{ vehiculoInput.nombreMarca }} {{ vehiculoInput.modelo }} </mat-card-title>
+      <mat-card-subtitle>{{ vehiculoInput?.version }} <br />
+      </mat-card-subtitle>
+    </div>
+
+
+  </div>
+    <div class="margenSup">
+
+      <a [routerLink]="['/vehiculo',vehiculoInput?.id]"> <button mat-raised-button color="primary" (click)="editVehiculo(vehiculoInput, vehiculoInput?.id)">Editar</button></a>
+      <button class="button" mat-raised-button color="primary" (click)="getDeleteVehiculo(vehiculoInput?.id)"><mat-icon>delete</mat-icon></button>
+
+    </div>
+
+</mat-card>

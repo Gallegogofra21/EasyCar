@@ -1,0 +1,22 @@
+<form class="example-form" [formGroup]="form">
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Nombre</mat-label>
+    <input matInput placeholder="Write your name" [(ngModel)]="concesionarioDto.nombre" formControlName="nombre" name="nombre">
+  </mat-form-field>
+  <br>
+  <mat-form-field class="example-full-width" appearance="fill">
+    <mat-label>Dirección</mat-label>
+    <input matInput placeholder="Write your direccion" [(ngModel)]="concesionarioDto.direccion" formControlName="direccion" name="direccion">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill">
+    <mat-label>Usuarios</mat-label>
+    <mat-select [(ngModel)]="selectedUserId" name="usuarioId">
+      <mat-option *ngFor="let user of users" [value]="user.id" (click)="getAllUsers()">
+        {{user?.nombre}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" (click)="doCreate()">Crear</button>
+</form>
