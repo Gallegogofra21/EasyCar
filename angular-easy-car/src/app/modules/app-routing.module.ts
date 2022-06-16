@@ -12,7 +12,7 @@ import { UserListComponent } from '../components/user-list/user-list.component';
 import { VehiculoListComponent } from '../components/vehiculo-list/vehiculo-list.component';
 
 const routes: Routes = [
-  {path: 'login', pathMatch: 'full', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
   {path: 'tipos', component: TipoListComponent},
   {path: 'marcas', component: MarcaListComponent},
   {path: 'vehiculos', component: VehiculoListComponent},
@@ -21,7 +21,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'create-tipo', component: CreateTipoComponent},
   {path: 'create-marca', component: CreateMarcaComponent},
-  {path: 'create-concesionario', component: CreateConcesionarioComponent}
+  {path: 'create-concesionario', component: CreateConcesionarioComponent},
+  {path: '', component: ConcesionarioListComponent}
 ];
 
 @NgModule({
