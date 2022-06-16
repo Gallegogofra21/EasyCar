@@ -20,6 +20,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
@@ -140,12 +141,12 @@ public class UserController {
     })
     @PostMapping("/auth/register/usuario")
     public ResponseEntity<GetUserDto> nuevoUsuario (@RequestPart("file") MultipartFile file, @Valid @RequestPart("user") CreateUsuarioDto newUser) throws IOException{
-        Usuario saved = userEntityService.createUser(newUser, file);
+        GetUserDto saved = userEntityService.createUser(newUser, file);
 
         if(saved == null)
             return ResponseEntity.badRequest().build();
         else
-            return ResponseEntity.ok(userDtoConverter.convertUsuarioToNewUser(saved));
+            return ResponseEntity.status(HttpStatus.CREATED).body(userEntityService.createUser(newUser, file));
     }
 
     @GetMapping("/usuario/fav")

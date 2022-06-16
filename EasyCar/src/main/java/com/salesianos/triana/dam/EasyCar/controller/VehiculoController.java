@@ -58,7 +58,7 @@ public class VehiculoController {
         return ResponseEntity.ok().header("link", paginationLinksUtil.createLinkHeader(result, uriBuilder)).body(result);
     }
 
-    @Operation(summary = "Listar todos los vehiculos de una marca con paginación y filtrado")
+    @Operation(summary = "Listar todos los vehiculos de una marca con paginación")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Se listan todos los vehiculos",
@@ -75,7 +75,7 @@ public class VehiculoController {
         return ResponseEntity.ok().header("link", paginationLinksUtil.createLinkHeader(result, uriBuilder)).body(result);
     }
 
-    @Operation(summary = "Listar todos los vehiculos de un tipo con paginación y filtrado")
+    @Operation(summary = "Listar todos los vehiculos de un tipo con paginación")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Se listan todos los vehiculos",
@@ -88,6 +88,23 @@ public class VehiculoController {
     @GetMapping("/tipo/{id}")
     public ResponseEntity<?> findAllByTipo(@PathVariable Long id, Pageable pageable, HttpServletRequest request) {
         Page<GetVehiculoDto> result = service.findAllVehiculosByTipo(id, pageable);
+        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
+        return ResponseEntity.ok().header("link", paginationLinksUtil.createLinkHeader(result, uriBuilder)).body(result);
+    }
+
+    @Operation(summary = "Listar todos los vehiculos de un concesionario con paginación")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se listan todos los vehiculos",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Vehiculo.class))}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se ha encontrado ningún vehiculo",
+                    content = @Content),
+    })
+    @GetMapping("/concesionario/{id}")
+    public ResponseEntity<?> findAllByConcesionario(@PathVariable Long id, Pageable pageable, HttpServletRequest request) {
+        Page<GetVehiculoDto> result = service.findAllVehiculosByConcesionario(id, pageable);
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(request.getRequestURL().toString());
         return ResponseEntity.ok().header("link", paginationLinksUtil.createLinkHeader(result, uriBuilder)).body(result);
     }
